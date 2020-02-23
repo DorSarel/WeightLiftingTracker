@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UserData from '../UserData';
 import './style.scss';
 
+import { UserContext } from '../../contexts/UserContext';
+
 const User = () => {
+  const { state: userState } = useContext(UserContext);
+  const { personal_info } = userState;
+
+  let userData = [];
+  for (let key in personal_info) {
+    userData.push(
+      <UserData
+        label={key}
+        value={personal_info[key].value}
+        unit={personal_info[key].unit}
+      />
+    );
+  }
+
   return (
     <div className='user'>
       <img
@@ -12,12 +28,7 @@ const User = () => {
       />
       <div className='user__view'>
         <h2 className='user__title'>Trainee Info:</h2>
-        <div className='user__personal'>
-          <UserData label={'Age'} value={26} />
-          <UserData label={'Weight'} value={76.1} unit={'Kg'} />
-          <UserData label={'Height'} value={173} unit={'cm'} />
-          <UserData label={'Fat'} value={13.5} unit={'%'} />
-        </div>
+        <div className='user__personal'>{userData}</div>
       </div>
     </div>
   );
