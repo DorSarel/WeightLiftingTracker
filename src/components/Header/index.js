@@ -4,7 +4,7 @@ import './style.scss';
 const Header = () => {
   return (
     <header className='header'>
-      <nav className='nav'>
+      <nav className='nav container'>
         <ul className='nav__list'>
           <li className='nav__list__item'>
             <a className='nav__list__link' href='#'>
