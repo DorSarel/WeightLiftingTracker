@@ -8,7 +8,7 @@ const Sidenav = () => {
       <ul className='sidenav__list'>
         <li className='sidenav__item'>
           <a className='sidenav__link' href='#'>
-            Workout Progress
+            Weights Progress
           </a>
         </li>
         <li className='sidenav__item'>
