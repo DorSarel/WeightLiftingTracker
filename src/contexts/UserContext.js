@@ -36,6 +36,7 @@ const reducer = (state, action) => {
           weight: { ...state.personal_info.weight },
           height: { ...state.personal_info.height },
           fat: { ...state.personal_info.fat },
+          [action.payload.key]: action.payload.value,
         },
       };
     default:
