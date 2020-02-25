@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.scss';
 
 const Sidenav = () => {
@@ -17,9 +18,9 @@ const Sidenav = () => {
           </a>
         </li>
         <li className='sidenav__item'>
-          <a className='sidenav__link' href='#'>
+          <Link className='sidenav__link' to='/dashboard/user_info'>
             Update User Data
-          </a>
+          </Link>
         </li>
       </ul>
     </aside>

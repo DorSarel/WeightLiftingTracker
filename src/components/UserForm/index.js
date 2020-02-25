@@ -1,26 +1,28 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 
 const UserForm = () => {
   const { state, updateUserInfo } = useContext(UserContext);
+  const history = useHistory();
   const { personal_info } = state;
   const initialLocalState = {
     age: {
       ...personal_info['age'],
-      valid: { min: 10, max: 120, step: 1 },
+      config: { min: 10, max: 120, step: 1 },
     },
     weight: {
       ...personal_info['weight'],
-      valid: { min: 30, max: 500, step: 0.1 },
+      config: { min: 30, max: 500, step: 0.1 },
     },
     height: {
       ...personal_info['height'],
-      valid: { min: 100, max: 250, step: 0.1 },
+      config: { min: 100, max: 250, step: 0.1 },
     },
     fat: {
       ...personal_info['fat'],
-      valid: { min: 0, max: 100, step: 0.1 },
+      config: { min: 0, max: 100, step: 0.1 },
     },
     isSubmitting: false,
   };
@@ -44,11 +46,12 @@ const UserForm = () => {
       const { value, unit } = data[key];
       payload[key] = { value: parseFloat(value), unit };
     }
-    // console.log(payload);
     setTimeout(() => {
+      //simulating async request
       updateUserInfo(payload);
       setData(prevData => ({ ...prevData, isSubmitting: false }));
-    }, 2000);
+      history.push('/dashboard');
+    }, 1500);
   };
 
   let formData = [];
@@ -63,9 +66,9 @@ const UserForm = () => {
           value={data[key].value}
           placeholder={`Your ${key}`}
           onChange={handleInputChage}
-          min={data[key].valid.min}
-          max={data[key].valid.max}
-          step={data[key].valid.step}
+          min={data[key].config.min}
+          max={data[key].config.max}
+          step={data[key].config.step}
         />
       </div>
     );
