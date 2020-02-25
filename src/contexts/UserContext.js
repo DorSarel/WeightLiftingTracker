@@ -36,7 +36,7 @@ const reducer = (state, action) => {
           weight: { ...state.personal_info.weight },
           height: { ...state.personal_info.height },
           fat: { ...state.personal_info.fat },
-          [action.payload.key]: action.payload.value,
+          ...action.payload,
         },
       };
     default:
@@ -47,8 +47,14 @@ const reducer = (state, action) => {
 const UserContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const updateUserInfo = payload => {
+    dispatch({ type: 'UPDATE_USER_INFO', payload });
+  };
+
   return (
-    <UserContext.Provider value={{ state }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ state, updateUserInfo }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
