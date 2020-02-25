@@ -12,6 +12,7 @@ const User = () => {
   for (let key in personal_info) {
     userData.push(
       <UserData
+        key={key}
         label={key}
         value={personal_info[key].value}
         unit={personal_info[key].unit}
