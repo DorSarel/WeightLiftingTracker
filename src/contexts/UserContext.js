@@ -53,10 +53,10 @@ const reducer = (state, action) => {
         ];
       } else {
         // updating key
-        updatedWeight['last'] = updatedWeight['current'];
+        updatedWeight['last'] = weights[liftKey]['current'];
         updatedWeight['current'] = payload[liftKey];
         updatedWeight['allData'] = [
-          ...updatedWeight['allData'],
+          ...weights[liftKey]['allData'],
           { value: payload[liftKey], added: Date.now() },
         ];
       }

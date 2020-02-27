@@ -1,0 +1,63 @@
+.heading-3 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.heading-4 {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.weights {
+  display: flex;
+  align-items: center;
+}
+
+.weight {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.3);
+
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  &__title {
+    font-size: 2.15rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin-bottom: 1.2rem;
+    &--current {
+      font-weight: bold;
+    }
+  }
+
+  &__stats {
+    &:link,
+    &:visited {
+      text-decoration: none;
+      font-size: 1.25rem;
+      color: #000;
+      border: 1px solid #000;
+      align-self: flex-start;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
