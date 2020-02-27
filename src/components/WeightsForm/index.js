@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 const lifts = ['HPC', 'Squat Snatch', 'Clean', 'Jerk'];
 
@@ -9,10 +10,33 @@ const WeightsForm = () => {
     isSubmitting: false,
   };
   const [state, setState] = useState(initialState);
+  const { addNewUserWeight } = useContext(UserContext);
+  const selectInput = useRef(null);
+
+  useEffect(() => {
+    const { value } = selectInput.current;
+    setState(prevState => ({ ...prevState, lifting: value }));
+  }, []);
 
   const onInputChange = e => {
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const addNewWeight = e => {
+    e.preventDefault();
+    setState(prevState => ({ ...prevState, isSubmitting: true }));
+    const payload = { [state.lifting]: state.weight };
+    console.log(payload);
+    setTimeout(() => {
+      addNewUserWeight(payload);
+      setState(prevState => ({
+        ...prevState,
+        lifting: '',
+        weight: 0,
+        isSubmitting: false,
+      }));
+    }, 1500);
   };
 
   // UI
@@ -29,6 +53,7 @@ const WeightsForm = () => {
       <div className='form__data'>
         <label className='form__label'>I Lift:</label>
         <select
+          ref={selectInput}
           onChange={onInputChange}
           name='lifting'
           className='form__select'
@@ -42,7 +67,9 @@ const WeightsForm = () => {
           className='form__input'
         />
       </div>
-      <button className='form__btn'>Done it!</button>
+      <button onClick={addNewWeight} className='form__btn'>
+        {state.isSubmitting ? 'Adding...' : 'Done it!'}
+      </button>
     </form>
   );
 };

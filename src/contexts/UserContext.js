@@ -39,6 +39,36 @@ const reducer = (state, action) => {
           ...action.payload,
         },
       };
+    case 'ADD_NEW_WEIGHT':
+      const { payload } = action;
+      const { weights } = state;
+      const liftKey = Object.keys(payload)[0]; // assuming only one key per request
+      let updatedWeight = {};
+      if (!weights || !weights.hasOwnProperty(liftKey)) {
+        // new key or first key
+        updatedWeight['last'] = 0;
+        updatedWeight['current'] = payload[liftKey];
+        updatedWeight['allData'] = [
+          { value: payload[liftKey], added: Date.now() },
+        ];
+      } else {
+        // updating key
+        updatedWeight['last'] = updatedWeight['current'];
+        updatedWeight['current'] = payload[liftKey];
+        updatedWeight['allData'] = [
+          ...updatedWeight['allData'],
+          { value: payload[liftKey], added: Date.now() },
+        ];
+      }
+      return {
+        ...state,
+        weights: {
+          ...state.weights,
+          [liftKey]: {
+            ...updatedWeight,
+          },
+        },
+      };
     default:
       return state;
   }
@@ -51,8 +81,12 @@ const UserContextProvider = ({ children }) => {
     dispatch({ type: 'UPDATE_USER_INFO', payload });
   };
 
+  const addNewUserWeight = payload => {
+    dispatch({ type: 'ADD_NEW_WEIGHT', payload });
+  };
+
   return (
-    <UserContext.Provider value={{ state, updateUserInfo }}>
+    <UserContext.Provider value={{ state, updateUserInfo, addNewUserWeight }}>
       {children}
     </UserContext.Provider>
   );
