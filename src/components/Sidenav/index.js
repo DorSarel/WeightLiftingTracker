@@ -1,24 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import './style.scss';
 
 const Sidenav = () => {
+  const match = useRouteMatch();
   return (
     <aside className='sidenav'>
       <h3 className='sidenav__title'>User Actions</h3>
       <ul className='sidenav__list'>
         <li className='sidenav__item'>
-          <a className='sidenav__link' href='#'>
+          <Link className='sidenav__link' to={`${match.url}`}>
             Weights Progress
-          </a>
+          </Link>
         </li>
         <li className='sidenav__item'>
-          <a className='sidenav__link' href='#'>
+          <Link className='sidenav__link' to={`${match.url}/add_weight`}>
             Add Workout
-          </a>
+          </Link>
         </li>
         <li className='sidenav__item'>
-          <Link className='sidenav__link' to='/dashboard/user_info'>
+          <Link className='sidenav__link' to={`${match.url}/user_info`}>
             Update User Data
           </Link>
         </li>

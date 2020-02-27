@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
+// need to be replaced with external data source
 const lifts = ['HPC', 'Squat Snatch', 'Clean', 'Jerk'];
 
 const WeightsForm = () => {
@@ -12,6 +14,7 @@ const WeightsForm = () => {
   const [state, setState] = useState(initialState);
   const { addNewUserWeight } = useContext(UserContext);
   const selectInput = useRef(null);
+  const history = useHistory();
 
   useEffect(() => {
     const { value } = selectInput.current;
@@ -36,6 +39,7 @@ const WeightsForm = () => {
         weight: 0,
         isSubmitting: false,
       }));
+      history.push('/dashboard');
     }, 1500);
   };
 
