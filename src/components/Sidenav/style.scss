@@ -1,38 +1,40 @@
 .sidenav {
   background-color: #bbb;
-  border-radius: 5px;
-  flex: 0 0 12%;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &__title {
-    text-align: center;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid #ccc;
-    background-color: #aaa;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: #333;
+  &__img {
+    width: 8rem;
+    border-radius: 50%;
+  }
+
+  &__greeting {
+    margin-bottom: 3rem;
   }
 
   &__list {
     list-style: none;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__item {
-    &:not(:last-child) {
-      border-bottom: 1px solid #000;
-    }
+    padding: 0;
+    align-self: stretch;
   }
 
   &__link:link,
   &__link:visited {
     text-decoration: none;
-    width: 100%;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     padding: 1rem 1.75rem;
     color: currentColor;
+    transition: all 0.2s;
+  }
+
+  &__link:hover,
+  &__link:active {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
   }
 }

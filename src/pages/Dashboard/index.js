@@ -11,23 +11,8 @@ const Dashboard = () => {
   const match = useRouteMatch();
   return (
     <div className='dashboard'>
+      <Sidenav />
       <User />
-      <div className='actions'>
-        <Sidenav />
-        <div className='content'>
-          <Switch>
-            <Route exact path={`${match.path}`}>
-              <WeightsProgress />
-            </Route>
-            <Route path={`${match.path}/user_info`}>
-              <UserForm />
-            </Route>
-            <Route path={`${match.path}/add_weight`}>
-              <WeightsForm />
-            </Route>
-          </Switch>
-        </div>
-      </div>
     </div>
   );
 };
