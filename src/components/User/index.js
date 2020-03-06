@@ -22,15 +22,7 @@ const User = () => {
 
   return (
     <div className='user'>
-      <img
-        src='https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80'
-        className='user__image'
-        alt='User'
-      />
-      <div className='user__view'>
-        <h2 className='user__title'>Trainee Info:</h2>
-        <div className='user__personal'>{userData}</div>
-      </div>
+      <div className='user__profile'>{userData}</div>
     </div>
   );
 };

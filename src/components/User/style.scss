@@ -1,49 +1,31 @@
 .user {
+  padding: 3rem 0;
+  grid-column: center-start / center-end;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  font-size: 2.25rem;
-  font-weight: 300;
-  height: 30vh;
-  margin-bottom: 8rem;
+  grid-template-rows: max-content minmax(max-content, 1fr);
+  row-gap: 3rem;
 
-  &__image {
-    grid-column: 1 / span 4;
-    height: 100%;
-    border-radius: 50%;
-    margin-right: 10rem;
+  &__profile {
+    border: 1px solid rgba(0, 0, 0, 1);
+
+    align-self: center;
+    display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+    grid-template-columns: repeat(4, minmax(max-content, 1fr));
   }
 
-  &__view {
-    grid-column: 5 / -1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  &__title {
-    margin-bottom: 3rem;
-  }
-
-  &__personal {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  &__data {
+  &__info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 2.5rem;
+  }
 
-    &:not(:last-child) {
-      margin-right: 1.5rem;
-    }
+  &__value {
+    font-size: 2.5rem;
   }
 
   &__key {
-    font-size: 1.45rem;
-    text-transform: capitalize;
+    font-size: 1.5rem;
+    text-transform: uppercase;
   }
 }
