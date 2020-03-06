@@ -22,8 +22,3 @@ body {
 
   min-height: 100vh;
 }
-
-.container {
-  max-width: 90vw;
-  margin: 0 5vw 0 5vw;
-}
