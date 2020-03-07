@@ -6,12 +6,16 @@
   row-gap: 3rem;
 
   &__profile {
-    border: 1px solid rgba(0, 0, 0, 1);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 2.5rem 0;
+    box-shadow: 0 1rem 2.25rem rgba(0, 0, 0, 0.15);
 
     align-self: center;
+    justify-content: space-evenly;
     display: grid;
-    // grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
-    grid-template-columns: repeat(4, minmax(max-content, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20rem, max-content));
+    row-gap: 1rem;
   }
 
   &__info {

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import UserData from '../UserData';
+import WeightsProgress from '../WeightsProgress';
 import './style.scss';
 
 import { UserContext } from '../../contexts/UserContext';
@@ -23,6 +24,7 @@ const User = () => {
   return (
     <div className='user'>
       <div className='user__profile'>{userData}</div>
+      <WeightsProgress />
     </div>
   );
 };

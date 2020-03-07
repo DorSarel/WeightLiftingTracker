@@ -11,11 +11,14 @@ const WeightsProgress = () => {
     userWeights.push(
       <div key={key} className='weight'>
         <h4 className='weight__title'>{key}</h4>
+        <button className='weight__edit'>Edit</button>
         <p className='weight__value'>
           current weight:{' '}
           <span className='weight__value weight__value--current'>{`${weights[key].current}Kg`}</span>
         </p>
-        <p className='weight__value'>last weight: {`${weights[key].last}Kg`}</p>
+        <p className='weight__value weight__value--last'>
+          last weight: {`${weights[key].last}Kg`}
+        </p>
         <a className='weight__stats' href='#'>
           Statistics
         </a>
@@ -25,7 +28,7 @@ const WeightsProgress = () => {
 
   return (
     <>
-      <h3 className='heading-3'>My Weights</h3>
+      {/* <h3 className='heading-3'>My Weights</h3> */}
       <div className='weights'>
         {userWeights.length > 0 ? (
           userWeights

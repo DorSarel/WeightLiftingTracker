@@ -6,20 +6,24 @@
 .heading-4 {
   font-size: 3rem;
   font-weight: 400;
+  grid-column: 1 / -1;
 }
 
 .weights {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, max-content));
+  justify-content: space-evenly;
+  justify-items: center;
   align-items: center;
+  row-gap: 1.25rem;
 }
 
 .weight {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: repeat(3, max-content);
+  padding: 2rem;
+  column-gap: 1.25rem;
 
   &:not(:last-child) {
     margin-right: 2rem;
@@ -37,6 +41,10 @@
     margin-bottom: 1.2rem;
     &--current {
       font-weight: bold;
+    }
+
+    &--last {
+      grid-row: 3 / 4;
     }
   }
 
