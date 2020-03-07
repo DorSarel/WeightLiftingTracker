@@ -12,16 +12,18 @@
 .weights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, max-content));
-  justify-content: space-evenly;
-  justify-items: center;
-  align-items: center;
+  // justify-content: space-evenly;
+  // justify-items: center;
+  // align-items: center;
   row-gap: 1.25rem;
+  column-gap: 1.25rem;
 }
 
 .weight {
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: minmax(max-content, 1fr) max-content;
   grid-template-rows: repeat(3, max-content);
+  align-items: center;
   padding: 2rem;
   column-gap: 1.25rem;
 
@@ -58,6 +60,8 @@
       align-self: flex-start;
       padding: 0.5rem 1rem;
       transition: transform 0.2s;
+      grid-row: 3 / 4;
+      grid-column: 2 / 3;
     }
 
     &:hover {
