@@ -28,7 +28,6 @@ const WeightsProgress = () => {
 
   return (
     <>
-      {/* <h3 className='heading-3'>My Weights</h3> */}
       <div className='weights'>
         {userWeights.length > 0 ? (
           userWeights

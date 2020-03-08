@@ -23,7 +23,7 @@ const User = () => {
       />
     );
   }
-  console.log(match);
+
   return (
     <div className='user'>
       <div className='user__profile'>{userData}</div>
