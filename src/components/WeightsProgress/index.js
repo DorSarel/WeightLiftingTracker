@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
+import Icons from '../../assets/sprite.svg';
 
 const WeightsProgress = () => {
   const { state } = useContext(UserContext);
@@ -11,7 +12,9 @@ const WeightsProgress = () => {
     userWeights.push(
       <div key={key} className='weight'>
         <h4 className='weight__title'>{key}</h4>
-        <button className='weight__edit'>Edit</button>
+        <svg className='weight__icon'>
+          <use xlinkHref={`${Icons}#icon-edit`} />
+        </svg>
         <p className='weight__value'>
           current weight:{' '}
           <span className='weight__value weight__value--current'>{`${weights[key].current}Kg`}</span>

@@ -12,9 +12,6 @@
 .weights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, max-content));
-  // justify-content: space-evenly;
-  // justify-items: center;
-  // align-items: center;
   row-gap: 1.25rem;
   column-gap: 1.25rem;
 }
@@ -71,5 +68,18 @@
     &:active {
       transform: translateY(0);
     }
+  }
+
+  &__icon {
+    justify-self: center;
+    width: 2rem;
+    height: 2rem;
+    fill: #555;
+    transition: all 0.2s;
+  }
+
+  &__icon:hover {
+    fill: #000;
+    cursor: pointer;
   }
 }
