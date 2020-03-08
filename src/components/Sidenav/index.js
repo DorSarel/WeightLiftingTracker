@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 import Icons from '../../assets/sprite.svg';
 
 const Sidenav = () => {
   const match = useRouteMatch();
+  const { state } = useContext(UserContext);
   return (
     <aside className='sidenav'>
       <img
@@ -12,14 +14,14 @@ const Sidenav = () => {
         alt='User img'
         className='sidenav__img'
       />
-      <p className='sidenav__greeting'>Hello, Dor Sarel</p>
+      <p className='sidenav__greeting'>Hello, {state.username}</p>
       <ul className='sidenav__list'>
         <li className='sidenav__item'>
           <Link className='sidenav__link' to={`${match.url}`}>
             <svg className='sidenav__icon'>
               <use xlinkHref={`${Icons}#icon-area-graph`} />
             </svg>
-            Weights Progress
+            Dashboard
           </Link>
         </li>
         <li className='sidenav__item'>
@@ -39,6 +41,7 @@ const Sidenav = () => {
           </Link>
         </li>
       </ul>
+      <p className='copyright'>Designed & Created by Dor Sarel</p>
     </aside>
   );
 };
