@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import UserData from '../UserData';
 import WeightsProgress from '../WeightsProgress';
 import WeightsForm from '../WeightsForm';
+import UserForm from '../UserForm';
 import './style.scss';
 
 import { UserContext } from '../../contexts/UserContext';
@@ -33,6 +34,9 @@ const User = () => {
         </Route>
         <Route path={`${match.path}/add_weight`}>
           <WeightsForm />
+        </Route>
+        <Route path={`${match.path}/user_info`}>
+          <UserForm />
         </Route>
       </Switch>
     </div>

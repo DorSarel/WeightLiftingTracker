@@ -18,12 +18,13 @@
 
   &__label {
     margin-right: 3.25rem;
-    flex: 0 0 30%;
+    flex: 0 0 10%;
+    text-transform: uppercase;
   }
 
   &__input {
     @extend %common-padding;
-    flex: 1;
+    flex: 0 0 15%;
     border: 1px solid #eee;
     border-radius: 5px;
   }
