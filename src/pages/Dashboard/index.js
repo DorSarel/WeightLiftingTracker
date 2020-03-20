@@ -1,6 +1,6 @@
 import React from 'react';
 import UserInfo from '../../components/UserInfo';
-//import User from '../../components/User';
+import UserActions from '../../components/UserActions';
 import Sidenav from '../../components/Sidenav';
 import './style.scss';
 
@@ -9,6 +9,7 @@ const Dashboard = () => {
     <div className='dashboard'>
       <Sidenav />
       <UserInfo />
+      <UserActions />
     </div>
   );
 };

@@ -1,20 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import UserData from '../UserInfoItem';
-import WeightsProgress from '../WeightsProgress';
+import WeightsView from '../WeightsView';
 import WeightsForm from '../WeightsForm';
 import UserForm from '../UserForm';
 import './style.scss';
 
-const User = () => {
+const UserActions = () => {
   const match = useRouteMatch();
 
   return (
-    <div className='user'>
-      <div className='user__profile'>{userData}</div>
+    <div className='user-actions'>
       <Switch>
         <Route exact path={match.path}>
-          <WeightsProgress />
+          <WeightsView />
         </Route>
         <Route path={`${match.path}/add_weight`}>
           <WeightsForm />
@@ -27,4 +25,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserActions;
