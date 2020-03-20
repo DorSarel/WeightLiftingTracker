@@ -34,9 +34,9 @@
   }
 
   &__link:hover,
-  &__link:active {
-    background-color: #55c1ff;
-    color: #fdfdfd;
+  &__link:active,
+  &__link:focus {
+    background-color: #5887ff;
   }
 
   &__icon {
