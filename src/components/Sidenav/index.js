@@ -9,7 +9,7 @@ const Sidenav = () => {
   const { state } = useContext(UserContext);
   return (
     <aside className='sidenav'>
-      <div class='sidenav__user'>
+      <div className='sidenav__user'>
         <img
           src='https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=845&q=80'
           alt='User img'

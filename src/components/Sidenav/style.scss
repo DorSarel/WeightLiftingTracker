@@ -1,8 +1,10 @@
 .sidenav {
   background-color: #715aff;
+  color: #fff;
   font-size: 1.5rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5em;
 
   &__user {
     display: flex;
