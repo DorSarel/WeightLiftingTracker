@@ -35,7 +35,6 @@ const WeightsForm = () => {
     e.preventDefault();
     setState(prevState => ({ ...prevState, isSubmitting: true }));
     const payload = { [state.weightliftingExercise]: state.weight };
-    console.log(payload);
     setTimeout(() => {
       addNewUserWeight(payload);
       setState(prevState => ({

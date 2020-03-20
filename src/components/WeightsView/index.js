@@ -8,20 +8,27 @@ const WeightsView = () => {
   const { weights: userWeightsFromCtx } = state;
 
   let userWeights = [];
+  for (let key in userWeightsFromCtx) {
+    const { last, current } = userWeightsFromCtx[key];
+    userWeights.push(
+      <WeightsViewItem
+        key={key}
+        title={key}
+        currentWeight={current}
+        lastWeight={last}
+      />
+    );
+  }
 
   return (
     <>
       <div className='weights'>
         <h1>My Weights</h1>
-        <WeightsViewItem />
-        <WeightsViewItem />
-        <WeightsViewItem />
-        <WeightsViewItem />
-        {/* {userWeights.length > 0 ? (
+        {userWeights.length > 0 ? (
           userWeights
         ) : (
           <p>You didn`t add any weights... Start adding now!</p>
-        )} */}
+        )}
       </div>
     </>
   );
