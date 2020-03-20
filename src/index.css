@@ -32,4 +32,6 @@ body {
   font-weight: 700;
   color: #fff;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

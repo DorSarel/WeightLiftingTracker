@@ -3,11 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
 // need to be replaced with external data source
-const lifts = ['HPC', 'Squat Snatch', 'Clean', 'Jerk'];
+const weightweightliftingExerciseExercises = [
+  'HPC',
+  'Squat Snatch',
+  'Clean',
+  'Jerk',
+];
 
 const WeightsForm = () => {
   const initialState = {
-    lifting: '',
+    weightliftingExercise: '',
     weight: 0,
     isSubmitting: false,
   };
@@ -18,7 +23,7 @@ const WeightsForm = () => {
 
   useEffect(() => {
     const { value } = selectInput.current;
-    setState(prevState => ({ ...prevState, lifting: value }));
+    setState(prevState => ({ ...prevState, weightliftingExercise: value }));
   }, []);
 
   const onInputChange = e => {
@@ -29,13 +34,13 @@ const WeightsForm = () => {
   const addNewWeight = e => {
     e.preventDefault();
     setState(prevState => ({ ...prevState, isSubmitting: true }));
-    const payload = { [state.lifting]: state.weight };
+    const payload = { [state.weightliftingExercise]: state.weight };
     console.log(payload);
     setTimeout(() => {
       addNewUserWeight(payload);
       setState(prevState => ({
         ...prevState,
-        lifting: '',
+        weightliftingExercise: '',
         weight: 0,
         isSubmitting: false,
       }));
@@ -44,7 +49,7 @@ const WeightsForm = () => {
   };
 
   // UI
-  const options = lifts.map(item => {
+  const options = weightweightliftingExerciseExercises.map(item => {
     return (
       <option value={item} key={item}>
         {item}
@@ -54,12 +59,12 @@ const WeightsForm = () => {
 
   return (
     <form className='form'>
-      <div className='form__data'>
-        <label className='form__label'>I Lift:</label>
+      <div className='form__control'>
+        <label className='form__label'>Exercise</label>
         <select
           ref={selectInput}
           onChange={onInputChange}
-          name='lifting'
+          name='weightliftingExercise'
           className='form__select'
         >
           {options}
@@ -71,8 +76,8 @@ const WeightsForm = () => {
           className='form__input'
         />
       </div>
-      <button onClick={addNewWeight} className='form__btn'>
-        {state.isSubmitting ? 'Adding...' : 'Done it!'}
+      <button onClick={addNewWeight} className='btn'>
+        {state.isSubmitting ? 'Adding...' : 'Add new weight'}
       </button>
     </form>
   );

@@ -22,10 +22,17 @@
     margin-bottom: 0.15em;
   }
 
-  &__input {
+  &__input,
+  &__select {
     border: 1px solid #102e4a;
     border-radius: 5px;
     font-family: inherit;
     padding: 0.5em 2em;
   }
+
+  &__select {
+    margin-bottom: 1em;
+  }
+
+  /* simple select style for weightsForm */
 }
