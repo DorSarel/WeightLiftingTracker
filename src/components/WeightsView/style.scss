@@ -7,7 +7,7 @@
 
 .weight-view {
   padding: 0 1em;
-  margin-bottom: 1.25em;
+  margin-bottom: 2.5em;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -49,6 +49,7 @@
 
   &__value + p {
     text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   &__btn {
@@ -56,6 +57,9 @@
     border: 0;
     padding: 0.5em 2.5em;
     font-family: inherit;
+    font-size: inherit;
+    font-weight: 700;
     color: #fff;
+    cursor: pointer;
   }
 }

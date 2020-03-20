@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import WeightsViewItem from '../WeightsViewItem';
 import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
-import Icons from '../../assets/sprite.svg';
 
 const WeightsView = () => {
   const { state } = useContext(UserContext);

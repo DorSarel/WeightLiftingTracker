@@ -3,7 +3,7 @@ import React from 'react';
 const WeightsViewItem = () => {
   return (
     <div className='weight-view'>
-      <div class='weight-view__content'>
+      <div className='weight-view__content'>
         <h2 className='weight-view__title'>HPC</h2>
         <div className='weight-view__data weight-view__data--current'>
           <p className='weight-view__value'>80Kg</p>
