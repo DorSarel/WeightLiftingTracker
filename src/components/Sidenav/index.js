@@ -9,12 +9,14 @@ const Sidenav = () => {
   const { state } = useContext(UserContext);
   return (
     <aside className='sidenav'>
-      <img
-        src='https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=845&q=80'
-        alt='User img'
-        className='sidenav__img'
-      />
-      <p className='sidenav__greeting'>Hello, {state.username}</p>
+      <div class='sidenav__user'>
+        <img
+          src='https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=845&q=80'
+          alt='User img'
+          className='sidenav__img'
+        />
+        <p className='sidenav__greeting'>Hello, {state.username}</p>
+      </div>
       <ul className='sidenav__list'>
         <li className='sidenav__item'>
           <Link className='sidenav__link' to={`${match.url}`}>
@@ -29,7 +31,7 @@ const Sidenav = () => {
             <svg className='sidenav__icon'>
               <use xlinkHref={`${Icons}#icon-plus`} />
             </svg>
-            Add Workout
+            Add Weight
           </Link>
         </li>
         <li className='sidenav__item'>

@@ -1,9 +1,4 @@
 .dashboard {
-  display: grid;
-  grid-template-columns: 15vw 5vw [center-start] repeat(
-      8,
-      [start-col] 1fr [end-col]
-    ) [center-end] 5vw;
-  // column-gap: 5vw;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,26 +1,26 @@
 .sidenav {
-  background-color: #bbb;
-  font-size: 1.75rem;
-  padding: 3rem 0;
+  background-color: #715aff;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
-  &__img {
-    width: 8rem;
-    border-radius: 50%;
+  &__user {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 1.75em;
   }
 
-  &__greeting {
-    margin-bottom: 3rem;
+  &__img {
+    width: 5rem;
+    border-radius: 50%;
+    margin-right: 1em;
   }
 
   &__list {
     list-style: none;
     margin: 0;
-    margin-bottom: auto;
-    padding: 0;
-    align-self: stretch;
+    display: flex;
+    flex-direction: column;
   }
 
   &__link:link,
@@ -28,15 +28,15 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 1rem 1.75rem;
+    padding: 0.75em 1.75em;
     color: currentColor;
     transition: all 0.2s;
   }
 
   &__link:hover,
   &__link:active {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background-color: #55c1ff;
+    color: #fdfdfd;
   }
 
   &__icon {
@@ -51,4 +51,5 @@
   font-size: 1.2rem;
   width: 80%;
   text-align: center;
+  display: none;
 }
