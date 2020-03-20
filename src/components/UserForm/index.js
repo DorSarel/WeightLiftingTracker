@@ -6,22 +6,22 @@ import './style.scss';
 const UserForm = () => {
   const { state, updateUserInfo } = useContext(UserContext);
   const history = useHistory();
-  const { personal_info } = state;
+  const { personal_info: userPersonalInfo } = state;
   const initialLocalState = {
     age: {
-      ...personal_info['age'],
+      ...userPersonalInfo['age'],
       config: { min: 10, max: 120, step: 1 },
     },
     weight: {
-      ...personal_info['weight'],
+      ...userPersonalInfo['weight'],
       config: { min: 30, max: 500, step: 0.1 },
     },
     height: {
-      ...personal_info['height'],
+      ...userPersonalInfo['height'],
       config: { min: 100, max: 250, step: 0.1 },
     },
     fat: {
-      ...personal_info['fat'],
+      ...userPersonalInfo['fat'],
       config: { min: 0, max: 100, step: 0.1 },
     },
     isSubmitting: false,
@@ -42,7 +42,7 @@ const UserForm = () => {
     event.preventDefault();
     setData(prevData => ({ ...prevData, isSubmitting: true }));
     let payload = {};
-    for (let key in personal_info) {
+    for (let key in userPersonalInfo) {
       const { value, unit } = data[key];
       payload[key] = { value: parseFloat(value), unit };
     }
@@ -55,9 +55,9 @@ const UserForm = () => {
   };
 
   let formData = [];
-  for (let key in personal_info) {
+  for (let key in userPersonalInfo) {
     formData.push(
-      <div key={key} className='form__data'>
+      <div key={key} className='form__control'>
         <label className='form__label'>{key}</label>
         <input
           type='number'
@@ -76,11 +76,9 @@ const UserForm = () => {
   return (
     <form className='form'>
       {formData}
-      <div className='form__data'>
-        <button onClick={handleSubmit} className='form__btn'>
-          {data.isSubmitting ? 'Updating...' : 'Update'}
-        </button>
-      </div>
+      <button onClick={handleSubmit} className='btn'>
+        {data.isSubmitting ? 'Updating...' : 'Update'}
+      </button>
     </form>
   );
 };

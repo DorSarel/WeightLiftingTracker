@@ -22,3 +22,14 @@ body {
   color: #464646;
   min-height: 100vh;
 }
+
+.btn {
+  background-image: linear-gradient(to left, #715aff, #a682ff 70%);
+  border: 0;
+  padding: 0.5em 2.5em;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}

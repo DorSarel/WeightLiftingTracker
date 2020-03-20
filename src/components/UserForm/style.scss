@@ -3,55 +3,29 @@
 }
 
 .form {
-  font-size: 2.25rem;
-  padding: 3rem;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
 
-  &__data {
-    @extend %common-padding;
+  &__control {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 1em;
     }
   }
 
   &__label {
-    margin-right: 3.25rem;
-    flex: 0 0 10%;
-    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.15em;
   }
 
   &__input {
-    @extend %common-padding;
-    flex: 0 0 15%;
-    border: 1px solid #eee;
+    border: 1px solid #102e4a;
     border-radius: 5px;
-  }
-
-  &__select {
-    @extend %common-padding;
-    margin-right: 1.25rem;
-    border-radius: 5px;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &__btn {
-    padding: 1rem 2rem;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    background-color: #bbb;
-    font-weight: bold;
-    font-size: inherit;
-    transition: all 0.2s;
-
-    &:hover {
-      cursor: pointer;
-      background-color: #000;
-      color: white;
-    }
+    font-family: inherit;
+    padding: 0.5em 2em;
   }
 }

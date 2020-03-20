@@ -14,7 +14,7 @@ const WeightsViewItem = () => {
           <p>previous</p>
         </div>
       </div>
-      <button className='weight-view__btn'>View data</button>
+      <button className='btn'>View data</button>
     </div>
   );
 };
