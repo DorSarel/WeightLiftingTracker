@@ -1,0 +1,54 @@
+.weights {
+  font-size: 1.5rem;
+  h1 {
+    margin-bottom: 1em;
+  }
+}
+
+.weight-view {
+  padding: 0 1em;
+  margin-bottom: 2.5em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    height: 80%;
+    background-color: currentColor;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+  }
+
+  &__title {
+    font-weight: 400;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.25rem;
+
+    &--current {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #102e4a;
+    }
+  }
+
+  &__value + p {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}

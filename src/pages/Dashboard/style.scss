@@ -1,15 +1,4 @@
 .dashboard {
-  padding: 2rem 1.25rem;
-  background-color: rgb(252, 248, 248);
-  border-radius: 5px;
-}
-
-.actions {
   display: flex;
-}
-
-.content {
-  min-height: 40rem;
-  padding: 2rem;
-  flex: 1;
+  flex-direction: column;
 }
