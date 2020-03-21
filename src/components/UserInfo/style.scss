@@ -10,6 +10,15 @@
     justify-content: space-between;
   }
 
+  @media only screen and (min-width: $large-breakpoint) {
+    flex-direction: column;
+    margin-bottom: 0;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    width: 20vw;
+    justify-content: flex-start;
+  }
+
   &__item {
     border: 1px solid #cfcfcf;
     box-shadow: 0 6px 1.25rem rgba(0, 0, 0, 0.3);
@@ -25,6 +34,10 @@
 
     @media only screen and (min-width: $md-breakpoint) {
       width: 45%;
+    }
+
+    @media only screen and (min-width: $large-breakpoint) {
+      width: 100%;
     }
   }
 
