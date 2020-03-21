@@ -39,7 +39,7 @@ const Sidenav = () => {
             <svg className='sidenav__icon'>
               <use xlinkHref={`${Icons}#icon-loop`} />
             </svg>
-            Update User Data
+            User Info
           </Link>
         </li>
       </ul>
