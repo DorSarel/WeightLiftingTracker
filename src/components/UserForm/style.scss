@@ -11,9 +11,17 @@
     margin: 0 auto;
   }
 
-  // @media only screen and (min-width: $large-breakpoint) {
-  //   max-width: 40%;
-  // }
+  @media only screen and (min-width: $large-breakpoint) {
+    max-width: 80%;
+  }
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    max-width: 60%;
+  }
+
+  @media only screen and (min-width: $huge-breakpoint) {
+    max-width: 40%;
+  }
 
   &__control {
     display: flex;
