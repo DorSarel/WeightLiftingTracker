@@ -74,12 +74,15 @@ const UserForm = () => {
     );
   }
   return (
-    <form className='form'>
-      {formData}
-      <button onClick={handleSubmit} className='btn'>
-        {data.isSubmitting ? 'Updating...' : 'Update'}
-      </button>
-    </form>
+    <>
+      <h1 className='heading-1'>Update User Info</h1>
+      <form className='form'>
+        {formData}
+        <button onClick={handleSubmit} className='btn'>
+          {data.isSubmitting ? 'Updating...' : 'Update'}
+        </button>
+      </form>
+    </>
   );
 };
 
