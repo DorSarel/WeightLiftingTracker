@@ -1,4 +1,11 @@
+@import '../../media-queries.scss';
+
 .dashboard {
   display: flex;
   flex-direction: column;
+
+  @media only screen and (min-width: $large-breakpoint) {
+    flex-direction: row;
+    min-height: 100vh;
+  }
 }

@@ -22,8 +22,8 @@ const WeightsView = () => {
 
   return (
     <>
+      <h1 className='heading-1'>My Weights</h1>
       <div className='weights'>
-        <h1>My Weights</h1>
         {userWeights.length > 0 ? (
           userWeights
         ) : (

@@ -1,7 +1,22 @@
+@import '../../media-queries.scss';
+
 .weights {
   font-size: 1.5rem;
-  h1 {
-    margin-bottom: 1em;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  @media only screen and (min-width: $large-breakpoint) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    flex-direction: row;
   }
 }
 
@@ -11,6 +26,22 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    width: 45%;
+  }
+
+  @media only screen and (min-width: $large-breakpoint) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    width: 47%;
+  }
+
+  @media only screen and (min-width: $huge-breakpoint) {
+    width: 30%;
+  }
 
   &::before {
     content: '';
@@ -25,13 +56,43 @@
 
   &__content {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      & > * {
+        margin-bottom: 1em;
+      }
+    }
+  }
+
+  &__weights {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5em;
+    width: 70%;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      width: 100%;
+    }
   }
 
   &__title {
     font-weight: 400;
+    font-size: 2rem;
+    width: 20%;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      width: 100%;
+    }
+
+    @media only screen and (min-width: $large-breakpoint) {
+      font-size: 2.5rem;
+    }
   }
 
   &__data {
@@ -39,11 +100,13 @@
     flex-direction: column;
     align-items: center;
     font-size: 1.25rem;
+    width: 45%;
 
     &--current {
       font-weight: 700;
       font-size: 1.75rem;
       color: #102e4a;
+      transform: scale(1.05);
     }
   }
 

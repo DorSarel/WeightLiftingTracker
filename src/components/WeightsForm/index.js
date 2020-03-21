@@ -57,28 +57,31 @@ const WeightsForm = () => {
   });
 
   return (
-    <form className='form'>
-      <div className='form__control'>
-        <label className='form__label'>Exercise</label>
-        <select
-          ref={selectInput}
-          onChange={onInputChange}
-          name='weightliftingExercise'
-          className='form__select'
-        >
-          {options}
-        </select>
-        <input
-          type='number'
-          name='weight'
-          onChange={onInputChange}
-          className='form__input'
-        />
-      </div>
-      <button onClick={addNewWeight} className='btn'>
-        {state.isSubmitting ? 'Adding...' : 'Add new weight'}
-      </button>
-    </form>
+    <>
+      <h1 className='heading-1 heading-1--center'>Add Weight</h1>
+      <form className='form'>
+        <div className='form__control'>
+          <label className='form__label'>Exercise</label>
+          <select
+            ref={selectInput}
+            onChange={onInputChange}
+            name='weightliftingExercise'
+            className='form__select'
+          >
+            {options}
+          </select>
+          <input
+            type='number'
+            name='weight'
+            onChange={onInputChange}
+            className='form__input'
+          />
+        </div>
+        <button onClick={addNewWeight} className='btn'>
+          {state.isSubmitting ? 'Adding...' : 'Add new weight'}
+        </button>
+      </form>
+    </>
   );
 };
 

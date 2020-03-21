@@ -1,3 +1,10 @@
+@import '../../media-queries.scss';
+
 .user-actions {
   padding: 1em 2em;
+
+  @media only screen and (min-width: $large-breakpoint) {
+    flex: 1;
+    padding-top: 2.5em;
+  }
 }

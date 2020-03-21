@@ -1,12 +1,27 @@
-%common-padding {
-  padding: 0.75rem 1.5rem;
-}
+@import '../../media-queries.scss';
 
 .form {
   font-size: 1.75rem;
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    max-width: 60%;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: $large-breakpoint) {
+    max-width: 80%;
+  }
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    max-width: 60%;
+  }
+
+  @media only screen and (min-width: $huge-breakpoint) {
+    max-width: 40%;
+  }
 
   &__control {
     display: flex;
@@ -33,6 +48,4 @@
   &__select {
     margin-bottom: 1em;
   }
-
-  /* simple select style for weightsForm */
 }
