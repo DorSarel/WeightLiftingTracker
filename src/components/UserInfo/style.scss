@@ -1,6 +1,14 @@
+@import '../../media-queries.scss';
+
 .user-info {
   padding: 0 2em;
   margin-bottom: 2em;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
   &__item {
     border: 1px solid #cfcfcf;
@@ -14,6 +22,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      width: 45%;
+    }
   }
 
   &__item:hover {
