@@ -58,7 +58,7 @@ const WeightsForm = () => {
 
   return (
     <>
-      <h1 className='heading-1'>Add Weight</h1>
+      <h1 className='heading-1 heading-1--center'>Add Weight</h1>
       <form className='form'>
         <div className='form__control'>
           <label className='form__label'>Exercise</label>

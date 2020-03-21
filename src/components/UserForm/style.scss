@@ -11,6 +11,10 @@
     margin: 0 auto;
   }
 
+  @media only screen and (min-width: $large-breakpoint) {
+    max-width: 40%;
+  }
+
   &__control {
     display: flex;
     flex-direction: column;

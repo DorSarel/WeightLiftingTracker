@@ -75,7 +75,7 @@ const UserForm = () => {
   }
   return (
     <>
-      <h1 className='heading-1'>Update User Info</h1>
+      <h1 className='heading-1 heading-1--center'>Update User Info</h1>
       <form className='form'>
         {formData}
         <button onClick={handleSubmit} className='btn'>

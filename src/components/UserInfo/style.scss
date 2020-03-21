@@ -13,10 +13,10 @@
   @media only screen and (min-width: $large-breakpoint) {
     flex-direction: column;
     margin-bottom: 0;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 4em;
     width: 20vw;
     justify-content: flex-start;
+    margin-right: 3em;
   }
 
   &__item {
@@ -38,6 +38,7 @@
 
     @media only screen and (min-width: $large-breakpoint) {
       width: 100%;
+      margin-bottom: 2.5em;
     }
   }
 
