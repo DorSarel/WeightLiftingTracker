@@ -11,9 +11,9 @@
     margin: 0 auto;
   }
 
-  @media only screen and (min-width: $large-breakpoint) {
-    max-width: 40%;
-  }
+  // @media only screen and (min-width: $large-breakpoint) {
+  //   max-width: 40%;
+  // }
 
   &__control {
     display: flex;
@@ -40,6 +40,4 @@
   &__select {
     margin-bottom: 1em;
   }
-
-  /* simple select style for weightsForm */
 }
