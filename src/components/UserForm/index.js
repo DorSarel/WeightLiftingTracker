@@ -11,18 +11,22 @@ const UserForm = () => {
     age: {
       ...userPersonalInfo['age'],
       config: { min: 10, max: 120, step: 1 },
+      errorMsg: '',
     },
     weight: {
       ...userPersonalInfo['weight'],
       config: { min: 30, max: 500, step: 0.1 },
+      errorMsg: '',
     },
     height: {
       ...userPersonalInfo['height'],
       config: { min: 100, max: 250, step: 0.1 },
+      errorMsg: '',
     },
     fat: {
       ...userPersonalInfo['fat'],
       config: { min: 0, max: 100, step: 0.1 },
+      errorMsg: '',
     },
     isSubmitting: false,
   };
@@ -40,36 +44,80 @@ const UserForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setData(prevData => ({ ...prevData, isSubmitting: true }));
-    let payload = {};
-    for (let key in userPersonalInfo) {
-      const { value, unit } = data[key];
-      payload[key] = { value: parseFloat(value), unit };
+
+    if (isFormValid()) {
+      setData(prevData => ({ ...prevData, isSubmitting: true }));
+      let payload = {};
+      for (let key in userPersonalInfo) {
+        const { value, unit } = data[key];
+        payload[key] = { value: parseFloat(value), unit };
+      }
+      setTimeout(() => {
+        //simulating async request
+        updateUserInfo(payload);
+        setData(prevData => ({ ...prevData, isSubmitting: false }));
+        history.push('/dashboard');
+      }, 1500);
     }
-    setTimeout(() => {
-      //simulating async request
-      updateUserInfo(payload);
-      setData(prevData => ({ ...prevData, isSubmitting: false }));
-      history.push('/dashboard');
-    }, 1500);
+  };
+
+  const isFormValid = () => {
+    let isFormValid = true;
+
+    for (let userInfoKey in userPersonalInfo) {
+      const {
+        value,
+        config: { min, max },
+      } = data[userInfoKey];
+
+      if (value === '') {
+        isFormValid = false;
+        setErrorMessage(userInfoKey, 'Input cannot be blank');
+      } else if (value < min || value > max) {
+        isFormValid = false;
+        setErrorMessage(userInfoKey, `Inupt must be between ${min} to ${max}`);
+      }
+    }
+    return isFormValid;
+  };
+
+  const setErrorMessage = (inputKey, errorMsg) => {
+    setData(prevData => ({
+      ...prevData,
+      [inputKey]: { ...prevData[inputKey], errorMsg },
+    }));
   };
 
   let formData = [];
-  for (let key in userPersonalInfo) {
+  for (let userInfoKey in userPersonalInfo) {
+    const {
+      value,
+      errorMsg,
+      config: { min, max, step },
+    } = data[userInfoKey];
+
     formData.push(
-      <div key={key} className='form__control'>
-        <label className='form__label'>{key}</label>
+      <div
+        key={userInfoKey}
+        className={
+          errorMsg === ''
+            ? 'form__control'
+            : 'form__control form__control--error'
+        }
+      >
+        <label className='form__label'>{userInfoKey}</label>
         <input
           type='number'
           className='form__input'
-          name={key}
-          value={data[key].value}
-          placeholder={`Your ${key}`}
+          name={userInfoKey}
+          value={value}
+          placeholder={`Your ${userInfoKey}`}
           onChange={handleInputChage}
-          min={data[key].config.min}
-          max={data[key].config.max}
-          step={data[key].config.step}
+          min={min}
+          max={max}
+          step={step}
         />
+        <small className='form__error-msg'>{errorMsg}</small>
       </div>
     );
   }

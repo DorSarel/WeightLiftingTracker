@@ -26,6 +26,7 @@
   &__control {
     display: flex;
     flex-direction: column;
+    padding-bottom: 1rem;
 
     &:not(:last-child) {
       margin-bottom: 1em;
@@ -43,9 +44,26 @@
     border-radius: 5px;
     font-family: inherit;
     padding: 0.5em 2em;
+    transition: all 0.2s;
   }
 
   &__select {
     margin-bottom: 1em;
+  }
+
+  /* Error section */
+  &__error-msg {
+    visibility: hidden;
+    text-transform: initial;
+    font-size: 1.125rem;
+    color: red;
+  }
+
+  &__control--error &__input {
+    border: 1px solid red;
+  }
+
+  &__control--error &__error-msg {
+    visibility: visible;
   }
 }
