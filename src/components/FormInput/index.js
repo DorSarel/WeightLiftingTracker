@@ -10,7 +10,6 @@ const FormInput = ({
 }) => {
   return (
     <div
-      key={labelTitle}
       className={
         errorMsg === '' ? 'form__control' : 'form__control form__control--error'
       }

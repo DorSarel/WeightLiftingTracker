@@ -95,6 +95,7 @@ const UserForm = () => {
 
     formData.push(
       <FormInput
+        key={userInfoKey}
         type='number'
         labelTitle={userInfoKey}
         value={value}

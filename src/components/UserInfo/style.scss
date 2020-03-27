@@ -5,18 +5,27 @@
   margin-bottom: 2em;
 
   @media only screen and (min-width: $md-breakpoint) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
   }
 
   @media only screen and (min-width: $large-breakpoint) {
-    flex-direction: column;
     margin-bottom: 0;
-    padding-top: 4em;
-    width: 30vw;
-    justify-content: flex-start;
+    padding-top: 4rem;
+    width: 25vw;
     margin-right: 3em;
+
+    grid-template-columns: minmax(25rem, 36rem);
+    justify-content: center;
+  }
+
+  &__title {
+    grid-column: 1 / -1;
+
+    @media only screen and (min-width: $large-breakpoint) {
+      text-align: left;
+    }
   }
 
   &__item {
@@ -32,12 +41,7 @@
     justify-content: space-between;
     align-items: center;
 
-    @media only screen and (min-width: $md-breakpoint) {
-      width: 45%;
-    }
-
     @media only screen and (min-width: $large-breakpoint) {
-      width: 100%;
       margin-bottom: 2.5em;
     }
   }
