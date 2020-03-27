@@ -6,7 +6,8 @@ import Icons from '../../assets/sprite.svg';
 
 const Sidenav = () => {
   const match = useRouteMatch();
-  const { state } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { username } = user || 'N/A';
   return (
     <aside className='sidenav'>
       <div className='sidenav__user'>
@@ -15,7 +16,7 @@ const Sidenav = () => {
           alt='User img'
           className='sidenav__img'
         />
-        <p className='sidenav__greeting'>Hello, {state.username}</p>
+        <p className='sidenav__greeting'>Hello, {username}</p>
       </div>
       <ul className='sidenav__list'>
         <li className='sidenav__item'>

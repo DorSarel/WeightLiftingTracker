@@ -1,28 +1,31 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 
 const UserContext = createContext();
+// const initialState = {
+//   id: 1,
+//   username: 'Dor Sarel',
+//   personal_info: {
+//     age: {
+//       value: 26,
+//       unit: '',
+//     },
+//     weight: {
+//       value: 76.1, // assuming weight in KG
+//       unit: 'Kg',
+//     },
+//     height: {
+//       value: 173, // assuming height in cm
+//       unit: 'cm',
+//     },
+//     fat: {
+//       value: 13.5,
+//       unit: '%',
+//     },
+//   },
+//   weights: null,
+// };
 const initialState = {
-  id: 1,
-  username: 'Dor Sarel',
-  personal_info: {
-    age: {
-      value: 26,
-      unit: '',
-    },
-    weight: {
-      value: 76.1, // assuming weight in KG
-      unit: 'Kg',
-    },
-    height: {
-      value: 173, // assuming height in cm
-      unit: 'cm',
-    },
-    fat: {
-      value: 13.5,
-      unit: '%',
-    },
-  },
-  weights: null,
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -30,13 +33,16 @@ const reducer = (state, action) => {
     case 'UPDATE_USER_INFO':
       return {
         ...state,
-        personal_info: {
-          ...state.personal_info,
-          age: { ...state.personal_info.age },
-          weight: { ...state.personal_info.weight },
-          height: { ...state.personal_info.height },
-          fat: { ...state.personal_info.fat },
-          ...action.payload,
+        user: {
+          ...state.user,
+          personal_info: {
+            ...state.personal_info,
+            age: { ...state.personal_info.age },
+            weight: { ...state.personal_info.weight },
+            height: { ...state.personal_info.height },
+            fat: { ...state.personal_info.fat },
+            ...action.payload,
+          },
         },
       };
     case 'ADD_NEW_WEIGHT':
@@ -62,12 +68,20 @@ const reducer = (state, action) => {
       }
       return {
         ...state,
-        weights: {
-          ...state.weights,
-          [liftKey]: {
-            ...updatedWeight,
+        user: {
+          ...state.user,
+          weights: {
+            ...state.weights,
+            [liftKey]: {
+              ...updatedWeight,
+            },
           },
         },
+      };
+    case 'SET_USER_FROM_DB':
+      return {
+        ...state,
+        user: { ...action.payload },
       };
     default:
       return state;
@@ -77,6 +91,19 @@ const reducer = (state, action) => {
 const UserContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useEffect(() => {
+    async function fetchUserData() {
+      const response = await fetch(
+        'https://weightliftingtracker-ea4e9.firebaseio.com/users.json'
+      );
+      const responseData = await response.json();
+      // console.log(responseData['-M3T32p4ALMVlqkQr5Dr']);
+      const user = { ...responseData['-M3T32p4ALMVlqkQr5Dr'] };
+      dispatch({ type: 'SET_USER_FROM_DB', payload: user });
+    }
+    fetchUserData();
+  }, []);
+
   const updateUserInfo = payload => {
     dispatch({ type: 'UPDATE_USER_INFO', payload });
   };
@@ -84,9 +111,11 @@ const UserContextProvider = ({ children }) => {
   const addNewUserWeight = payload => {
     dispatch({ type: 'ADD_NEW_WEIGHT', payload });
   };
-
+  console.log(state);
   return (
-    <UserContext.Provider value={{ state, updateUserInfo, addNewUserWeight }}>
+    <UserContext.Provider
+      value={{ user: state.user, updateUserInfo, addNewUserWeight }}
+    >
       {children}
     </UserContext.Provider>
   );

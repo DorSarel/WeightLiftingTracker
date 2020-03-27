@@ -4,8 +4,8 @@ import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 
 const WeightsView = () => {
-  const { state } = useContext(UserContext);
-  const { weights: userWeightsFromCtx } = state;
+  const { user } = useContext(UserContext);
+  const { weights: userWeightsFromCtx } = user || {};
 
   let userWeights = [];
   for (let key in userWeightsFromCtx) {

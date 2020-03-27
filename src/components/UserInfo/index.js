@@ -5,8 +5,8 @@ import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 
 const UserInfo = () => {
-  const { state } = useContext(UserContext);
-  const { personal_info: userInfo } = state;
+  const { user } = useContext(UserContext);
+  const { personal_info: userInfo } = user || {};
   let userData = [];
 
   for (let key in userInfo) {
