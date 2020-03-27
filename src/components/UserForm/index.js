@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import FormInput from '../FormInput';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
@@ -37,7 +38,7 @@ const UserForm = () => {
     setData(prevData => {
       return {
         ...prevData,
-        [name]: { ...prevData[name], value },
+        [name]: { ...prevData[name], value: parseFloat(value) },
       };
     });
   };
@@ -90,35 +91,17 @@ const UserForm = () => {
 
   let formData = [];
   for (let userInfoKey in userPersonalInfo) {
-    const {
-      value,
-      errorMsg,
-      config: { min, max, step },
-    } = data[userInfoKey];
+    const { value, errorMsg, config: attributes } = data[userInfoKey];
 
     formData.push(
-      <div
-        key={userInfoKey}
-        className={
-          errorMsg === ''
-            ? 'form__control'
-            : 'form__control form__control--error'
-        }
-      >
-        <label className='form__label'>{userInfoKey}</label>
-        <input
-          type='number'
-          className='form__input'
-          name={userInfoKey}
-          value={value}
-          placeholder={`Your ${userInfoKey}`}
-          onChange={handleInputChage}
-          min={min}
-          max={max}
-          step={step}
-        />
-        <small className='form__error-msg'>{errorMsg}</small>
-      </div>
+      <FormInput
+        type='number'
+        labelTitle={userInfoKey}
+        value={value}
+        attributes={attributes}
+        errorMsg={errorMsg}
+        onChangeHandler={handleInputChage}
+      />
     );
   }
   return (
