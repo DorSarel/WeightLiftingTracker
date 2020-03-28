@@ -31,12 +31,12 @@ const WeightsForm = () => {
     setState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const addNewWeight = e => {
+  const addNewWeight = async e => {
     e.preventDefault();
     setState(prevState => ({ ...prevState, isSubmitting: true }));
     const payload = { [state.weightliftingExercise]: state.weight };
-    setTimeout(() => {
-      addNewUserWeight(payload);
+    try {
+      await addNewUserWeight(payload);
       setState(prevState => ({
         ...prevState,
         weightliftingExercise: '',
@@ -44,7 +44,9 @@ const WeightsForm = () => {
         isSubmitting: false,
       }));
       history.push('/dashboard');
-    }, 1500);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   // UI

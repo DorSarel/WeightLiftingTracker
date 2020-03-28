@@ -5,9 +5,9 @@ import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 
 const UserForm = () => {
-  const { state, updateUserInfo } = useContext(UserContext);
+  const { user, updateUserInfo } = useContext(UserContext);
   const history = useHistory();
-  const { personal_info: userPersonalInfo } = state;
+  const { personal_info: userPersonalInfo } = user;
   const initialLocalState = {
     age: {
       ...userPersonalInfo['age'],
@@ -43,7 +43,7 @@ const UserForm = () => {
     });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     if (isFormValid()) {
@@ -53,12 +53,13 @@ const UserForm = () => {
         const { value, unit } = data[key];
         payload[key] = { value: parseFloat(value), unit };
       }
-      setTimeout(() => {
-        //simulating async request
-        updateUserInfo(payload);
+      try {
+        const res = await updateUserInfo(payload);
         setData(prevData => ({ ...prevData, isSubmitting: false }));
         history.push('/dashboard');
-      }, 1500);
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   };
 

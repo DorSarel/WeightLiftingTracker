@@ -16,8 +16,8 @@
     width: 25vw;
     margin-right: 3em;
 
-    grid-template-columns: minmax(25rem, 36rem);
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
 
   &__title {
