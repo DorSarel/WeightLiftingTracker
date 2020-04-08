@@ -1,5 +1,6 @@
 import React from 'react';
 import Icons from '../../assets/sprite.svg';
+import PropTypes from 'prop-types';
 
 const UserInfoItem = ({ label, value, unit = '' }) => {
   return (
@@ -13,6 +14,12 @@ const UserInfoItem = ({ label, value, unit = '' }) => {
       </svg>
     </div>
   );
+};
+
+UserInfoItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  unit: PropTypes.string,
 };
 
 export default UserInfoItem;

@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadUserInfo } from '../../redux/actions/userInfoActions';
 import UserInfoItem from '../UserInfoItem';
 
 import './style.scss';
 
 const UserInfo = () => {
+  const userInfo = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserInfo());
+  }, [dispatch]);
+
   let userData = [];
-
-  const userInfo = {
-    TBD: {
-      value: 4,
-      unit: 'KG',
-    },
-  };
-
   for (let key in userInfo) {
     userData.push(
       <UserInfoItem

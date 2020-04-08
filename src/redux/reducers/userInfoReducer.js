@@ -4,7 +4,7 @@ import initialState from './initialState';
 export default function userInfoReducer(state = initialState.userInfo, action) {
   switch (action.type) {
     case types.LOAD_INFO_SUCCESS:
-      return state;
+      return { ...state, ...action.userInfo };
     default:
       return state;
   }
