@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import WeightsViewItem from '../WeightsViewItem';
-import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 
 const WeightsView = () => {
-  const { user } = useContext(UserContext);
-  const { weights: userWeightsFromCtx } = user || {};
+  const userWeightsFromCtx = {
+    TBD: {
+      current: 5,
+      last: 3,
+    },
+  };
 
   let userWeights = [];
   for (let key in userWeightsFromCtx) {

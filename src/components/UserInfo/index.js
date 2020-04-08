@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import UserInfoItem from '../UserInfoItem';
-import { UserContext } from '../../contexts/UserContext';
 
 import './style.scss';
 
 const UserInfo = () => {
-  const { user } = useContext(UserContext);
-  const { personal_info: userInfo } = user || {};
   let userData = [];
+
+  const userInfo = {
+    TBD: {
+      value: 4,
+      unit: 'KG',
+    },
+  };
 
   for (let key in userInfo) {
     userData.push(

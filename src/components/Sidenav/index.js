@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
 import './style.scss';
 import Icons from '../../assets/sprite.svg';
 
 const Sidenav = () => {
   const match = useRouteMatch();
-  const { user } = useContext(UserContext);
-  const { username } = user || 'N/A';
+  const username = 'Dor'; //TBD
   return (
     <aside className='sidenav'>
       <div className='sidenav__user'>

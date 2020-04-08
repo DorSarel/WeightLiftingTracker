@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
 
 // need to be replaced with external data source
 const weightweightliftingExerciseExercises = [
@@ -17,40 +16,39 @@ const WeightsForm = () => {
     isSubmitting: false,
   };
   const [state, setState] = useState(initialState);
-  const { addNewUserWeight } = useContext(UserContext);
   const selectInput = useRef(null);
   const history = useHistory();
 
   useEffect(() => {
     const { value } = selectInput.current;
-    setState(prevState => ({ ...prevState, weightliftingExercise: value }));
+    setState((prevState) => ({ ...prevState, weightliftingExercise: value }));
   }, []);
 
-  const onInputChange = e => {
+  const onInputChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => ({ ...prevState, [name]: value }));
+    setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const addNewWeight = async e => {
-    e.preventDefault();
-    setState(prevState => ({ ...prevState, isSubmitting: true }));
-    const payload = { [state.weightliftingExercise]: state.weight };
-    try {
-      await addNewUserWeight(payload);
-      setState(prevState => ({
-        ...prevState,
-        weightliftingExercise: '',
-        weight: 0,
-        isSubmitting: false,
-      }));
-      history.push('/dashboard');
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  // const addNewWeight = async e => {
+  //   e.preventDefault();
+  //   setState(prevState => ({ ...prevState, isSubmitting: true }));
+  //   const payload = { [state.weightliftingExercise]: state.weight };
+  //   try {
+  //     await addNewUserWeight(payload);
+  //     setState(prevState => ({
+  //       ...prevState,
+  //       weightliftingExercise: '',
+  //       weight: 0,
+  //       isSubmitting: false,
+  //     }));
+  //     history.push('/dashboard');
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
   // UI
-  const options = weightweightliftingExerciseExercises.map(item => {
+  const options = weightweightliftingExerciseExercises.map((item) => {
     return (
       <option value={item} key={item}>
         {item}
@@ -79,7 +77,7 @@ const WeightsForm = () => {
             className='form__input'
           />
         </div>
-        <button onClick={addNewWeight} className='btn'>
+        <button className='btn'>
           {state.isSubmitting ? 'Adding...' : 'Add new weight'}
         </button>
       </form>
