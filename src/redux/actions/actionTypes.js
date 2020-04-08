@@ -1,0 +1,1 @@
+export const LOAD_INFO_SUCCESS = 'LOAD_INFO_SUCCESS';
