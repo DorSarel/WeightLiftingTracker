@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const FormInput = ({
-  type,
-  labelTitle,
+const NumberInput = ({
+  label,
   value,
   attributes,
   errorMsg,
@@ -14,19 +14,27 @@ const FormInput = ({
         errorMsg === '' ? 'form__control' : 'form__control form__control--error'
       }
     >
-      <label className='form__label'>{labelTitle}</label>
+      <label className='form__label'>{label}</label>
       <input
-        type={type}
+        type='number'
         className='form__input'
-        name={labelTitle}
+        name={label}
         value={value}
-        placeholder={`Your ${labelTitle}`}
+        placeholder={`Your ${label}`}
         onChange={onChangeHandler}
         {...attributes}
       />
-      <small className='form__error-msg'>{errorMsg}</small>
+      {errorMsg && <small className='form__error-msg'>{errorMsg}</small>}
     </div>
   );
 };
 
-export default FormInput;
+NumberInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onChangeHandler: PropTypes.func.isRequired,
+  attributes: PropTypes.object,
+  errorMsg: PropTypes.string,
+};
+
+export default NumberInput;
