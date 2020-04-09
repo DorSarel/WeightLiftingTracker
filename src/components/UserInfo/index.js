@@ -29,7 +29,7 @@ const UserInfo = () => {
       <h1 className='heading-1 heading-1--center user-info__title'>
         Personal Information
       </h1>
-      {userData}
+      {userInfo ? userData : <p>Fetching...</p>}
     </div>
   );
 };
