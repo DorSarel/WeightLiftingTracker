@@ -26,8 +26,7 @@ export function updateUserInfo(dbKey, updatedUserInfo) {
   return function (dispatch) {
     return saveUserInfo(dbKey, updatedUserInfo)
       .then((data) => {
-        const dbKey = Object.keys(data)[0];
-        dispatch(updateUserInfoSuccess(data[dbKey]));
+        dispatch(updateUserInfoSuccess(data));
       })
       .catch((error) => {
         throw error;

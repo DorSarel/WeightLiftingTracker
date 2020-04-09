@@ -1,8 +1,7 @@
-const baseURL =
-  'https://weightliftingtracker-ea4e9.firebaseio.com/userInfo.json';
+const baseURL = 'https://weightliftingtracker-ea4e9.firebaseio.com/userInfo';
 
 export function getUserInfo() {
-  return fetch(baseURL)
+  return fetch(baseURL + '.json')
     .then((response) => response.json())
     .catch((error) => {
       throw error;
@@ -10,7 +9,7 @@ export function getUserInfo() {
 }
 
 export function saveUserInfo(dbKey, updatedUserInfo) {
-  return fetch(baseURL + `/${dbKey}`, {
+  return fetch(baseURL + `/${dbKey}.json`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

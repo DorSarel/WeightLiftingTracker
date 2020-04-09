@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import NumberInput from '../NumberInput';
+import PropTypes from 'prop-types';
 import './style.scss';
 
-const UserForm = ({ userInfo }) => {
+const UserForm = ({ userInfo, onSave, saving }) => {
   const [userState, setUserState] = useState({
     age: {
       ...userInfo.age,
@@ -39,17 +40,33 @@ const UserForm = ({ userInfo }) => {
   const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (isNaN(value)) value = userState[name].validation.min;
     setUserState((prevState) => ({
       ...prevState,
       [name]: { ...prevState[name], value: parseFloat(value) },
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Need to add validation
+
+    let updatedUserInfo = {};
+    for (let userKey in userState) {
+      updatedUserInfo[userKey] = {
+        value: userState[userKey].value,
+        unit: userState[userKey].unit,
+      };
+    }
+
+    onSave(updatedUserInfo);
+  };
+
   return (
     <>
       <h1 className='heading-1 heading-1--center'>Update User Info</h1>
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <NumberInput
           label='age'
           value={userState.age.value}
@@ -78,10 +95,16 @@ const UserForm = ({ userInfo }) => {
           attributes={userState.fat.validation}
           errorMsg={errors.fat}
         />
-        <button className='btn'>Need to update button</button>
+        <button className='btn'>{!saving ? 'Update' : 'Updating...'}</button>
       </form>
     </>
   );
+};
+
+UserForm.propTypes = {
+  userInfo: PropTypes.object.isRequired,
+  onSave: PropTypes.func.isRequired,
+  saving: PropTypes.bool.isRequired,
 };
 
 export default UserForm;
