@@ -8,7 +8,8 @@ export function loadUserInfoSuccess(userInfo) {
 export function loadUserInfo() {
   return function (dispatch) {
     return getUserInfo().then((data) => {
-      dispatch(loadUserInfoSuccess(data));
+      const dbKey = Object.keys(data)[0];
+      dispatch(loadUserInfoSuccess(data[dbKey]));
     });
   };
 }
