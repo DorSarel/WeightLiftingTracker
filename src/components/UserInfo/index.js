@@ -14,15 +14,17 @@ const UserInfo = () => {
   }, [dispatch]);
 
   let userData = [];
-  for (let key in userInfo) {
-    userData.push(
-      <UserInfoItem
-        key={key}
-        label={key}
-        value={userInfo[key].value}
-        unit={userInfo[key].unit}
-      />
-    );
+  if (userInfo) {
+    for (let key in userInfo.info) {
+      userData.push(
+        <UserInfoItem
+          key={key}
+          label={key}
+          value={userInfo.info[key].value}
+          unit={userInfo.info[key].unit}
+        />
+      );
+    }
   }
   return (
     <div className='user-info'>

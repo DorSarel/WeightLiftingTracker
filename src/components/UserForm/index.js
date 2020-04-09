@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NumberInput from '../NumberInput';
 import './style.scss';
 
-const UserForm = ({ userInfo = {} }) => {
+const UserForm = ({ userInfo }) => {
   const [userState, setUserState] = useState({
     age: {
       ...userInfo.age,
@@ -36,6 +36,7 @@ const UserForm = ({ userInfo = {} }) => {
       },
     },
   });
+  const [errors, setErrors] = useState({});
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -54,24 +55,28 @@ const UserForm = ({ userInfo = {} }) => {
           value={userState.age.value}
           onChange={handleOnChange}
           attributes={userState.age.validation}
+          errorMsg={errors.age}
         />
         <NumberInput
           label='weight'
           value={userState.weight.value}
           onChange={handleOnChange}
           attributes={userState.weight.validation}
+          errorMsg={errors.weight}
         />
         <NumberInput
           label='height'
           value={userState.height.value}
           onChange={handleOnChange}
           attributes={userState.height.validation}
+          errorMsg={errors.height}
         />
         <NumberInput
           label='fat'
           value={userState.fat.value}
           onChange={handleOnChange}
           attributes={userState.fat.validation}
+          errorMsg={errors.fat}
         />
         <button className='btn'>Need to update button</button>
       </form>
