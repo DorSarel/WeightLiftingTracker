@@ -39,9 +39,32 @@ const UserForm = ({ userInfo, onSave, saving }) => {
   });
   const [errors, setErrors] = useState({});
 
+  const isFormValid = () => {
+    let errors = {};
+    for (let userKey in userInfo) {
+      const { value } = userState[userKey];
+      const { min: minAllowedValue, max: maxAllowedValue } = userState[
+        userKey
+      ].validation;
+
+      if (isNaN(value) || value === '') {
+        errors[userKey] = 'Value must be a number';
+      } else if (value < minAllowedValue || value > maxAllowedValue) {
+        errors[
+          userKey
+        ] = `Value must be between ${minAllowedValue} and ${maxAllowedValue}`;
+      }
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleOnChange = (e) => {
     let { name, value } = e.target;
-    if (isNaN(value)) value = userState[name].validation.min;
+    if (isNaN(value) || value === '') {
+      console.log(value);
+      value = userState[name].validation.min;
+    }
     setUserState((prevState) => ({
       ...prevState,
       [name]: { ...prevState[name], value: parseFloat(value) },
@@ -50,7 +73,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Need to add validation
+    if (!isFormValid()) return;
 
     let updatedUserInfo = {};
     for (let userKey in userState) {
@@ -60,6 +83,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
       };
     }
 
+    setErrors({});
     onSave(updatedUserInfo);
   };
 
