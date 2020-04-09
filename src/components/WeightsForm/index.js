@@ -1,85 +1,67 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import SelectInput from '../SelectInput';
+import NumberInput from '../NumberInput';
 
 // need to be replaced with external data source
-const weightweightliftingExerciseExercises = [
+const weightliftingExercises = [
   'HPC',
   'Squat Snatch',
   'Clean',
   'Jerk',
+  'Deadlift',
 ];
 
 const WeightsForm = () => {
-  const initialState = {
-    weightliftingExercise: '',
-    weight: 0,
-    isSubmitting: false,
-  };
-  const [state, setState] = useState(initialState);
-  const selectInput = useRef(null);
-  const history = useHistory();
-
-  useEffect(() => {
-    const { value } = selectInput.current;
-    setState((prevState) => ({ ...prevState, weightliftingExercise: value }));
-  }, []);
-
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  // const addNewWeight = async e => {
-  //   e.preventDefault();
-  //   setState(prevState => ({ ...prevState, isSubmitting: true }));
-  //   const payload = { [state.weightliftingExercise]: state.weight };
-  //   try {
-  //     await addNewUserWeight(payload);
-  //     setState(prevState => ({
-  //       ...prevState,
-  //       weightliftingExercise: '',
-  //       weight: 0,
-  //       isSubmitting: false,
-  //     }));
-  //     history.push('/dashboard');
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
-
-  // UI
-  const options = weightweightliftingExerciseExercises.map((item) => {
-    return (
-      <option value={item} key={item}>
-        {item}
-      </option>
-    );
+  const [exercise, setExercise] = useState('');
+  const [weight, setWeight] = useState({
+    value: 0.5,
+    validation: {
+      min: 0.5,
+      max: 500,
+      step: 0.1,
+    },
   });
+
+  const handleSelectOnChange = (e) => {
+    const { value } = e.target;
+    setExercise(value);
+  };
+
+  const handleWeightOnChage = (e) => {
+    const { value } = e.target;
+    setWeight((prevWeight) => ({
+      ...prevWeight,
+      value: parseFloat(value),
+    }));
+  };
+
+  let options = [];
+  for (let key of weightliftingExercises) {
+    options.push({
+      value: key.toLowerCase(),
+      text: key,
+    });
+  }
 
   return (
     <>
       <h1 className='heading-1 heading-1--center'>Add Weight</h1>
       <form className='form'>
-        <div className='form__control'>
-          <label className='form__label'>Exercise</label>
-          <select
-            ref={selectInput}
-            onChange={onInputChange}
-            name='weightliftingExercise'
-            className='form__select'
-          >
-            {options}
-          </select>
-          <input
-            type='number'
-            name='weight'
-            onChange={onInputChange}
-            className='form__input'
-          />
-        </div>
-        <button className='btn'>
-          {state.isSubmitting ? 'Adding...' : 'Add new weight'}
-        </button>
+        <SelectInput
+          name='exercise'
+          label='exercise'
+          value={exercise}
+          onChange={handleSelectOnChange}
+          options={options}
+          defaultOption='Select Exercise'
+        />
+        <NumberInput
+          label='weight'
+          value={weight.value}
+          onChange={handleWeightOnChage}
+          attributes={weight.validation}
+        />
+        <button className='btn'>add weight</button>
       </form>
     </>
   );
