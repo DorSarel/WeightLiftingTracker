@@ -4,24 +4,26 @@ import PropTypes from 'prop-types';
 const NumberInput = ({
   label,
   value,
-  attributes,
-  errorMsg,
-  onChangeHandler,
+  attributes = {},
+  errorMsg = '',
+  onChange,
 }) => {
+  let wrapperClassName = 'form__control';
+  if (errorMsg) {
+    wrapperClassName += ' form__control--error';
+  }
   return (
-    <div
-      className={
-        errorMsg === '' ? 'form__control' : 'form__control form__control--error'
-      }
-    >
-      <label className='form__label'>{label}</label>
+    <div className={wrapperClassName}>
+      <label htmlFor={label} className='form__label'>
+        {label}
+      </label>
       <input
         type='number'
         className='form__input'
         name={label}
         value={value}
         placeholder={`Your ${label}`}
-        onChange={onChangeHandler}
+        onChange={onChange}
         {...attributes}
       />
       {errorMsg && <small className='form__error-msg'>{errorMsg}</small>}
@@ -32,7 +34,7 @@ const NumberInput = ({
 NumberInput.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   attributes: PropTypes.object,
   errorMsg: PropTypes.string,
 };
