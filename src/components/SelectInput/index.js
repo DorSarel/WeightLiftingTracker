@@ -9,27 +9,33 @@ const SelectInput = ({
   onChange,
   value,
   error = '',
-}) => (
-  <div className='form__control'>
-    <label htmlFor={name} className='form__label'>
-      {label}
-    </label>
-    <select
-      name={name}
-      onChange={onChange}
-      value={value}
-      className='form__select'
-    >
-      <option value=''>{defaultOption}</option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.text}
-        </option>
-      ))}
-    </select>
-    {error && <small className='form__error-msg'>{error}</small>}
-  </div>
-);
+}) => {
+  let wrapperClassName = 'form__control';
+  if (error) {
+    wrapperClassName += ' form__control--error';
+  }
+  return (
+    <div className={wrapperClassName}>
+      <label htmlFor={name} className='form__label'>
+        {label}
+      </label>
+      <select
+        name={name}
+        onChange={onChange}
+        value={value}
+        className='form__select'
+      >
+        <option value=''>{defaultOption}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.text}
+          </option>
+        ))}
+      </select>
+      {error && <small className='form__error-msg'>{error}</small>}
+    </div>
+  );
+};
 
 SelectInput.propTypes = {
   name: PropTypes.string.isRequired,
