@@ -11,7 +11,7 @@ const weightliftingExercises = [
   'Deadlift',
 ];
 
-const WeightsForm = () => {
+const WeightsForm = ({ onSave, saving }) => {
   const [exercise, setExercise] = useState('');
   const [weight, setWeight] = useState({
     value: 0.5,
@@ -63,8 +63,9 @@ const WeightsForm = () => {
     const newWeight = {
       exercise,
       weight: weight.value,
+      createdAt: Date.now(),
     };
-    console.log(newWeight);
+    onSave(newWeight);
   };
 
   let options = [];
