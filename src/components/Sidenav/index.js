@@ -1,21 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import './style.scss';
 import Icons from '../../assets/sprite.svg';
 
-const Sidenav = () => {
+const Sidenav = ({ userInfo }) => {
   const match = useRouteMatch();
-  const username = 'Dor'; //TBD
+  const { firstName, lastName } = userInfo;
+  const initials = firstName[0] + lastName[0];
+
   return (
     <aside className='sidenav'>
-      <div className='sidenav__user'>
-        <img
-          src='https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=845&q=80'
-          alt='User img'
-          className='sidenav__img'
-        />
-        <p className='sidenav__greeting'>Hello, {username}</p>
-      </div>
+      <Link to='/' className='sidenav__user'>
+        {initials}
+      </Link>
       <ul className='sidenav__list'>
         <li className='sidenav__item'>
           <Link className='sidenav__link' to={`${match.url}`}>

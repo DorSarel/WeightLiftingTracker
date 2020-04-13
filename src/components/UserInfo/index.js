@@ -7,14 +7,16 @@ const UserInfo = ({ userInfo }) => {
   let userData = [];
 
   for (let key in userInfo) {
-    userData.push(
-      <UserInfoItem
-        key={key}
-        label={key}
-        value={userInfo[key].value}
-        unit={userInfo[key].unit}
-      />
-    );
+    if (userInfo[key].value) {
+      userData.push(
+        <UserInfoItem
+          key={key}
+          label={key}
+          value={userInfo[key].value}
+          unit={userInfo[key].unit}
+        />
+      );
+    }
   }
 
   return (

@@ -17,15 +17,23 @@
   }
 
   &__user {
+    width: 6rem;
+    height: 6rem;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin: 2rem;
+    font-size: 2.5rem;
+
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0.5em 1.75em;
+    text-decoration: none;
 
     @media only screen and (min-width: $large-breakpoint) {
-      flex-direction: column;
-      justify-content: center;
-      margin-bottom: 1.125em;
-      padding-top: 2.5em;
+      align-self: center;
+      margin-top: 4rem;
     }
   }
 

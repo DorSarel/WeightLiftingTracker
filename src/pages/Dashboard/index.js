@@ -17,14 +17,12 @@ const Dashboard = () => {
     dispatch(loadUserInfo());
   }, [dispatch]);
 
-  return (
+  return !userInformation ? (
+    <h1>Spinner</h1>
+  ) : (
     <div className='dashboard'>
-      <Sidenav />
-      {userInformation ? (
-        <UserInfo userInfo={userInformation} />
-      ) : (
-        <h1>Spinner</h1>
-      )}
+      <Sidenav userInfo={userInformation} />
+      <UserInfo userInfo={userInformation} />
       <UserActions userInfo={userInformation} />
     </div>
   );
