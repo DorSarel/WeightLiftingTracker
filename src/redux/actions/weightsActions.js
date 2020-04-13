@@ -1,21 +1,19 @@
 import * as types from './actionTypes';
 import { loadWeights, saveWeight } from '../../api/weightApi';
 
-export function loadExerecisesWeightsSuccess(dbKey, weights) {
-  return { type: types.LOAD_EXERCISES_WEIGHTS_SUCCESS, dbKey, weights };
+export function loadExerecisesWeightsSuccess(weights) {
+  return { type: types.LOAD_EXERCISES_WEIGHTS_SUCCESS, weights };
 }
 
 export function saveExerciseWeightSuccess(exerciseToSave) {
   return { type: types.SAVE_EXERCISE_WEIGHT_SUCCESS, exerciseToSave };
 }
 
-export function loadUserWeights() {
+export function loadUserWeights(userKey) {
   return function (dispatch) {
-    return loadWeights()
-      .then((data) => {
-        if (!data) return;
-        const dbKey = Object.keys(data)[0];
-        dispatch(loadExerecisesWeightsSuccess(dbKey, data[dbKey]));
+    return loadWeights(userKey)
+      .then((weights) => {
+        dispatch(loadExerecisesWeightsSuccess(weights));
       })
       .catch((error) => {
         throw error;

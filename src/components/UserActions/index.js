@@ -20,6 +20,12 @@ const UserActions = ({ userInfo }) => {
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    if (!userWeights) {
+      dispatch(loadUserWeights(userKey));
+    }
+  }, [dispatch, userWeights]);
+
   const handleUserFormSubmit = (updatedUserInfo) => {
     //assuming validation occurred in UserForm component
     setSaving(true);
@@ -58,21 +64,20 @@ const UserActions = ({ userInfo }) => {
     }
     const isFirstUserExercise = userWeights === null;
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
-    console.log(exerciseToSave);
+
     dispatch(
       saveNewExerciseWeight(exerciseToSave, userKey, isFirstUserExercise)
     ).then(() => {
       setSaving(false);
+      history.push('/dashboard');
     });
   };
-
-  console.log('userWeights', userWeights);
 
   return (
     <div className='user-actions'>
       <Switch>
         <Route exact path={match.path}>
-          <WeightsView />
+          <WeightsView weights={userWeights} />
         </Route>
         <Route path={`${match.path}/add_weight`}>
           <WeightsForm onSave={handleWeightsFormSubmit} saving={saving} />

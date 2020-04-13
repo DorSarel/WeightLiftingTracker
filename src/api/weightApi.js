@@ -1,11 +1,16 @@
 import { firestoreDB } from '../config/fbConfig';
 
-export function loadWeights() {
-  // return fetch(baseURL + '.json')
-  //   .then((response) => response.json())
-  //   .catch((error) => {
-  //     throw error;
-  //   });
+export function loadWeights(userKey) {
+  return firestoreDB
+    .collection('weights')
+    .doc(userKey)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      }
+      return null;
+    });
 }
 
 export function saveWeight(userKey, exerciseToSave, shouldSetExercise) {

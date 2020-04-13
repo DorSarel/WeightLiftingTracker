@@ -85,6 +85,7 @@
     font-weight: 400;
     font-size: 2rem;
     width: 20%;
+    text-transform: capitalize;
 
     @media only screen and (min-width: $md-breakpoint) {
       width: 100%;

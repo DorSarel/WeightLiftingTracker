@@ -2,23 +2,16 @@ import React, { useContext } from 'react';
 import WeightsViewItem from '../WeightsViewItem';
 import './style.scss';
 
-const WeightsView = () => {
-  const userWeightsFromCtx = {
-    TBD: {
-      current: 5,
-      last: 3,
-    },
-  };
-
+const WeightsView = ({ weights }) => {
   let userWeights = [];
-  for (let key in userWeightsFromCtx) {
-    const { last, current } = userWeightsFromCtx[key];
+  for (let key in weights) {
+    const { previous, current } = weights[key];
     userWeights.push(
       <WeightsViewItem
         key={key}
         title={key}
         currentWeight={current}
-        lastWeight={last}
+        lastWeight={previous}
       />
     );
   }

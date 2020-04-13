@@ -14,8 +14,10 @@ const Dashboard = () => {
   const userInformation = useSelector(({ userInfo }) => userInfo);
 
   useEffect(() => {
-    dispatch(loadUserInfo());
-  }, [dispatch]);
+    if (!userInformation) {
+      dispatch(loadUserInfo());
+    }
+  }, [dispatch, userInformation]);
 
   return !userInformation ? (
     <h1>Spinner</h1>
