@@ -4,83 +4,71 @@ import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import WeightsView from '../WeightsView';
 import WeightsForm from '../WeightsForm';
 import UserForm from '../UserForm';
-import {
-  loadUserInfo,
-  updateUserInfo,
-} from '../../redux/actions/userInfoActions';
+import { loadUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExercise,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 
-const UserActions = () => {
+const UserActions = ({ userInfo }) => {
   const match = useRouteMatch();
   const history = useHistory();
-  const userInfo = useSelector((state) => state.userInfo);
-  const userWeights = useSelector((state) => state.userWeights);
+  //const userWeights = useSelector((state) => state.userWeights);
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    dispatch(loadUserInfo());
-    dispatch(loadUserWeights());
-  }, [dispatch]);
-
   const handleUserFormSubmit = (updatedUserInfo) => {
     // assuming validation occurred in UserForm component
-    setSaving(true);
-    dispatch(updateUserInfo(userInfo.dbKey, updatedUserInfo))
-      .then(() => {
-        setSaving(false);
-        history.push('/dashboard');
-      })
-      .catch((error) => {
-        setSaving(false);
-        alert('Error updating the user info ' + error.message);
-      });
+    // setSaving(true);
+    // dispatch(updateUserInfo(userInfo.dbKey, updatedUserInfo))
+    //   .then(() => {
+    //     setSaving(false);
+    //     history.push('/dashboard');
+    //   })
+    //   .catch((error) => {
+    //     setSaving(false);
+    //     alert('Error updating the user info ' + error.message);
+    //   });
   };
 
   const handleWeightsFormSubmit = (newWeight) => {
     // assuming validation occurred in UserForm component
-    setSaving(true);
-    const forGraphUses = {
-      value: newWeight.weight,
-      createdAt: newWeight.createdAt,
-    };
-
-    const weightToBeSaved = {
-      [newWeight.exercise]: {
-        current: newWeight.weight,
-        previous:
-          userWeights.weights && userWeights.weights[newWeight.exercise]
-            ? userWeights.weights[newWeight.exercise].current
-            : 0,
-        allData:
-          userWeights.weights && userWeights.weights[newWeight.exercise]
-            ? [
-                ...userWeights.weights[newWeight.exercise].allData,
-                { ...forGraphUses },
-              ]
-            : [{ ...forGraphUses }],
-      },
-    };
-
-    const dbKey = userWeights.hasOwnProperty('dbKey')
-      ? userWeights.dbKey
-      : null;
-    console.log('DB KEY: ', dbKey);
-    dispatch(saveNewExercise(weightToBeSaved, dbKey))
-      .then(() => {
-        setSaving(false);
-      })
-      .catch((error) => {
-        setSaving(false);
-        console.log('Saving failed ' + error.message);
-      });
+    // setSaving(true);
+    // const forGraphUses = {
+    //   value: newWeight.weight,
+    //   createdAt: newWeight.createdAt,
+    // };
+    // const weightToBeSaved = {
+    //   [newWeight.exercise]: {
+    //     current: newWeight.weight,
+    //     previous:
+    //       userWeights.weights && userWeights.weights[newWeight.exercise]
+    //         ? userWeights.weights[newWeight.exercise].current
+    //         : 0,
+    //     allData:
+    //       userWeights.weights && userWeights.weights[newWeight.exercise]
+    //         ? [
+    //             ...userWeights.weights[newWeight.exercise].allData,
+    //             { ...forGraphUses },
+    //           ]
+    //         : [{ ...forGraphUses }],
+    //   },
+    // };
+    // const dbKey = userWeights.hasOwnProperty('dbKey')
+    //   ? userWeights.dbKey
+    //   : null;
+    // console.log('DB KEY: ', dbKey);
+    // dispatch(saveNewExercise(weightToBeSaved, dbKey))
+    //   .then(() => {
+    //     setSaving(false);
+    //   })
+    //   .catch((error) => {
+    //     setSaving(false);
+    //     console.log('Saving failed ' + error.message);
+    //   });
   };
-  console.log('User Weights', userWeights);
-  console.log('User Info', userInfo);
+
   return (
     <div className='user-actions'>
       <Switch>
@@ -93,7 +81,7 @@ const UserActions = () => {
         <Route path={`${match.path}/user_info`}>
           {userInfo && (
             <UserForm
-              userInfo={userInfo.info}
+              userInfo={userInfo}
               onSave={handleUserFormSubmit}
               saving={saving}
             />
