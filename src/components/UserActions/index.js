@@ -7,7 +7,7 @@ import UserForm from '../UserForm';
 import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
-  saveNewExercise,
+  saveNewExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 
@@ -16,7 +16,7 @@ const userKey = 'YcVgXEu8HvuDesoJEgHz';
 const UserActions = ({ userInfo }) => {
   const match = useRouteMatch();
   const history = useHistory();
-  //const userWeights = useSelector((state) => state.userWeights);
+  const userWeights = useSelector((state) => state.userWeights);
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
 
@@ -36,40 +36,37 @@ const UserActions = ({ userInfo }) => {
 
   const handleWeightsFormSubmit = (newWeight) => {
     // assuming validation occurred in UserForm component
-    // setSaving(true);
-    // const forGraphUses = {
-    //   value: newWeight.weight,
-    //   createdAt: newWeight.createdAt,
-    // };
-    // const weightToBeSaved = {
-    //   [newWeight.exercise]: {
-    //     current: newWeight.weight,
-    //     previous:
-    //       userWeights.weights && userWeights.weights[newWeight.exercise]
-    //         ? userWeights.weights[newWeight.exercise].current
-    //         : 0,
-    //     allData:
-    //       userWeights.weights && userWeights.weights[newWeight.exercise]
-    //         ? [
-    //             ...userWeights.weights[newWeight.exercise].allData,
-    //             { ...forGraphUses },
-    //           ]
-    //         : [{ ...forGraphUses }],
-    //   },
-    // };
-    // const dbKey = userWeights.hasOwnProperty('dbKey')
-    //   ? userWeights.dbKey
-    //   : null;
-    // console.log('DB KEY: ', dbKey);
-    // dispatch(saveNewExercise(weightToBeSaved, dbKey))
-    //   .then(() => {
-    //     setSaving(false);
-    //   })
-    //   .catch((error) => {
-    //     setSaving(false);
-    //     console.log('Saving failed ' + error.message);
-    //   });
+    setSaving(true);
+    const forGraphUses = {
+      value: newWeight.weight,
+      createdAt: newWeight.createdAt,
+    };
+
+    // handle first time key
+    let exerciseDataToSave = {};
+    exerciseDataToSave.current = newWeight.weight;
+    exerciseDataToSave.exercise = newWeight.exercise;
+    if (!userWeights || !userWeights[newWeight.exercise]) {
+      exerciseDataToSave.previous = 0;
+      exerciseDataToSave.exercisePeriodData = [{ ...forGraphUses }];
+    } else {
+      exerciseDataToSave.previous = userWeights[newWeight.exercise].current;
+      exerciseDataToSave.exercisePeriodData = [
+        ...userWeights[newWeight.exercise].exercisePeriodData,
+        { ...forGraphUses },
+      ];
+    }
+    const isFirstUserExercise = userWeights === null;
+    const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
+    console.log(exerciseToSave);
+    dispatch(
+      saveNewExerciseWeight(exerciseToSave, userKey, isFirstUserExercise)
+    ).then(() => {
+      setSaving(false);
+    });
   };
+
+  console.log('userWeights', userWeights);
 
   return (
     <div className='user-actions'>

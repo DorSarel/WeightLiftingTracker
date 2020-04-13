@@ -5,12 +5,8 @@ export function loadExerecisesWeightsSuccess(dbKey, weights) {
   return { type: types.LOAD_EXERCISES_WEIGHTS_SUCCESS, dbKey, weights };
 }
 
-export function saveExerciseWeightSuccess(dbKey) {
-  return { type: types.SAVE_EXERCISE_WEIGHT_SUCCESS, dbKey };
-}
-
-export function updateExerciseWeightSuccess(updatedWeight) {
-  return { type: types.UPDATE_EXERCISE_WEIGHT_SUCCESS, updatedWeight };
+export function saveExerciseWeightSuccess(exerciseToSave) {
+  return { type: types.SAVE_EXERCISE_WEIGHT_SUCCESS, exerciseToSave };
 }
 
 export function loadUserWeights() {
@@ -27,16 +23,15 @@ export function loadUserWeights() {
   };
 }
 
-export function saveNewExercise(newWeight, dbKey) {
+export function saveNewExerciseWeight(
+  exerciseToSave,
+  userKey,
+  shouldSetExercise
+) {
   return function (dispatch) {
-    return saveWeight(newWeight)
-      .then((data) => {
-        if (!dbKey) {
-          const dbKey = Object.keys(data)[0];
-          dispatch(saveExerciseWeightSuccess(data[dbKey]));
-        } else {
-          dispatch(updateExerciseWeightSuccess(newWeight));
-        }
+    return saveWeight(userKey, exerciseToSave, shouldSetExercise)
+      .then(() => {
+        dispatch(saveExerciseWeightSuccess(exerciseToSave));
       })
       .catch((error) => {
         throw error;
