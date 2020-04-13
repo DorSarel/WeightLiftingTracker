@@ -4,12 +4,14 @@ import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import WeightsView from '../WeightsView';
 import WeightsForm from '../WeightsForm';
 import UserForm from '../UserForm';
-import { loadUserInfo } from '../../redux/actions/userInfoActions';
+import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExercise,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
+
+const userKey = 'YcVgXEu8HvuDesoJEgHz';
 
 const UserActions = ({ userInfo }) => {
   const match = useRouteMatch();
@@ -19,17 +21,17 @@ const UserActions = ({ userInfo }) => {
   const [saving, setSaving] = useState(false);
 
   const handleUserFormSubmit = (updatedUserInfo) => {
-    // assuming validation occurred in UserForm component
-    // setSaving(true);
-    // dispatch(updateUserInfo(userInfo.dbKey, updatedUserInfo))
-    //   .then(() => {
-    //     setSaving(false);
-    //     history.push('/dashboard');
-    //   })
-    //   .catch((error) => {
-    //     setSaving(false);
-    //     alert('Error updating the user info ' + error.message);
-    //   });
+    //assuming validation occurred in UserForm component
+    setSaving(true);
+    dispatch(updateUserInfo(userKey, updatedUserInfo))
+      .then(() => {
+        setSaving(false);
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        setSaving(false);
+        alert('Error updating the user info ' + error.message);
+      });
   };
 
   const handleWeightsFormSubmit = (newWeight) => {

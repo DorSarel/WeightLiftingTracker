@@ -42,6 +42,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
   const isFormValid = () => {
     let errors = {};
     for (let userKey in userInfo) {
+      if (!userInfo[userKey].value) continue;
       const { value } = userState[userKey];
       const { min: minAllowedValue, max: maxAllowedValue } = userState[
         userKey

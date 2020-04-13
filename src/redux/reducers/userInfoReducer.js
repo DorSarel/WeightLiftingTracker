@@ -6,7 +6,7 @@ export default function userInfoReducer(state = initialState.userInfo, action) {
     case types.LOAD_USER_INFO_SUCCESS:
       return { ...state, ...action.userInfo };
     case types.UPDATE_USER_INFO_SUCCESS:
-      return { ...state, info: { ...action.userInfo } };
+      return { ...state, ...action.userInfo };
     default:
       return state;
   }
