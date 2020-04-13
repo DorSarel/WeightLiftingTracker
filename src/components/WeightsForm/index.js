@@ -11,16 +11,18 @@ const weightliftingExercises = [
   'Deadlift',
 ];
 
+const initialState = {
+  value: 0.5,
+  validation: {
+    min: 0.5,
+    max: 500,
+    step: 0.1,
+  },
+};
+
 const WeightsForm = ({ onSave, saving }) => {
   const [exercise, setExercise] = useState('');
-  const [weight, setWeight] = useState({
-    value: 0.5,
-    validation: {
-      min: 0.5,
-      max: 500,
-      step: 0.1,
-    },
-  });
+  const [weight, setWeight] = useState(initialState);
   const [errors, setErrors] = useState({});
 
   const isFormValid = () => {
