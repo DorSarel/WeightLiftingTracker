@@ -3,7 +3,7 @@ import StringInput from '../../components/StringInput';
 import NumberInput from '../../components/NumberInput';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signIn } from '../../redux/actions/authActions';
+import { signUp } from '../../redux/actions/authActions';
 import {
   textInitialFormState,
   numberInitialFormState,
@@ -132,9 +132,14 @@ const SignUp = () => {
         value: numberFormState.fat.value,
         unit: '%',
       },
+      firstName: textFormState.firstName.value,
+      lastName: textFormState.lastName.value,
     };
 
     setErrors({});
+    dispatch(signUp(credentials, userData)).then(() => {
+      history.push('/dashboard');
+    });
   };
 
   return (

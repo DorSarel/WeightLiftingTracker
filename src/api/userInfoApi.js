@@ -16,3 +16,7 @@ export function getUserInformation(uid) {
 export function updateUserInformation(uid, updatedUserInfo) {
   return firestoreDB.collection('users').doc(uid).update(updatedUserInfo);
 }
+
+export function setUserInformation(uid, userData) {
+  return firestoreDB.collection('users').doc(uid).set(userData);
+}
