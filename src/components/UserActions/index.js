@@ -11,8 +11,6 @@ import {
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 
-const userKey = 'YcVgXEu8HvuDesoJEgHz';
-
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
   const history = useHistory();

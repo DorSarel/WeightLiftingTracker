@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         </Route>
         <Route path='/signin'>
           <SignIn />
+        </Route>
+        <Route path='/signup'>
+          <SignUp />
         </Route>
         <Route path='/dashboard'>
           <Dashboard />

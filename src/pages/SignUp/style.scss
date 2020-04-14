@@ -1,0 +1,23 @@
+@import '../../media-queries.scss';
+
+.form-signup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    grid-gap: 2rem;
+  }
+
+  & > * {
+    grid-column: 1 / -1;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      grid-column: span 1;
+    }
+  }
+
+  &__title {
+    grid-column: 1 / -1;
+  }
+}
