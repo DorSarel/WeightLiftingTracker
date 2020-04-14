@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import EmailInput from '../../components/EmailInput';
-import PasswordInput from '../../components/PasswordInput';
+import StringInput from '../../components/StringInput';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
@@ -83,13 +82,17 @@ const SignIn = () => {
   return (
     <form className='form form-login' onSubmit={handleSubmit}>
       <h3 className='form-login__title'>Sign in</h3>
-      <EmailInput
+      <StringInput
+        type='email'
+        name='email'
         label='email'
         value={formState.email.value}
         onChange={handleOnChange}
         errorMsg={errors.email}
       />
-      <PasswordInput
+      <StringInput
+        type='password'
+        name='password'
         label='password'
         value={formState.password.value}
         onChange={handleOnChange}

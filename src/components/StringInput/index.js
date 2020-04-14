@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PasswordInput = ({
+const StringInput = ({
+  type,
+  name,
   label,
   value,
   attributes = {},
@@ -18,9 +20,9 @@ const PasswordInput = ({
         {label}
       </label>
       <input
-        type='password'
+        type={type}
         className='form__input'
-        name={label}
+        name={name}
         value={value}
         placeholder={`Your ${label}`}
         onChange={onChange}
@@ -31,7 +33,9 @@ const PasswordInput = ({
   );
 };
 
-PasswordInput.propTypes = {
+StringInput.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -39,4 +43,4 @@ PasswordInput.propTypes = {
   errorMsg: PropTypes.string,
 };
 
-export default PasswordInput;
+export default StringInput;

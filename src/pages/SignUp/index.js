@@ -1,73 +1,77 @@
 import React, { useState } from 'react';
-import EmailInput from '../../components/EmailInput';
-import PasswordInput from '../../components/PasswordInput';
+import StringInput from '../../components/StringInput';
 import NumberInput from '../../components/NumberInput';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
+import {
+  textInitialFormState,
+  numberInitialFormState,
+} from './initialFormState';
 import './style.scss';
-
-const initialState = {
-  email: {
-    value: '',
-  },
-  password: {
-    value: '',
-    validation: {
-      min: 6,
-      max: 12,
-    },
-  },
-  age: {
-    value: 0,
-    validation: {
-      min: 10,
-      max: 150,
-    },
-  },
-  weight: {
-    value: 0,
-    validation: {
-      min: 30,
-      max: 350,
-    },
-  },
-  height: {
-    value: 0,
-    validation: {
-      min: 100,
-      max: 250,
-    },
-  },
-  fat: {
-    value: 0,
-    validation: {
-      min: 0,
-      max: 100,
-    },
-  },
-};
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [formState, setFormState] = useState(initialState);
+  const [textFormState, setTextFormState] = useState(textInitialFormState);
+  const [numberFormState, setNumberFormState] = useState(
+    numberInitialFormState
+  );
   const [errors, setErrors] = useState({});
 
   const isFormValid = () => {
+    const numberErrors = validateNumberInputs();
+    const textErrors = validateTextInputs();
+
+    const errors = {
+      ...numberErrors,
+      ...textErrors,
+    };
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateNumberInputs = () => {
     let errors = {};
-    // validate email
-    const email = formState.email.value;
+
+    for (let inputName in numberFormState) {
+      const {
+        value,
+        validation: { min: minAllowedLength, max: maxAllowedLength },
+      } = numberFormState[inputName];
+
+      if (value === '') {
+        errors[inputName] = `${inputName} cannot be blank`;
+      } else if (value < minAllowedLength || value > maxAllowedLength) {
+        errors[
+          inputName
+        ] = `${inputName} length must be between ${minAllowedLength} and ${maxAllowedLength}`;
+      }
+    }
+    return errors;
+  };
+
+  const validateTextInputs = () => {
+    // validate email, username, password
+    let errors = {};
+
+    const email = textFormState.email.value;
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(email).toLowerCase()) || email === '') {
       errors.email = 'Invalid email';
     }
 
-    // validate password
+    const firstName = textFormState.firstName.value;
+    const lastName = textFormState.lastName.value;
+
+    if (firstName === '') errors.firstName = 'Please enter valid name';
+    if (lastName === '') errors.lastName = 'Please enter valid name';
+
     const {
       value: password,
       validation: { min: minAllowedLength, max: maxAllowedLength },
-    } = formState.password;
+    } = textFormState.password;
 
     if (password === '') {
       errors.password = 'Invalid password';
@@ -78,13 +82,12 @@ const SignUp = () => {
       errors.password = `Password length must be between ${minAllowedLength} and ${maxAllowedLength}`;
     }
 
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
+    return errors;
   };
 
-  const handleOnChange = (e) => {
+  const handleTextOnChange = (e) => {
     const { name, value } = e.target;
-    setFormState((prevState) => ({
+    setTextFormState((prevState) => ({
       ...prevState,
       [name]: {
         ...prevState[name],
@@ -93,64 +96,110 @@ const SignUp = () => {
     }));
   };
 
+  const handleNumberOnChange = (e) => {
+    const { name, value } = e.target;
+    setNumberFormState((prevState) => ({
+      ...prevState,
+      [name]: {
+        ...prevState[name],
+        value: parseFloat(value),
+      },
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isFormValid()) return;
     const credentials = {
-      email: formState.email.value,
-      password: formState.password.value,
+      email: textFormState.email.value,
+      password: textFormState.password.value,
+    };
+
+    const userData = {
+      age: {
+        value: numberFormState.age.value,
+        unit: '',
+      },
+      weight: {
+        value: numberFormState.weight.value,
+        unit: 'kg',
+      },
+      height: {
+        value: numberFormState.height.value,
+        unit: 'cm',
+      },
+      fat: {
+        value: numberFormState.fat.value,
+        unit: '%',
+      },
     };
 
     setErrors({});
-    dispatch(signIn(credentials)).then(() => {
-      setFormState(initialState);
-      history.push('/dashboard');
-    });
   };
 
   return (
     <form className='form form-login form-signup' onSubmit={handleSubmit}>
       <h3 className='form-login__title form-signup__title'>Sign up</h3>
-      <EmailInput
+      <StringInput
+        type='email'
+        name='email'
         label='email'
-        value={formState.email.value}
-        onChange={handleOnChange}
+        value={textFormState.email.value}
+        onChange={handleTextOnChange}
         errorMsg={errors.email}
       />
-      <PasswordInput
+      <StringInput
+        type='password'
+        name='password'
         label='password'
-        value={formState.password.value}
-        onChange={handleOnChange}
+        value={textFormState.password.value}
+        onChange={handleTextOnChange}
         errorMsg={errors.password}
-        attributes={formState.password.validation}
+        attributes={textFormState.password.validation}
+      />
+      <StringInput
+        type='text'
+        name='firstName'
+        label='first name'
+        value={textFormState.firstName.value}
+        onChange={handleTextOnChange}
+        errorMsg={errors.firstName}
+      />
+      <StringInput
+        type='text'
+        name='lastName'
+        label='last name'
+        value={textFormState.lastName.value}
+        onChange={handleTextOnChange}
+        errorMsg={errors.lastName}
       />
       <NumberInput
         label='age'
-        value={formState.age.value}
-        onChange={handleOnChange}
+        value={numberFormState.age.value}
+        onChange={handleNumberOnChange}
         errorMsg={errors.age}
-        attributes={formState.age.validation}
+        attributes={numberFormState.age.validation}
       />
       <NumberInput
         label='weight'
-        value={formState.weight.value}
-        onChange={handleOnChange}
+        value={numberFormState.weight.value}
+        onChange={handleNumberOnChange}
         errorMsg={errors.weight}
-        attributes={formState.weight.validation}
+        attributes={numberFormState.weight.validation}
       />
       <NumberInput
         label='height'
-        value={formState.height.value}
-        onChange={handleOnChange}
+        value={numberFormState.height.value}
+        onChange={handleNumberOnChange}
         errorMsg={errors.height}
-        attributes={formState.height.validation}
+        attributes={numberFormState.height.validation}
       />
       <NumberInput
         label='fat'
-        value={formState.fat.value}
-        onChange={handleOnChange}
+        value={numberFormState.fat.value}
+        onChange={handleNumberOnChange}
         errorMsg={errors.fat}
-        attributes={formState.fat.validation}
+        attributes={numberFormState.fat.validation}
       />
       <button className='btn'>Sign up</button>
     </form>
