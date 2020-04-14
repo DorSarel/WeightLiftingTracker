@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import EmailInput from '../../components/EmailInput';
 import PasswordInput from '../../components/PasswordInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../../redux/actions/authActions';
 import './style.scss';
 
 const initialState = {
@@ -17,6 +19,8 @@ const initialState = {
 };
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const [formState, setFormState] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -68,8 +72,13 @@ const SignIn = () => {
     };
 
     console.log(credentials);
-    setFormState(initialState);
+    setErrors({});
+    dispatch(signIn(credentials)).then(() => {
+      setFormState(initialState);
+    });
   };
+
+  console.log('Auth', auth);
 
   return (
     <form className='form form-login' onSubmit={handleSubmit}>
