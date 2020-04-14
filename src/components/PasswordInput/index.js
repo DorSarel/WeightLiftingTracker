@@ -33,7 +33,7 @@ const PasswordInput = ({
 
 PasswordInput.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   attributes: PropTypes.object,
   errorMsg: PropTypes.string,
