@@ -19,3 +19,7 @@ export const registerUser = ({ email, password }) => {
       throw error;
     });
 };
+
+export const logoutUser = () => {
+  return firebase.auth().signOut();
+};

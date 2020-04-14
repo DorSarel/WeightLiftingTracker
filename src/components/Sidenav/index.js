@@ -3,7 +3,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import './style.scss';
 import Icons from '../../assets/sprite.svg';
 
-const Sidenav = ({ userInfo }) => {
+const Sidenav = ({ userInfo, logout }) => {
   const match = useRouteMatch();
   const { firstName, lastName } = userInfo;
   const initials = firstName[0] + lastName[0];
@@ -37,6 +37,14 @@ const Sidenav = ({ userInfo }) => {
             </svg>
             User Info
           </Link>
+        </li>
+        <li className='sidenav__item'>
+          <a href='#' className='sidenav__link' onClick={logout}>
+            <svg className='sidenav__icon'>
+              <use xlinkHref={`${Icons}#icon-log-out`} />
+            </svg>
+            Logout
+          </a>
         </li>
       </ul>
       <p className='copyright'>Designed & Created by Dor Sarel</p>
