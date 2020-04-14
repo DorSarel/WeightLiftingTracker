@@ -13,9 +13,10 @@ export function loadWeights(userKey) {
     });
 }
 
-export function saveWeight(userKey, exerciseToSave, shouldSetExercise) {
+export function saveWeight(uid, exerciseToSave, shouldSetExercise) {
+  const exerciseRef = firestoreDB.collection('weights').doc(uid);
   if (shouldSetExercise) {
-    return firestoreDB.collection('weights').doc(userKey).set(exerciseToSave);
+    return exerciseRef.set(exerciseToSave);
   }
-  return firestoreDB.collection('weights').doc(userKey).update(exerciseToSave);
+  return exerciseRef.update(exerciseToSave);
 }

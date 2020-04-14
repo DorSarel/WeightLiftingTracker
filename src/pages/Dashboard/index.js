@@ -12,12 +12,13 @@ const Dashboard = () => {
   // redux
   const dispatch = useDispatch();
   const userInformation = useSelector(({ userInfo }) => userInfo);
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!userInformation) {
-      dispatch(loadUserInfo());
+      dispatch(loadUserInfo(auth.uid));
     }
-  }, [dispatch, userInformation]);
+  }, [dispatch, userInformation, auth.uid]);
 
   return !userInformation ? (
     <h1>Spinner</h1>
@@ -25,7 +26,7 @@ const Dashboard = () => {
     <div className='dashboard'>
       <Sidenav userInfo={userInformation} />
       <UserInfo userInfo={userInformation} />
-      <UserActions userInfo={userInformation} />
+      <UserActions userInfo={userInformation} uid={auth.uid} />
     </div>
   );
 };

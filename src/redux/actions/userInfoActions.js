@@ -12,9 +12,9 @@ export function updateUserInfoSuccess(userInfo) {
   return { type: types.UPDATE_USER_INFO_SUCCESS, userInfo };
 }
 
-export function loadUserInfo() {
+export function loadUserInfo(uid) {
   return function (dispatch) {
-    return getUserInformation()
+    return getUserInformation(uid)
       .then((data) => {
         dispatch(loadUserInfoSuccess(data));
       })
@@ -24,9 +24,9 @@ export function loadUserInfo() {
   };
 }
 
-export function updateUserInfo(userKey, updatedUserInfo) {
+export function updateUserInfo(uid, updatedUserInfo) {
   return function (dispatch) {
-    return updateUserInformation(userKey, updatedUserInfo)
+    return updateUserInformation(uid, updatedUserInfo)
       .then(() => {
         dispatch(updateUserInfoSuccess(updatedUserInfo));
       })

@@ -21,13 +21,9 @@ export function loadUserWeights(userKey) {
   };
 }
 
-export function saveNewExerciseWeight(
-  exerciseToSave,
-  userKey,
-  shouldSetExercise
-) {
+export function saveNewExerciseWeight(exerciseToSave, uid, shouldSetExercise) {
   return function (dispatch) {
-    return saveWeight(userKey, exerciseToSave, shouldSetExercise)
+    return saveWeight(uid, exerciseToSave, shouldSetExercise)
       .then(() => {
         dispatch(saveExerciseWeightSuccess(exerciseToSave));
       })

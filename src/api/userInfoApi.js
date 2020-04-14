@@ -1,12 +1,18 @@
 import { firestoreDB } from '../config/fbConfig';
 
-export function getUserInformation() {
+export function getUserInformation(uid) {
   return firestoreDB
     .collection('users')
+    .doc(uid)
     .get()
-    .then((snapshot) => snapshot.docs[0].data());
+    .then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      }
+      return null;
+    });
 }
 
-export function updateUserInformation(userKey, updatedUserInfo) {
-  return firestoreDB.collection('users').doc(userKey).update(updatedUserInfo);
+export function updateUserInformation(uid, updatedUserInfo) {
+  return firestoreDB.collection('users').doc(uid).update(updatedUserInfo);
 }

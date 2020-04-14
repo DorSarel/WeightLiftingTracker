@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import EmailInput from '../../components/EmailInput';
 import PasswordInput from '../../components/PasswordInput';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
 import './style.scss';
 
@@ -20,7 +21,7 @@ const initialState = {
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const history = useHistory();
   const [formState, setFormState] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -75,10 +76,9 @@ const SignIn = () => {
     setErrors({});
     dispatch(signIn(credentials)).then(() => {
       setFormState(initialState);
+      history.push('/dashboard');
     });
   };
-
-  console.log('Auth', auth);
 
   return (
     <form className='form form-login' onSubmit={handleSubmit}>

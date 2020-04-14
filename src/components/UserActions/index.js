@@ -13,7 +13,7 @@ import './style.scss';
 
 const userKey = 'YcVgXEu8HvuDesoJEgHz';
 
-const UserActions = ({ userInfo }) => {
+const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
   const history = useHistory();
   const userWeights = useSelector((state) => state.userWeights);
@@ -22,14 +22,14 @@ const UserActions = ({ userInfo }) => {
 
   useEffect(() => {
     if (!userWeights) {
-      dispatch(loadUserWeights(userKey));
+      dispatch(loadUserWeights(uid));
     }
-  }, [dispatch, userWeights]);
+  }, [dispatch, userWeights, uid]);
 
   const handleUserFormSubmit = (updatedUserInfo) => {
     //assuming validation occurred in UserForm component
     setSaving(true);
-    dispatch(updateUserInfo(userKey, updatedUserInfo))
+    dispatch(updateUserInfo(uid, updatedUserInfo))
       .then(() => {
         setSaving(false);
         history.push('/dashboard');
@@ -66,7 +66,7 @@ const UserActions = ({ userInfo }) => {
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
 
     dispatch(
-      saveNewExerciseWeight(exerciseToSave, userKey, isFirstUserExercise)
+      saveNewExerciseWeight(exerciseToSave, uid, isFirstUserExercise)
     ).then(() => {
       setSaving(false);
       history.push('/dashboard');
