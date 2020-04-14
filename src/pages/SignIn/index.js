@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import StringInput from '../../components/StringInput';
 import Spinner from '../../components/Spinner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
 import './style.scss';
@@ -21,6 +22,7 @@ const initialState = {
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const history = useHistory();
   const [formState, setFormState] = useState(initialState);
   const [saving, setSaving] = useState(false);
@@ -85,6 +87,8 @@ const SignIn = () => {
         setSaving(false);
       });
   };
+
+  if (auth.uid) return <Redirect to='/dashboard' />;
 
   return saving ? (
     <Spinner />

@@ -1,8 +1,14 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './style.scss';
 
 const Login = () => {
+  const auth = useSelector((state) => state.auth);
+
+  if (auth.uid) return <Redirect to='/dashboard' />;
+
   return (
     <div className='login'>
       <h1 className='login__title'>

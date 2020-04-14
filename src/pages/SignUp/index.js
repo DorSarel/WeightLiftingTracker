@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import StringInput from '../../components/StringInput';
 import NumberInput from '../../components/NumberInput';
 import Spinner from '../../components/Spinner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../redux/actions/authActions';
 import {
@@ -13,6 +14,7 @@ import './style.scss';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const history = useHistory();
   const [textFormState, setTextFormState] = useState(textInitialFormState);
   const [numberFormState, setNumberFormState] = useState(
@@ -149,6 +151,8 @@ const SignUp = () => {
         setSaving(false);
       });
   };
+
+  if (auth.uid) return <Redirect to='/dashboard' />;
 
   return saving ? (
     <Spinner />

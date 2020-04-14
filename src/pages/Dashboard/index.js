@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import UserInfo from '../../components/UserInfo';
@@ -19,7 +20,7 @@ const Dashboard = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!userInformation) {
+    if (auth.uid && !userInformation) {
       dispatch(loadUserInfo(auth.uid));
     }
   }, [dispatch, userInformation, auth.uid]);
@@ -29,6 +30,9 @@ const Dashboard = () => {
       history.push('/signin');
     });
   };
+
+  // Guard Route
+  if (!auth.uid) return <Redirect to='/signin' />;
 
   return !userInformation ? (
     <Spinner />
