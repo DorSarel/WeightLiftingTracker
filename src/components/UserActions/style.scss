@@ -1,0 +1,10 @@
+@import '../../media-queries.scss';
+
+.user-actions {
+  grid-column: 1 / -1;
+  padding: 1em 2em;
+
+  @media only screen and (min-width: $large-breakpoint) {
+    grid-column: 2 / -1;
+  }
+}

@@ -1,0 +1,71 @@
+@import '../../media-queries.scss';
+
+.login {
+  padding: 2rem;
+  margin-top: 10rem;
+  text-align: center;
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+
+  &__title {
+    grid-column: 1 / -1;
+    font-size: 3rem;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      font-size: 4.25rem;
+    }
+
+    &--big {
+      font-size: 4rem;
+      background-image: linear-gradient(to left, #715aff, #a682ff 70%);
+      display: inline-block;
+      -webkit-background-clip: text;
+      color: transparent;
+
+      @media only screen and (min-width: $md-breakpoint) {
+        font-size: 6rem;
+      }
+    }
+  }
+
+  &__description {
+    grid-column: 1 / -1;
+    font-size: 2rem;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+
+  &__btn {
+    grid-column: 1 / -1;
+    text-decoration: none;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    max-width: 36rem;
+    width: 100%;
+
+    @media only screen and (min-width: $login-breakpoint) {
+      justify-self: center;
+    }
+
+    @media only screen and (min-width: $md-breakpoint) {
+      grid-column: span 1;
+    }
+
+    &--start {
+      @media only screen and (min-width: $md-breakpoint) {
+        justify-self: self-start;
+      }
+    }
+
+    &--end {
+      @media only screen and (min-width: $md-breakpoint) {
+        justify-self: self-end;
+      }
+    }
+  }
+}

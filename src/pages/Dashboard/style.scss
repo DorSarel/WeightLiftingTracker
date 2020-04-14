@@ -1,0 +1,6 @@
+@import '../../media-queries.scss';
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(20rem, 15vw) 1fr;
+}

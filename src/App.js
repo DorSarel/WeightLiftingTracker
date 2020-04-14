@@ -1,11 +1,36 @@
-import React from 'react';
-import Header from './components/Header';
+import React, { useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import { authCheckState } from './redux/actions/authActions';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authCheckState());
+  }, [dispatch]);
+
   return (
-    <div>
-      <Header />
-    </div>
+    <main>
+      <Switch>
+        <Route exact path='/'>
+          <Login />
+        </Route>
+        <Route path='/signin'>
+          <SignIn />
+        </Route>
+        <Route path='/signup'>
+          <SignUp />
+        </Route>
+        <Route path='/dashboard'>
+          <Dashboard />
+        </Route>
+      </Switch>
+    </main>
   );
 }
 
