@@ -1,0 +1,14 @@
+@import '../../media-queries.scss';
+
+.form-login {
+  max-width: 40rem;
+  padding: 2rem;
+
+  margin: 5rem auto;
+
+  &__title {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+    text-transform: capitalize;
+  }
+}
