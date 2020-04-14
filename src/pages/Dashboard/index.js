@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import UserInfo from '../../components/UserInfo';
 import UserActions from '../../components/UserActions';
 import Sidenav from '../../components/Sidenav';
+import Spinner from '../../components/Spinner';
 import './style.scss';
 
 import { loadUserInfo } from '../../redux/actions/userInfoActions';
@@ -30,7 +31,7 @@ const Dashboard = () => {
   };
 
   return !userInformation ? (
-    <h1>Spinner</h1>
+    <Spinner />
   ) : (
     <div className='dashboard'>
       <Sidenav userInfo={userInformation} logout={handleUserLogout} />

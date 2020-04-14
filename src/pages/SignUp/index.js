@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import StringInput from '../../components/StringInput';
 import NumberInput from '../../components/NumberInput';
+import Spinner from '../../components/Spinner';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../redux/actions/authActions';
@@ -17,6 +18,7 @@ const SignUp = () => {
   const [numberFormState, setNumberFormState] = useState(
     numberInitialFormState
   );
+  const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
 
   const isFormValid = () => {
@@ -110,6 +112,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isFormValid()) return;
+    setSaving(true);
     const credentials = {
       email: textFormState.email.value,
       password: textFormState.password.value,
@@ -137,12 +140,19 @@ const SignUp = () => {
     };
 
     setErrors({});
-    dispatch(signUp(credentials, userData)).then(() => {
-      history.push('/dashboard');
-    });
+    dispatch(signUp(credentials, userData))
+      .then(() => {
+        setSaving(false);
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        setSaving(false);
+      });
   };
 
-  return (
+  return saving ? (
+    <Spinner />
+  ) : (
     <form className='form form-login form-signup' onSubmit={handleSubmit}>
       <h3 className='form-login__title form-signup__title'>Sign up</h3>
       <StringInput

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StringInput from '../../components/StringInput';
+import Spinner from '../../components/Spinner';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
@@ -22,6 +23,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [formState, setFormState] = useState(initialState);
+  const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
 
   const isFormValid = () => {
@@ -71,15 +73,22 @@ const SignIn = () => {
       password: formState.password.value,
     };
 
-    console.log(credentials);
+    setSaving(true);
     setErrors({});
-    dispatch(signIn(credentials)).then(() => {
-      setFormState(initialState);
-      history.push('/dashboard');
-    });
+    dispatch(signIn(credentials))
+      .then(() => {
+        setFormState(initialState);
+        setSaving(false);
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        setSaving(false);
+      });
   };
 
-  return (
+  return saving ? (
+    <Spinner />
+  ) : (
     <form className='form form-login' onSubmit={handleSubmit}>
       <h3 className='form-login__title'>Sign in</h3>
       <StringInput
