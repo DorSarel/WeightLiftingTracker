@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
 import { toast } from 'react-toastify';
+import { checkEmail, checkPassword } from '../../utils/utils';
 import './style.scss';
 
 const initialState = {
@@ -32,26 +33,20 @@ const SignIn = () => {
   const isFormValid = () => {
     let errors = {};
     // validate email
-    const email = formState.email.value;
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase()) || email === '') {
-      errors.email = 'Invalid email';
-    }
+    const emailValidation = checkEmail(formState.email.value);
+    if (emailValidation.error) errors.email = emailValidation.error;
 
     // validate password
     const {
       value: password,
       validation: { min: minAllowedLength, max: maxAllowedLength },
     } = formState.password;
-
-    if (password === '') {
-      errors.password = 'Invalid password';
-    } else if (
-      password.length < minAllowedLength ||
-      password.length > maxAllowedLength
-    ) {
-      errors.password = `Password length must be between ${minAllowedLength} and ${maxAllowedLength}`;
-    }
+    const passwordValidation = checkPassword(
+      password,
+      minAllowedLength,
+      maxAllowedLength
+    );
+    if (passwordValidation.error) errors.password = passwordValidation.error;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
