@@ -41,18 +41,15 @@ export const checkNumberInput = (
   maxAllowedLength
 ) => {
   let isInputValid = {
-    isValid: true,
     error: null,
   };
 
   if (inputToCheck === '') {
-    isInputValid.isValid = false;
     isInputValid.error = `${inputName} cannot be blank`;
   } else if (
     inputToCheck < minAllowedLength ||
     inputToCheck > maxAllowedLength
   ) {
-    isInputValid.isValid = false;
     isInputValid.error = `${inputName} value must be between ${minAllowedLength} and ${maxAllowedLength}`;
   }
 

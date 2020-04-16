@@ -11,6 +11,7 @@ import {
   textInitialFormState,
   numberInitialFormState,
 } from './initialFormState';
+import { checkEmail, checkPassword, checkNumberInput } from '../../utils/utils';
 import './style.scss';
 
 const SignUp = () => {
@@ -46,13 +47,14 @@ const SignUp = () => {
         validation: { min: minAllowedLength, max: maxAllowedLength },
       } = numberFormState[inputName];
 
-      if (value === '') {
-        errors[inputName] = `${inputName} cannot be blank`;
-      } else if (value < minAllowedLength || value > maxAllowedLength) {
-        errors[
-          inputName
-        ] = `${inputName} length must be between ${minAllowedLength} and ${maxAllowedLength}`;
-      }
+      const inputValidation = checkNumberInput(
+        value,
+        inputName,
+        minAllowedLength,
+        maxAllowedLength
+      );
+
+      if (inputValidation.error) errors[inputName] = inputValidation.error;
     }
     return errors;
   };
@@ -61,31 +63,26 @@ const SignUp = () => {
     // validate email, username, password
     let errors = {};
 
-    const email = textFormState.email.value;
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase()) || email === '') {
-      errors.email = 'Invalid email';
-    }
+    const emailValidation = checkEmail(textFormState.email.value);
+    if (emailValidation.error) errors.email = emailValidation.error;
+
+    // validate password
+    const {
+      value: password,
+      validation: { min: minAllowedLength, max: maxAllowedLength },
+    } = textFormState.password;
+    const passwordValidation = checkPassword(
+      password,
+      minAllowedLength,
+      maxAllowedLength
+    );
+    if (passwordValidation.error) errors.password = passwordValidation.error;
 
     const firstName = textFormState.firstName.value;
     const lastName = textFormState.lastName.value;
 
     if (firstName === '') errors.firstName = 'Please enter valid name';
     if (lastName === '') errors.lastName = 'Please enter valid name';
-
-    const {
-      value: password,
-      validation: { min: minAllowedLength, max: maxAllowedLength },
-    } = textFormState.password;
-
-    if (password === '') {
-      errors.password = 'Invalid password';
-    } else if (
-      password.length < minAllowedLength ||
-      password.length > maxAllowedLength
-    ) {
-      errors.password = `Password length must be between ${minAllowedLength} and ${maxAllowedLength}`;
-    }
 
     return errors;
   };
