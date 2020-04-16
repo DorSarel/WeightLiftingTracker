@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import StringInput from '../../components/StringInput';
 import NumberInput from '../../components/NumberInput';
 import Spinner from '../../components/Spinner';
@@ -148,6 +149,7 @@ const SignUp = () => {
         history.push('/dashboard');
       })
       .catch((error) => {
+        toast.error(`Failed to register. ${error.message}`);
         setSaving(false);
       });
   };
