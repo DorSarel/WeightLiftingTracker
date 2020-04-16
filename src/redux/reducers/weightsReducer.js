@@ -13,6 +13,8 @@ export default function weightsReducer(
         ...state,
         ...action.exerciseToSave,
       };
+    case types.LOGOUT_SUCCESS:
+      return initialState.userWeights;
     default:
       return state;
   }

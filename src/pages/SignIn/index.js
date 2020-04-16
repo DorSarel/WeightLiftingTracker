@@ -80,8 +80,6 @@ const SignIn = () => {
     setErrors({});
     dispatch(signIn(credentials))
       .then(() => {
-        setFormState(initialState);
-        setSaving(false);
         history.push('/dashboard');
       })
       .catch((error) => {
