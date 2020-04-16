@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SelectInput from '../SelectInput';
 import NumberInput from '../NumberInput';
+import { checkNumberInput } from '../../utils/utils';
 
 // need to be replaced with external data source
 const weightliftingExercises = [
@@ -32,14 +33,13 @@ const WeightsForm = ({ onSave, saving }) => {
       errors.exercise = 'Please select exercise from the list';
 
     const { min: minAllowedValue, max: maxAllowedValue } = weight.validation;
-    if (weight.value === '') {
-      errors.weight = 'Weight must be a number';
-    } else if (
-      weight.value < minAllowedValue ||
-      weight.value > maxAllowedValue
-    ) {
-      errors.weight = `Weight must be between ${minAllowedValue} and ${maxAllowedValue}`;
-    }
+    const weightValidation = checkNumberInput(
+      weight.value,
+      'weight',
+      minAllowedValue,
+      maxAllowedValue
+    );
+    if (weightValidation.error) errors.weight = weightValidation.error;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
