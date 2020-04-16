@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import UserInfo from '../../components/UserInfo';
 import UserActions from '../../components/UserActions';
 import Sidenav from '../../components/Sidenav';
@@ -26,9 +27,13 @@ const Dashboard = () => {
   }, [dispatch, userInformation, auth.uid]);
 
   const handleUserLogout = () => {
-    dispatch(logout()).then(() => {
-      history.push('/signin');
-    });
+    dispatch(logout())
+      .then(() => {
+        history.push('/signin');
+      })
+      .catch((error) => {
+        toast.error(`Failed to logout. ${error.message}`);
+      });
   };
 
   // Guard Route

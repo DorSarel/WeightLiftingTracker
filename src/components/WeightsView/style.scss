@@ -2,25 +2,17 @@
 
 .weights {
   font-size: 1.5rem;
-
-  @media only screen and (min-width: $md-breakpoint) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  @media only screen and (min-width: $large-breakpoint) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 1rem;
 
   @media only screen and (min-width: $larger-breakpoint) {
-    flex-direction: row;
+    grid-gap: 3rem;
   }
 }
 
 .weight-view {
+  grid-column: 1 / -1;
   padding: 0 1em;
   margin-bottom: 2.5em;
   display: flex;
@@ -28,19 +20,11 @@
   position: relative;
 
   @media only screen and (min-width: $md-breakpoint) {
-    width: 45%;
-  }
-
-  @media only screen and (min-width: $large-breakpoint) {
-    width: 100%;
-  }
-
-  @media only screen and (min-width: $larger-breakpoint) {
-    width: 47%;
+    grid-column: span 3;
   }
 
   @media only screen and (min-width: $huge-breakpoint) {
-    width: 30%;
+    grid-column: span 2;
   }
 
   &::before {

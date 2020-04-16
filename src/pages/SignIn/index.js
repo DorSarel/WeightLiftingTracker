@@ -5,6 +5,7 @@ import Spinner from '../../components/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../redux/actions/authActions';
+import { toast } from 'react-toastify';
 import './style.scss';
 
 const initialState = {
@@ -79,11 +80,10 @@ const SignIn = () => {
     setErrors({});
     dispatch(signIn(credentials))
       .then(() => {
-        setFormState(initialState);
-        setSaving(false);
         history.push('/dashboard');
       })
       .catch((error) => {
+        toast.error(`Error trying signing in. ${error.message}`);
         setSaving(false);
       });
   };
