@@ -23,7 +23,9 @@ const WeightsView = ({ weights }) => {
         {userWeights.length > 0 ? (
           userWeights
         ) : (
-          <p>You didn`t add any weights... Start adding now!</p>
+          <p style={{ gridColumn: '1 / -1' }}>
+            You didn`t add any weights... Start adding now!
+          </p>
         )}
       </div>
     </>
