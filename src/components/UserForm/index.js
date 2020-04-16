@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NumberInput from '../NumberInput';
 import PropTypes from 'prop-types';
+import { checkNumberInput } from '../../utils/utils';
 import './style.scss';
 
 const UserForm = ({ userInfo, onSave, saving }) => {
@@ -41,20 +42,20 @@ const UserForm = ({ userInfo, onSave, saving }) => {
 
   const isFormValid = () => {
     let errors = {};
-    for (let userKey in userInfo) {
-      if (!userInfo[userKey].value) continue;
-      const { value } = userState[userKey];
+    for (let inputName in userInfo) {
+      if (!userInfo[inputName].value) continue;
+      const { value } = userState[inputName];
       const { min: minAllowedValue, max: maxAllowedValue } = userState[
-        userKey
+        inputName
       ].validation;
 
-      if (isNaN(value) || value === '') {
-        errors[userKey] = 'Value must be a number';
-      } else if (value < minAllowedValue || value > maxAllowedValue) {
-        errors[
-          userKey
-        ] = `Value must be between ${minAllowedValue} and ${maxAllowedValue}`;
-      }
+      const inputValidation = checkNumberInput(
+        value,
+        inputName,
+        minAllowedValue,
+        maxAllowedValue
+      );
+      if (inputValidation.error) errors[inputName] = inputValidation.error;
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
