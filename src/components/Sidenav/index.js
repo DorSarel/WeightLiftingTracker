@@ -10,7 +10,7 @@ const Sidenav = ({ userInfo, logout }) => {
 
   return (
     <aside className='sidenav'>
-      <Link to='/' className='sidenav__user'>
+      <Link to='/dashboard' className='sidenav__user'>
         {initials}
       </Link>
       <ul className='sidenav__list'>
