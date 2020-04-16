@@ -30,6 +30,7 @@ export const numberInitialFormState = {
     validation: {
       min: 30,
       max: 350,
+      step: 0.1,
     },
   },
   height: {
@@ -44,6 +45,7 @@ export const numberInitialFormState = {
     validation: {
       min: 0,
       max: 100,
+      step: 0.1,
     },
   },
 };

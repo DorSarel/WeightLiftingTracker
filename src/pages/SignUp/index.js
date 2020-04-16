@@ -142,7 +142,6 @@ const SignUp = () => {
     setErrors({});
     dispatch(signUp(credentials, userData))
       .then(() => {
-        setSaving(false);
         history.push('/dashboard');
       })
       .catch((error) => {
