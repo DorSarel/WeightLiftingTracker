@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +11,7 @@ import { authCheckState } from './redux/actions/authActions';
 
 function App() {
   const dispatch = useDispatch();
+  const { path } = useRouteMatch();
 
   useEffect(() => {
     dispatch(authCheckState());
@@ -19,18 +20,19 @@ function App() {
   return (
     <main>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={path}>
           <Login />
         </Route>
-        <Route path='/signin'>
+        <Route path={`${path}signin`}>
           <SignIn />
         </Route>
-        <Route path='/signup'>
+        <Route path={`${path}signup`}>
           <SignUp />
         </Route>
-        <Route path='/dashboard'>
+        <Route path={`${path}dashboard`}>
           <Dashboard />
         </Route>
+        <Redirect to={path} />
       </Switch>
       <ToastContainer
         style={{ fontSize: '1.25rem' }}
