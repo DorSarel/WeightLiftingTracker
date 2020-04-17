@@ -19,7 +19,20 @@ const Chart = ({ label, exercisePeriodData }) => {
     ],
   };
 
-  return <Line data={data} />;
+  const options = {
+    scales: {
+      xAxes: [
+        {
+          type: 'time',
+          time: {
+            unit: 'day',
+          },
+        },
+      ],
+    },
+  };
+
+  return <Line data={data} options={options} />;
 };
 
 Chart.propTypes = {
