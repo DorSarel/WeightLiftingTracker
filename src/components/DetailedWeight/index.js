@@ -19,10 +19,16 @@ const DetailedWeight = () => {
       <Box prefix='previous' value={exerciseData.previous} unit='kg' />
       <Box prefix='max' value={maxWeight} unit='kg' />
       <Box prefix='avg' value={avgWeight.toFixed(2)} unit='kg' />
-      <Chart
-        label={exerciseData.exercise}
-        exercisePeriodData={exerciseData.exercisePeriodData}
-      />
+      {exerciseData.exercisePeriodData.length > 1 ? (
+        <Chart
+          label={exerciseData.exercise}
+          exercisePeriodData={exerciseData.exercisePeriodData}
+        />
+      ) : (
+        <p className='detailed-weight__no-grpah'>
+          Not enough data to generate graph
+        </p>
+      )}
     </div>
   );
 };

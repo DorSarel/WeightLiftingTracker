@@ -44,6 +44,12 @@
   &__data {
     text-transform: uppercase;
   }
+
+  &__no-grpah {
+    grid-column: 1 / -1;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
 }
 
 canvas {
