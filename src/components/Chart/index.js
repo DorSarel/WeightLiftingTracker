@@ -27,6 +27,16 @@ const Chart = ({ label, exercisePeriodData }) => {
           time: {
             unit: 'day',
           },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
         },
       ],
     },
