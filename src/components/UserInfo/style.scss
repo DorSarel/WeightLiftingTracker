@@ -39,8 +39,13 @@
     flex-direction: column;
     align-items: center;
 
-    @media only screen and (min-width: $larger-breakpoint) {
+    @media only screen and (min-width: $md-breakpoint) {
       grid-column: span 1;
+    }
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
   }
 
@@ -49,12 +54,21 @@
   }
 
   &__value {
-    font-size: 2.25rem;
+    font-size: 2.35rem;
+    font-weight: bold;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 3rem;
+    }
   }
 
   &__key {
     text-transform: capitalize;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
   }
 
   &__change {
@@ -62,6 +76,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      margin-top: 2rem;
+    }
 
     &--up {
       color: green;
@@ -76,10 +94,19 @@
     width: 1.75rem;
     height: 1.75rem;
     fill: currentColor;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      width: 2.125rem;
+      height: 2.125rem;
+    }
   }
 
   &__percentage {
     font-size: 1.25rem;
     font-weight: bold;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
   }
 }
