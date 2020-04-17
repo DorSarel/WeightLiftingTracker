@@ -10,6 +10,7 @@ import {
   saveNewExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
+import DetailedWeight from '../DetailedWeight';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -70,7 +71,7 @@ const UserActions = ({ userInfo, uid }) => {
       history.push('/dashboard');
     });
   };
-
+  console.log(userWeights);
   return (
     <div className='user-actions'>
       <Switch>
@@ -88,6 +89,9 @@ const UserActions = ({ userInfo, uid }) => {
               saving={saving}
             />
           )}
+        </Route>
+        <Route path={`${match.path}/weights/:exercise`}>
+          <DetailedWeight />
         </Route>
       </Switch>
     </div>

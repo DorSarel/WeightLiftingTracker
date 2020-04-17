@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+
+const style = {
+  textDecoration: 'none',
+  textAlign: 'center',
+};
 
 const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
+  const { url } = useRouteMatch();
   return (
     <div className='weight-view'>
       <div className='weight-view__content'>
@@ -18,7 +25,9 @@ const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
           </div>
         </div>
       </div>
-      <button className='btn'>View data</button>
+      <Link to={`${url}/weights/${title}`} className='btn' style={style}>
+        View data
+      </Link>
     </div>
   );
 };
