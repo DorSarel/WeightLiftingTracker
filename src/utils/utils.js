@@ -55,3 +55,19 @@ export const checkNumberInput = (
 
   return isInputValid;
 };
+
+export const getMaxValue = (trackedExerciseWeights) =>
+  trackedExerciseWeights.reduce(
+    (max, currentValue) => Math.max(max, currentValue.value),
+    trackedExerciseWeights[0].value
+  );
+
+export const getAvgValue = (trackedExerciseWeights) => {
+  let totalWeightsValue = trackedExerciseWeights.reduce(
+    (totalSum, currentValue) => {
+      return totalSum + currentValue.value;
+    },
+    0
+  );
+  return totalWeightsValue / trackedExerciseWeights.length;
+};
