@@ -11,6 +11,8 @@ import {
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 
+import Chart from '../Chart';
+
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
   const history = useHistory();
@@ -70,7 +72,7 @@ const UserActions = ({ userInfo, uid }) => {
       history.push('/dashboard');
     });
   };
-
+  console.log(userWeights);
   return (
     <div className='user-actions'>
       <Switch>
@@ -90,6 +92,7 @@ const UserActions = ({ userInfo, uid }) => {
           )}
         </Route>
       </Switch>
+      {/* {userWeights && <Chart exerciseData={userWeights['jerk']} />} */}
     </div>
   );
 };
