@@ -58,7 +58,7 @@
     font-weight: bold;
 
     @media only screen and (min-width: $larger-breakpoint) {
-      font-size: 3rem;
+      font-size: 4rem;
     }
   }
 
@@ -73,20 +73,13 @@
 
   &__change {
     margin-top: 1.5rem;
+    color: #715aff;
     display: flex;
     align-items: center;
     justify-content: center;
 
     @media only screen and (min-width: $larger-breakpoint) {
       margin-top: 2rem;
-    }
-
-    &--up {
-      color: green;
-    }
-
-    &--down {
-      color: red;
     }
   }
 
