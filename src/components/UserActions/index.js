@@ -10,7 +10,7 @@ import {
   saveNewExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
-
+import DetailedWeight from '../DetailedWeight';
 import Chart from '../Chart';
 
 const UserActions = ({ userInfo, uid }) => {
@@ -90,6 +90,9 @@ const UserActions = ({ userInfo, uid }) => {
               saving={saving}
             />
           )}
+        </Route>
+        <Route path={`${match.path}/weights/:exercise`}>
+          <DetailedWeight />
         </Route>
       </Switch>
       {/* {userWeights && <Chart exerciseData={userWeights['jerk']} />} */}
