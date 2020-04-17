@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 const UserInfoItem = ({ label, value, unit = '' }) => {
   return (
     <div className='user-info__item'>
-      <div className='user-info__main'>
-        <p className='user-info__value'>{`${value}${unit}`}</p>
-        <p className='user-info__key'>{label}</p>
+      <p className='user-info__value'>{`${value}${unit}`}</p>
+      <p className='user-info__key'>{label}</p>
+      <div className='user-info__change user-info__change--up'>
+        <svg className='user-info__icon'>
+          <use xlinkHref={`${Icons}#icon-triangle-up`} />
+        </svg>
+        <p className='user-info__percentage'>0.5%</p>
       </div>
-      <svg className='user-info__icon'>
-        <use xlinkHref={`${Icons}#icon-line-graph`} />
-      </svg>
     </div>
   );
 };
