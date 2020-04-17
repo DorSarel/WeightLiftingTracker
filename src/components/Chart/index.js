@@ -1,17 +1,16 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
-const Chart = ({ exerciseData }) => {
+const Chart = ({ label, exercisePeriodData }) => {
   const data = {
-    labels: exerciseData.exercisePeriodData.map((previousData) =>
+    labels: exercisePeriodData.map((previousData) =>
       new Date(previousData.createdAt).toDateString()
     ),
     datasets: [
       {
-        label: 'Jerk',
-        data: exerciseData.exercisePeriodData.map(
-          (previousData) => previousData.value
-        ),
+        label,
+        data: exercisePeriodData.map((previousData) => previousData.value),
         borderColor: '#715aff',
         pointBackgroundColor: '#a682ff',
         fill: false,
@@ -21,6 +20,11 @@ const Chart = ({ exerciseData }) => {
   };
 
   return <Line data={data} />;
+};
+
+Chart.propTypes = {
+  label: PropTypes.string.isRequired,
+  exercisePeriodData: PropTypes.array.isRequired,
 };
 
 export default Chart;

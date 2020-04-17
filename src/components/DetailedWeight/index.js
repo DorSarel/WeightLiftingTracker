@@ -19,6 +19,10 @@ const DetailedWeight = () => {
       <Box prefix='previous' value={exerciseData.previous} unit='kg' />
       <Box prefix='max' value={maxWeight} unit='kg' />
       <Box prefix='avg' value={avgWeight.toFixed(2)} unit='kg' />
+      <Chart
+        label={exerciseData.exercise}
+        exercisePeriodData={exerciseData.exercisePeriodData}
+      />
     </div>
   );
 };
