@@ -13,6 +13,7 @@ const UserInfo = ({ userInfo }) => {
           key={key}
           label={key}
           value={userInfo[key].value}
+          previous={userInfo[key].previous}
           unit={userInfo[key].unit}
         />
       );

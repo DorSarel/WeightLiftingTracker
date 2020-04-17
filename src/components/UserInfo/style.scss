@@ -30,22 +30,22 @@
     background-color: #fff;
     border: 1px solid #cfcfcf;
     box-shadow: 0 6px 1.25rem rgba(0, 0, 0, 0.3);
-    font-size: 2.25rem;
-    padding: 1em;
+    padding: 2rem;
     transform: scale(1);
     transition: transform 0.25s;
 
-    grid-column: 1 / -1;
+    grid-column: span 2;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 
     @media only screen and (min-width: $md-breakpoint) {
-      grid-column: span 2;
+      grid-column: span 1;
     }
 
     @media only screen and (min-width: $larger-breakpoint) {
-      grid-column: span 1;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
   }
 
@@ -53,20 +53,57 @@
     transform: scale(1.05);
   }
 
-  &__main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &__value {
+    font-size: 2.35rem;
+    font-weight: bold;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 4rem;
+    }
   }
 
   &__key {
-    text-transform: uppercase;
-    font-size: 1.75rem;
+    text-transform: capitalize;
+    font-size: 1.25rem;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__change {
+    margin-top: 1.5rem;
+    color: #715aff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      margin-top: 2rem;
+    }
   }
 
   &__icon {
-    width: 3rem;
-    height: 3rem;
-    fill: #102e4a;
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: currentColor;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      width: 2.125rem;
+      height: 2.125rem;
+    }
+  }
+
+  &__percentage {
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
   }
 }
