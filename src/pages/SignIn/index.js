@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import { checkEmail, checkPassword } from '../../utils/utils';
 import './style.scss';
 
+import Modal from '../../components/Modal';
+
 const initialState = {
   email: {
     value: '',
@@ -27,7 +29,7 @@ const SignIn = () => {
   const auth = useSelector((state) => state.auth);
   const history = useHistory();
   const [formState, setFormState] = useState(initialState);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(true);
   const [errors, setErrors] = useState({});
 
   const isFormValid = () => {
@@ -86,7 +88,8 @@ const SignIn = () => {
   if (auth.uid) return <Redirect to='/dashboard' />;
 
   return saving ? (
-    <Spinner />
+    // <Spinner />
+    <Modal />
   ) : (
     <form className='form form-login' onSubmit={handleSubmit}>
       <h3 className='form-login__title'>Sign in</h3>
