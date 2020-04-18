@@ -25,9 +25,17 @@ const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
           </div>
         </div>
       </div>
-      <Link to={`${url}/weights/${title}`} className='btn' style={style}>
-        View data
-      </Link>
+      <div className='weight-view__actions'>
+        <Link to={`${url}/weights/${title}`} className='btn' style={style}>
+          View data
+        </Link>
+        <button className='btn btn--revert' style={style}>
+          Revert
+        </button>
+        <button className='btn btn--remove weight-view__remove' style={style}>
+          Remove
+        </button>
+      </div>
     </div>
   );
 };
