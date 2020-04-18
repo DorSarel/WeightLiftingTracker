@@ -12,6 +12,8 @@ import {
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 import DetailedWeight from '../DetailedWeight';
+import { useModal } from '../../hooks/useModal';
+import Modal from '../Modal';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -19,6 +21,8 @@ const UserActions = ({ userInfo, uid }) => {
   const userWeights = useSelector((state) => state.userWeights);
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
+  const [exerciseToRemove, setExerciseToRemove] = useState('');
+  const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
     if (!userWeights) {
@@ -73,10 +77,19 @@ const UserActions = ({ userInfo, uid }) => {
     });
   };
 
-  const handleRemove = (exerciseToRemove) => {
-    dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
-      history.push('/dashboard');
-    });
+  const handleRemove = () => {
+    if (exerciseToRemove) {
+      dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
+        closeModal();
+        setExerciseToRemove('');
+        history.push('/dashboard');
+      });
+    }
+  };
+
+  const handleExerciseToRemove = (toRemove) => {
+    setExerciseToRemove(toRemove);
+    openModal();
   };
 
   const handleRevertExercise = (exerciseToRevert) => {
@@ -102,14 +115,24 @@ const UserActions = ({ userInfo, uid }) => {
     });
   };
 
+  console.log(exerciseToRemove);
+
   return (
     <div className='user-actions'>
+      {isModalOpen && (
+        <Modal
+          title='remove'
+          actionText={`remove ${exerciseToRemove}`}
+          handleConfirm={handleRemove}
+          handleClose={closeModal}
+        />
+      )}
       <Switch>
         <Route exact path={match.path}>
           <WeightsView
             weights={userWeights}
             revertWeight={handleRevertExercise}
-            removeWeight={handleRemove}
+            removeWeight={handleExerciseToRemove}
           />
         </Route>
         <Route path={`${match.path}/add_weight`}>
