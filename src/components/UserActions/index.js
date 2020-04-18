@@ -71,12 +71,38 @@ const UserActions = ({ userInfo, uid }) => {
       history.push('/dashboard');
     });
   };
-  console.log(userWeights);
+
+  const handleRevertExercise = (exerciseToRevert) => {
+    const indexToRemove =
+      userWeights[exerciseToRevert].exercisePeriodData.length - 1;
+    const indexToUseForPrevious =
+      userWeights[exerciseToRevert].exercisePeriodData.length - 3;
+
+    const exerciseDataToUpdate = {
+      ...userWeights[exerciseToRevert],
+      current: userWeights[exerciseToRevert].previous,
+      previous:
+        userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious]
+          .value,
+      exercisePeriodData: userWeights[
+        exerciseToRevert
+      ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
+    };
+
+    const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
+    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false)).then(() => {
+      history.push('/dashboard');
+    });
+  };
+
   return (
     <div className='user-actions'>
       <Switch>
         <Route exact path={match.path}>
-          <WeightsView weights={userWeights} />
+          <WeightsView
+            weights={userWeights}
+            revertWeight={handleRevertExercise}
+          />
         </Route>
         <Route path={`${match.path}/add_weight`}>
           <WeightsForm onSave={handleWeightsFormSubmit} saving={saving} />

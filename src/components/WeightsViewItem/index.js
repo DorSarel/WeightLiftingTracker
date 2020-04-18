@@ -6,8 +6,19 @@ const style = {
   textAlign: 'center',
 };
 
-const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
+const WeightsViewItem = ({
+  title,
+  currentWeight,
+  lastWeight,
+  onRevert,
+  disable,
+}) => {
   const { url } = useRouteMatch();
+
+  const handleOnRevert = () => {
+    onRevert(title);
+  };
+
   return (
     <div className='weight-view'>
       <div className='weight-view__content'>
@@ -29,7 +40,12 @@ const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
         <Link to={`${url}/weights/${title}`} className='btn' style={style}>
           View data
         </Link>
-        <button className='btn btn--revert' style={style}>
+        <button
+          onClick={handleOnRevert}
+          className='btn btn--revert'
+          style={style}
+          disabled={disable}
+        >
           Revert
         </button>
         <button className='btn btn--remove weight-view__remove' style={style}>

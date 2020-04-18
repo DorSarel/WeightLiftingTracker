@@ -55,6 +55,12 @@ body {
   letter-spacing: 1px;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+  background-image: none;
+  background-color: #464646;
+}
+
 .btn--remove {
   background: #f00000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
