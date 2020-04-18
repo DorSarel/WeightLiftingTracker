@@ -126,6 +126,7 @@ const SignUp = () => {
       weight: {
         value: numberFormState.weight.value,
         unit: 'kg',
+        previous: numberFormState.weight.value,
       },
       height: {
         value: numberFormState.height.value,
@@ -134,6 +135,7 @@ const SignUp = () => {
       fat: {
         value: numberFormState.fat.value,
         unit: '%',
+        previous: numberFormState.fat.value,
       },
       firstName: textFormState.firstName.value,
       lastName: textFormState.lastName.value,

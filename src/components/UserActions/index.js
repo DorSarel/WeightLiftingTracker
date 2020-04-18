@@ -8,8 +8,12 @@ import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExerciseWeight,
+  removeExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
+import DetailedWeight from '../DetailedWeight';
+import { useModal } from '../../hooks/useModal';
+import Modal from '../Modal';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -17,6 +21,8 @@ const UserActions = ({ userInfo, uid }) => {
   const userWeights = useSelector((state) => state.userWeights);
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
+  const [exerciseToRemove, setExerciseToRemove] = useState('');
+  const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
     if (!userWeights) {
@@ -71,11 +77,63 @@ const UserActions = ({ userInfo, uid }) => {
     });
   };
 
+  const handleRemove = () => {
+    if (exerciseToRemove) {
+      dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
+        closeModal();
+        setExerciseToRemove('');
+        history.push('/dashboard');
+      });
+    }
+  };
+
+  const handleExerciseToRemove = (toRemove) => {
+    setExerciseToRemove(toRemove);
+    openModal();
+  };
+
+  const handleRevertExercise = (exerciseToRevert) => {
+    const indexToRemove =
+      userWeights[exerciseToRevert].exercisePeriodData.length - 1;
+    const indexToUseForPrevious =
+      userWeights[exerciseToRevert].exercisePeriodData.length - 3;
+
+    const exerciseDataToUpdate = {
+      ...userWeights[exerciseToRevert],
+      current: userWeights[exerciseToRevert].previous,
+      previous:
+        userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious]
+          .value,
+      exercisePeriodData: userWeights[
+        exerciseToRevert
+      ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
+    };
+
+    const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
+    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false)).then(() => {
+      history.push('/dashboard');
+    });
+  };
+
+  console.log(exerciseToRemove);
+
   return (
     <div className='user-actions'>
+      {isModalOpen && (
+        <Modal
+          title='remove'
+          actionText={`remove ${exerciseToRemove}`}
+          handleConfirm={handleRemove}
+          handleClose={closeModal}
+        />
+      )}
       <Switch>
         <Route exact path={match.path}>
-          <WeightsView weights={userWeights} />
+          <WeightsView
+            weights={userWeights}
+            revertWeight={handleRevertExercise}
+            removeWeight={handleExerciseToRemove}
+          />
         </Route>
         <Route path={`${match.path}/add_weight`}>
           <WeightsForm onSave={handleWeightsFormSubmit} saving={saving} />
@@ -88,6 +146,9 @@ const UserActions = ({ userInfo, uid }) => {
               saving={saving}
             />
           )}
+        </Route>
+        <Route path={`${match.path}/weights/:exercise`}>
+          <DetailedWeight />
         </Route>
       </Switch>
     </div>

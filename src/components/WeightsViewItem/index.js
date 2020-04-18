@@ -1,6 +1,29 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
+const style = {
+  textDecoration: 'none',
+  textAlign: 'center',
+};
+
+const WeightsViewItem = ({
+  title,
+  currentWeight,
+  lastWeight,
+  onRevert,
+  onRemove,
+  disable,
+}) => {
+  const { url } = useRouteMatch();
+
+  const handleOnRevert = () => {
+    onRevert(title);
+  };
+
+  const handleRemove = () => {
+    onRemove(title);
+  };
+
   return (
     <div className='weight-view'>
       <div className='weight-view__content'>
@@ -18,7 +41,26 @@ const WeightsViewItem = ({ title, currentWeight, lastWeight }) => {
           </div>
         </div>
       </div>
-      <button className='btn'>View data</button>
+      <div className='weight-view__actions'>
+        <Link to={`${url}/weights/${title}`} className='btn' style={style}>
+          View data
+        </Link>
+        <button
+          onClick={handleOnRevert}
+          className='btn btn--revert'
+          style={style}
+          disabled={disable}
+        >
+          Revert
+        </button>
+        <button
+          onClick={handleRemove}
+          className='btn btn--remove weight-view__remove'
+          style={style}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 };

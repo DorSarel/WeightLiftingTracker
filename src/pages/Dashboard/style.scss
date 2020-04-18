@@ -3,4 +3,5 @@
 .dashboard {
   display: grid;
   grid-template-columns: minmax(20rem, 15vw) 1fr;
+  grid-row-gap: 3rem;
 }
