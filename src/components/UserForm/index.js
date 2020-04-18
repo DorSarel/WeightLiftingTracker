@@ -87,7 +87,10 @@ const UserForm = ({ userInfo, onSave, saving }) => {
       } else {
         updatedUserInfo[userKey] = {
           value: userState[userKey].value,
-          previous: userInfo[userKey].value,
+          previous:
+            userInfo[userKey].value !== userState[userKey].value
+              ? userInfo[userKey].value
+              : userInfo[userKey].previous,
           unit: userState[userKey].unit,
         };
       }
