@@ -1,4 +1,4 @@
-import { firestoreDB } from '../config/fbConfig';
+import firebase, { firestoreDB } from '../config/fbConfig';
 
 export function loadWeights(userKey) {
   return firestoreDB
@@ -19,4 +19,13 @@ export function saveWeight(uid, exerciseToSave, shouldSetExercise) {
     return exerciseRef.set(exerciseToSave);
   }
   return exerciseRef.update(exerciseToSave);
+}
+
+export function removeWeight(uid, exerciseToRemove) {
+  return firestoreDB
+    .collection('weights')
+    .doc(uid)
+    .update({
+      [exerciseToRemove]: firebase.firestore.FieldValue.delete(),
+    });
 }

@@ -13,6 +13,10 @@ export default function weightsReducer(
         ...state,
         ...action.exerciseToSave,
       };
+    case types.REMOVE_EXERCISE_WEIGHT_SUCCESS:
+      let userWeight = { ...state };
+      delete userWeight[action.exerciseToRemove];
+      return userWeight;
     case types.LOGOUT_SUCCESS:
       return initialState.userWeights;
     default:

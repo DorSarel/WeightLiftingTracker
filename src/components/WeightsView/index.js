@@ -2,7 +2,7 @@ import React from 'react';
 import WeightsViewItem from '../WeightsViewItem';
 import './style.scss';
 
-const WeightsView = ({ weights, revertWeight }) => {
+const WeightsView = ({ weights, revertWeight, removeWeight }) => {
   let userWeights = [];
   for (let key in weights) {
     const { previous, current } = weights[key];
@@ -13,10 +13,10 @@ const WeightsView = ({ weights, revertWeight }) => {
         currentWeight={current}
         lastWeight={previous}
         onRevert={revertWeight}
+        onRemove={removeWeight}
         disable={weights[key].exercisePeriodData.length < 3}
       />
     );
-    console.log(key, weights[key].exercisePeriodData.length < 3);
   }
 
   return (

@@ -8,6 +8,7 @@ import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExerciseWeight,
+  removeExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import './style.scss';
 import DetailedWeight from '../DetailedWeight';
@@ -72,6 +73,12 @@ const UserActions = ({ userInfo, uid }) => {
     });
   };
 
+  const handleRemove = (exerciseToRemove) => {
+    dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
+      history.push('/dashboard');
+    });
+  };
+
   const handleRevertExercise = (exerciseToRevert) => {
     const indexToRemove =
       userWeights[exerciseToRevert].exercisePeriodData.length - 1;
@@ -102,6 +109,7 @@ const UserActions = ({ userInfo, uid }) => {
           <WeightsView
             weights={userWeights}
             revertWeight={handleRevertExercise}
+            removeWeight={handleRemove}
           />
         </Route>
         <Route path={`${match.path}/add_weight`}>

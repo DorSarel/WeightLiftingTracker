@@ -11,12 +11,17 @@ const WeightsViewItem = ({
   currentWeight,
   lastWeight,
   onRevert,
+  onRemove,
   disable,
 }) => {
   const { url } = useRouteMatch();
 
   const handleOnRevert = () => {
     onRevert(title);
+  };
+
+  const handleRemove = () => {
+    onRemove(title);
   };
 
   return (
@@ -48,7 +53,11 @@ const WeightsViewItem = ({
         >
           Revert
         </button>
-        <button className='btn btn--remove weight-view__remove' style={style}>
+        <button
+          onClick={handleRemove}
+          className='btn btn--remove weight-view__remove'
+          style={style}
+        >
           Remove
         </button>
       </div>
