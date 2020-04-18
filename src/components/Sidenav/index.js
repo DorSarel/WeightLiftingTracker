@@ -7,12 +7,9 @@ import Icons from '../../assets/sprite.svg';
 
 const Sidenav = ({ userInfo, logout }) => {
   const match = useRouteMatch();
-  const [isModalOpen, setIsModalOpen] = useModal();
+  const [isModalOpen, openModal, closeModal] = useModal();
   const { firstName, lastName } = userInfo;
   const initials = firstName[0] + lastName[0];
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
