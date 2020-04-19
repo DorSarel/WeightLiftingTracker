@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icons from '../../assets/sprite.svg';
 import './style.scss';
 
-const ChangeInPercentage = ({ current, previous }) => {
+const ChangeInPercentage = ({ current, previous = undefined }) => {
   let wrapperClass = 'change';
   let iconTriangleDirection = 'up';
   let changeInPercentage = 0;
@@ -28,7 +28,6 @@ const ChangeInPercentage = ({ current, previous }) => {
 
 ChangeInPercentage.propTypes = {
   current: PropTypes.number.isRequired,
-  previous: PropTypes.number.isRequired,
 };
 
 export default ChangeInPercentage;

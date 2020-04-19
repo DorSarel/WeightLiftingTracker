@@ -65,9 +65,11 @@
   &__key {
     text-transform: capitalize;
     font-size: 1.25rem;
+    margin-bottom: 1rem;
 
     @media only screen and (min-width: $larger-breakpoint) {
       font-size: 1.5rem;
+      margin-bottom: 2rem;
     }
   }
 }
