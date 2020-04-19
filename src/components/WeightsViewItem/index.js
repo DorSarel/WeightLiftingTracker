@@ -39,12 +39,16 @@ const WeightsViewItem = ({
       </p>
       <p className='weight-view__time-text'>Change</p>
       <ChangeInPercentage current={currentWeight} previous={lastWeight} />
-      <Link to={`${url}/weights/${title}`} className='btn' style={style}>
+      <Link
+        to={`${url}/weights/${title}`}
+        className='btn weight-view__btn'
+        style={style}
+      >
         View data
       </Link>
       <button
         onClick={handleOnRevert}
-        className='btn btn--revert'
+        className='btn btn--revert weight-view__btn'
         style={style}
         disabled={disable}
       >

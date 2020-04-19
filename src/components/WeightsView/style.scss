@@ -70,4 +70,12 @@
     font-size: 2rem;
     text-transform: uppercase;
   }
+
+  &__btn {
+    border-radius: 10px;
+
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
 }
