@@ -97,13 +97,13 @@ const UserActions = ({ userInfo, uid }) => {
       userWeights[exerciseToRevert].exercisePeriodData.length - 1;
     const indexToUseForPrevious =
       userWeights[exerciseToRevert].exercisePeriodData.length - 3;
+    const previousDataObj =
+      userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious];
 
     const exerciseDataToUpdate = {
       ...userWeights[exerciseToRevert],
       current: userWeights[exerciseToRevert].previous,
-      previous:
-        userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious]
-          .value,
+      previous: previousDataObj ? previousDataObj.value : 0,
       exercisePeriodData: userWeights[
         exerciseToRevert
       ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
