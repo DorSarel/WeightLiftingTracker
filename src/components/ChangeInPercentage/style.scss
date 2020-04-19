@@ -1,0 +1,37 @@
+@import '../../media-queries.scss';
+
+.change {
+  margin-top: 1.5rem;
+  color: #715aff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    margin-top: 2rem;
+  }
+
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: currentColor;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      width: 2.125rem;
+      height: 2.125rem;
+    }
+  }
+
+  &__percentage {
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
+  }
+}
