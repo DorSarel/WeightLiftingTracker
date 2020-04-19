@@ -28,7 +28,9 @@ const WeightsViewItem = ({
   return (
     <div className='weight-view'>
       <h2 className='weight-view__title'>{title}</h2>
-      <span className='weight-view__close'>&times;</span>
+      <span onClick={handleRemove} className='weight-view__close'>
+        &times;
+      </span>
       <p className='weight-view__time-text'>Current</p>
       <p className='weight-view__data'>{currentWeight}kg</p>
       <p className='weight-view__time-text'>Previous</p>
