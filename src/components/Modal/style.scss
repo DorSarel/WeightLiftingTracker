@@ -8,16 +8,32 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &__box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #fff;
     padding: 2rem;
     width: 80%;
     max-width: 50rem;
     border-radius: 10px;
+  }
+
+  &__box--top {
+    top: 20%;
+    @media only screen and (min-width: $large-breakpoint) {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__box--bottom {
+    bottom: 20%;
+    @media only screen and (min-width: $large-breakpoint) {
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+    }
   }
 
   &__header {

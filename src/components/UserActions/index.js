@@ -125,6 +125,7 @@ const UserActions = ({ userInfo, uid }) => {
           actionText={`remove ${exerciseToRemove}`}
           handleConfirm={handleRemove}
           handleClose={closeModal}
+          positionBoxClass='modal__box--bottom'
         />
       )}
       <Switch>
