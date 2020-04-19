@@ -115,8 +115,6 @@ const UserActions = ({ userInfo, uid }) => {
     });
   };
 
-  console.log(exerciseToRemove);
-
   return (
     <div className='user-actions'>
       {isModalOpen && (

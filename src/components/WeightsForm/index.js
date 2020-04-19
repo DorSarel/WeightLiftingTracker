@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SelectInput from '../SelectInput';
 import NumberInput from '../NumberInput';
 import { checkNumberInput } from '../../utils/utils';
@@ -25,6 +25,16 @@ const WeightsForm = ({ onSave, saving }) => {
   const [exercise, setExercise] = useState('');
   const [weight, setWeight] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const elementToScrollTo = useRef(null);
+
+  useEffect(() => {
+    const viewportOffsets = elementToScrollTo.current.getBoundingClientRect();
+    window.scrollTo({
+      top: viewportOffsets.top,
+      left: viewportOffsets.left,
+      behavior: 'smooth',
+    });
+  }, []);
 
   const isFormValid = () => {
     let errors = {};
@@ -81,7 +91,7 @@ const WeightsForm = ({ onSave, saving }) => {
   return (
     <>
       <h1 className='heading-1 heading-1--center'>Add Weight</h1>
-      <form className='form' onSubmit={handleOnSubmit}>
+      <form ref={elementToScrollTo} className='form' onSubmit={handleOnSubmit}>
         <SelectInput
           name='exercise'
           label='exercise'
