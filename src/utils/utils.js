@@ -71,3 +71,6 @@ export const getAvgValue = (trackedExerciseWeights) => {
   );
   return totalWeightsValue / trackedExerciseWeights.length;
 };
+
+export const sortObjectsByDate = (firstDateObject, secondDateObjcet) =>
+  secondDateObjcet.createdAt - firstDateObject.createdAt;

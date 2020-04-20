@@ -4,7 +4,7 @@ import Chart from '../Chart';
 import Table from '../Table';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getMaxValue, getAvgValue } from '../../utils/utils';
+import { getMaxValue, getAvgValue, sortObjectsByDate } from '../../utils/utils';
 import './style.scss';
 
 const DetailedWeight = () => {
@@ -13,30 +13,34 @@ const DetailedWeight = () => {
   const maxWeight = getMaxValue(exerciseData.exercisePeriodData);
   const avgWeight = getAvgValue(exerciseData.exercisePeriodData);
 
+  const dataSetReversedArray = exerciseData.exercisePeriodData.sort(
+    sortObjectsByDate
+  );
+
   return (
     <div className='detailed-weight'>
       <h2 className='detailed-weight__title'>{exerciseData.exercise}</h2>
       <DataBox
         prefix='current'
-        value={exerciseData.current}
+        value={parseFloat(exerciseData.current)}
         unit='kg'
         additionlClass='detailed-weight__grid-span'
       />
       <DataBox
         prefix='previous'
-        value={exerciseData.previous}
+        value={parseFloat(exerciseData.previous)}
         unit='kg'
         additionlClass='detailed-weight__grid-span'
       />
       <DataBox
         prefix='max'
-        value={maxWeight}
+        value={parseFloat(maxWeight)}
         unit='kg'
         additionlClass='detailed-weight__grid-span'
       />
       <DataBox
         prefix='avg'
-        value={avgWeight.toFixed(2)}
+        value={parseFloat(avgWeight.toFixed(2))}
         unit='kg'
         additionlClass='detailed-weight__grid-span'
       />
@@ -53,7 +57,7 @@ const DetailedWeight = () => {
         </p>
       )}
       <div className='detailed-weight__table'>
-        <Table dataList={exerciseData.exercisePeriodData} />
+        <Table dataList={dataSetReversedArray} />
       </div>
     </div>
   );
