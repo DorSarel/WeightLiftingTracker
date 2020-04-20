@@ -13,7 +13,7 @@ const DetailedWeight = () => {
   const maxWeight = getMaxValue(exerciseData.exercisePeriodData);
   const avgWeight = getAvgValue(exerciseData.exercisePeriodData);
 
-  const dataSetReversedArray = exerciseData.exercisePeriodData.sort(
+  const dataSetReversedArray = [...exerciseData.exercisePeriodData].sort(
     sortObjectsByDate
   );
 
