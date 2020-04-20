@@ -2,15 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SelectInput from '../SelectInput';
 import NumberInput from '../NumberInput';
 import { checkNumberInput } from '../../utils/utils';
-
-// need to be replaced with external data source
-const weightliftingExercises = [
-  'HPC',
-  'Squat Snatch',
-  'Clean',
-  'Jerk',
-  'Deadlift',
-];
+import weightliftingExercises from '../../config/exercises';
 
 const initialState = {
   value: 0.5,

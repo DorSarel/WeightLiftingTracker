@@ -14,6 +14,7 @@ import './style.scss';
 import DetailedWeight from '../DetailedWeight';
 import { useModal } from '../../hooks/useModal';
 import Modal from '../Modal';
+import { toast } from 'react-toastify';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -40,7 +41,7 @@ const UserActions = ({ userInfo, uid }) => {
       })
       .catch((error) => {
         setSaving(false);
-        alert('Error updating the user info ' + error.message);
+        toast.error('Error updating the user info ' + error.message);
       });
   };
 
@@ -69,21 +70,28 @@ const UserActions = ({ userInfo, uid }) => {
     const isFirstUserExercise = userWeights === null;
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
 
-    dispatch(
-      saveNewExerciseWeight(exerciseToSave, uid, isFirstUserExercise)
-    ).then(() => {
-      setSaving(false);
-      history.push('/dashboard');
-    });
+    dispatch(saveNewExerciseWeight(exerciseToSave, uid, isFirstUserExercise))
+      .then(() => {
+        setSaving(false);
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        setSaving(false);
+        toast.error('Error updating the weights ' + error.message);
+      });
   };
 
   const handleRemove = () => {
     if (exerciseToRemove) {
-      dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
-        closeModal();
-        setExerciseToRemove('');
-        history.push('/dashboard');
-      });
+      dispatch(removeExerciseWeight(exerciseToRemove, uid))
+        .then(() => {
+          closeModal();
+          setExerciseToRemove('');
+          history.push('/dashboard');
+        })
+        .catch((error) => {
+          toast.error(`Failed to remove ${exerciseToRemove}` + error.message);
+        });
     }
   };
 
@@ -110,9 +118,13 @@ const UserActions = ({ userInfo, uid }) => {
     };
 
     const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
-    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false)).then(() => {
-      history.push('/dashboard');
-    });
+    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false))
+      .then(() => {
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        toast.error(`Failed to revert ${exerciseToRevert} ` + error.message);
+      });
   };
 
   return (

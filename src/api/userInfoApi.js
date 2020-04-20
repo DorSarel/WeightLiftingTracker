@@ -10,13 +10,28 @@ export function getUserInformation(uid) {
         return doc.data();
       }
       return null;
+    })
+    .catch((error) => {
+      throw error;
     });
 }
 
 export function updateUserInformation(uid, updatedUserInfo) {
-  return firestoreDB.collection('users').doc(uid).update(updatedUserInfo);
+  return firestoreDB
+    .collection('users')
+    .doc(uid)
+    .update(updatedUserInfo)
+    .catch((error) => {
+      throw error;
+    });
 }
 
 export function setUserInformation(uid, userData) {
-  return firestoreDB.collection('users').doc(uid).set(userData);
+  return firestoreDB
+    .collection('users')
+    .doc(uid)
+    .set(userData)
+    .catch((error) => {
+      throw error;
+    });
 }
