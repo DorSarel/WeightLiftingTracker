@@ -1,6 +1,7 @@
 import React from 'react';
 import DataBox from '../DataBox/DataBox';
 import Chart from '../Chart';
+import Table from '../Table';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getMaxValue, getAvgValue } from '../../utils/utils';
@@ -51,6 +52,9 @@ const DetailedWeight = () => {
           Not enough data to generate graph
         </p>
       )}
+      <div className='detailed-weight__table'>
+        <Table dataList={exerciseData.exercisePeriodData} />
+      </div>
     </div>
   );
 };

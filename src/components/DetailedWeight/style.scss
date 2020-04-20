@@ -48,6 +48,17 @@
     }
   }
 
+  &__table {
+    grid-column: 1 / -1;
+    margin-top: 5rem;
+    max-height: 40rem;
+    overflow-y: scroll;
+
+    @media only screen and (min-width: $large-breakpoint) {
+      grid-column: 3 / -1;
+    }
+  }
+
   &__no-grpah {
     grid-column: 1 / -1;
     font-size: 1.5rem;

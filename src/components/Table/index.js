@@ -1,17 +1,18 @@
 import React from 'react';
 import ChangeInPercentage from '../ChangeInPercentage';
+import './style.scss';
 
 const Table = ({ dataList }) => (
   <table className='table'>
-    <tr>
+    <tr className='table__row-heading'>
       <th>Date</th>
       <th>Weight</th>
       <th>Change</th>
     </tr>
     {(dataList || []).reverse().map((item, idx, arr) => (
-      <tr>
-        <td>item.createdAt</td>
-        <td>item.value</td>
+      <tr className='table__row'>
+        <td>{item.createdAt}</td>
+        <td>{item.value}</td>
         <td>
           <ChangeInPercentage
             current={item.value}
