@@ -1,0 +1,51 @@
+@import '../../media-queries.scss';
+
+.data-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 3px 2rem rgba(0, 0, 0, 0.3);
+
+  @media only screen and (min-width: $larger-breakpoint) {
+    font-size: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  &__prefix {
+    text-transform: uppercase;
+  }
+
+  &__data {
+    justify-self: self-end;
+    text-transform: uppercase;
+  }
+}
+
+// &__box {
+//   grid-column: span 2;
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   align-items: center;
+//   margin-bottom: 2rem;
+//   font-size: 1.75rem;
+
+//   @media only screen and (min-width: $large-breakpoint) {
+//     grid-column: span 1;
+//     font-size: 2.125rem;
+//     margin-bottom: 5rem;
+//   }
+// }
+
+// &__prefix {
+//   text-transform: capitalize;
+//   margin-right: 0.75rem;
+// }
+
+// &__data {
+//   text-transform: uppercase;
+// }

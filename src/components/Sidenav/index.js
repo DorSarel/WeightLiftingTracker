@@ -19,6 +19,7 @@ const Sidenav = ({ userInfo, logout }) => {
           actionText='logout'
           handleConfirm={logout}
           handleClose={closeModal}
+          styleBoxPosition={{ top: '10%' }}
         />
       )}
       <aside className='sidenav'>

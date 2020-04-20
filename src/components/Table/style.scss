@@ -1,0 +1,35 @@
+@import '../../media-queries.scss';
+
+.table {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+
+  &__row-heading {
+    font-size: 1.75rem;
+    background-color: #a297f8;
+    color: #fff;
+  }
+
+  &__row {
+    font-size: 1.25rem;
+
+    @media only screen and (min-width: $larger-breakpoint) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__row:nth-child(2n) {
+    background-color: rgb(235, 207, 207);
+  }
+
+  &__row:nth-child(2n + 1) {
+    background-color: rgb(218, 186, 186);
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0;
+  }
+}

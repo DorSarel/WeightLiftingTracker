@@ -16,10 +16,8 @@ export const logoutSuccess = () => {
 
 export const signIn = (credentials) => {
   return (dispatch, getState) => {
-    console.log(credentials);
     return loginUser(credentials)
       .then((userId) => {
-        console.log(userId);
         localStorage.setItem('uid', userId);
         dispatch(loginSuccess(userId));
       })

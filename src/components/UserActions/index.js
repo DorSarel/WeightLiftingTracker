@@ -14,6 +14,7 @@ import './style.scss';
 import DetailedWeight from '../DetailedWeight';
 import { useModal } from '../../hooks/useModal';
 import Modal from '../Modal';
+import { toast } from 'react-toastify';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -40,7 +41,7 @@ const UserActions = ({ userInfo, uid }) => {
       })
       .catch((error) => {
         setSaving(false);
-        alert('Error updating the user info ' + error.message);
+        toast.error('Error updating the user info ' + error.message);
       });
   };
 
@@ -69,21 +70,28 @@ const UserActions = ({ userInfo, uid }) => {
     const isFirstUserExercise = userWeights === null;
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
 
-    dispatch(
-      saveNewExerciseWeight(exerciseToSave, uid, isFirstUserExercise)
-    ).then(() => {
-      setSaving(false);
-      history.push('/dashboard');
-    });
+    dispatch(saveNewExerciseWeight(exerciseToSave, uid, isFirstUserExercise))
+      .then(() => {
+        setSaving(false);
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        setSaving(false);
+        toast.error('Error updating the weights ' + error.message);
+      });
   };
 
   const handleRemove = () => {
     if (exerciseToRemove) {
-      dispatch(removeExerciseWeight(exerciseToRemove, uid)).then(() => {
-        closeModal();
-        setExerciseToRemove('');
-        history.push('/dashboard');
-      });
+      dispatch(removeExerciseWeight(exerciseToRemove, uid))
+        .then(() => {
+          closeModal();
+          setExerciseToRemove('');
+          history.push('/dashboard');
+        })
+        .catch((error) => {
+          toast.error(`Failed to remove ${exerciseToRemove}` + error.message);
+        });
     }
   };
 
@@ -97,25 +105,27 @@ const UserActions = ({ userInfo, uid }) => {
       userWeights[exerciseToRevert].exercisePeriodData.length - 1;
     const indexToUseForPrevious =
       userWeights[exerciseToRevert].exercisePeriodData.length - 3;
+    const previousDataObj =
+      userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious];
 
     const exerciseDataToUpdate = {
       ...userWeights[exerciseToRevert],
       current: userWeights[exerciseToRevert].previous,
-      previous:
-        userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious]
-          .value,
+      previous: previousDataObj ? previousDataObj.value : 0,
       exercisePeriodData: userWeights[
         exerciseToRevert
       ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
     };
 
     const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
-    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false)).then(() => {
-      history.push('/dashboard');
-    });
+    dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false))
+      .then(() => {
+        history.push('/dashboard');
+      })
+      .catch((error) => {
+        toast.error(`Failed to revert ${exerciseToRevert} ` + error.message);
+      });
   };
-
-  console.log(exerciseToRemove);
 
   return (
     <div className='user-actions'>
@@ -125,6 +135,7 @@ const UserActions = ({ userInfo, uid }) => {
           actionText={`remove ${exerciseToRemove}`}
           handleConfirm={handleRemove}
           handleClose={closeModal}
+          positionBoxClass='modal__box--bottom'
         />
       )}
       <Switch>

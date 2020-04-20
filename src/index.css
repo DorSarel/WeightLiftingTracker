@@ -93,6 +93,7 @@ body {
   font-size: 3rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-bottom: 2rem;
 }
 
 @media only screen and (min-width: 900px) {

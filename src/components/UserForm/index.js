@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NumberInput from '../NumberInput';
 import PropTypes from 'prop-types';
 import { checkNumberInput } from '../../utils/utils';
@@ -39,6 +39,16 @@ const UserForm = ({ userInfo, onSave, saving }) => {
     },
   });
   const [errors, setErrors] = useState({});
+  const elementToScrollTo = useRef(null);
+
+  useEffect(() => {
+    const viewportOffsets = elementToScrollTo.current.getBoundingClientRect();
+    window.scrollTo({
+      top: viewportOffsets.top,
+      left: viewportOffsets.left,
+      behavior: 'smooth',
+    });
+  }, []);
 
   const isFormValid = () => {
     let errors = {};
@@ -103,7 +113,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
   return (
     <>
       <h1 className='heading-1 heading-1--center'>Update User Info</h1>
-      <form className='form' onSubmit={handleSubmit}>
+      <form ref={elementToScrollTo} className='form' onSubmit={handleSubmit}>
         <NumberInput
           label='age'
           value={userState.age.value}
@@ -132,7 +142,9 @@ const UserForm = ({ userInfo, onSave, saving }) => {
           attributes={userState.fat.validation}
           errorMsg={errors.fat}
         />
-        <button className='btn'>{!saving ? 'Update' : 'Updating...'}</button>
+        <button disabled={saving} className='btn'>
+          {!saving ? 'Update' : 'Updating...'}
+        </button>
       </form>
     </>
   );

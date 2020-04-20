@@ -10,6 +10,9 @@ export function loadWeights(userKey) {
         return doc.data();
       }
       return null;
+    })
+    .catch((error) => {
+      throw error;
     });
 }
 
