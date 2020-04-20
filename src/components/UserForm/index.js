@@ -142,7 +142,9 @@ const UserForm = ({ userInfo, onSave, saving }) => {
           attributes={userState.fat.validation}
           errorMsg={errors.fat}
         />
-        <button className='btn'>{!saving ? 'Update' : 'Updating...'}</button>
+        <button disabled={saving} className='btn'>
+          {!saving ? 'Update' : 'Updating...'}
+        </button>
       </form>
     </>
   );

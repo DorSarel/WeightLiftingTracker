@@ -108,7 +108,9 @@ const WeightsForm = ({ onSave, saving }) => {
           attributes={weight.validation}
           errorMsg={errors.weight}
         />
-        <button className='btn'>{saving ? 'adding...' : 'add weight'}</button>
+        <button disabled={saving} className='btn'>
+          {saving ? 'adding...' : 'add weight'}
+        </button>
       </form>
     </>
   );
