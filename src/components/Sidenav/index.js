@@ -15,8 +15,8 @@ const Sidenav = ({ userInfo, logout }) => {
     <>
       {isModalOpen && (
         <Modal
-          title='logout'
-          actionText='logout'
+          title='log out'
+          actionText='log out'
           handleConfirm={logout}
           handleClose={closeModal}
           styleBoxPosition={{ top: '10%' }}
@@ -56,7 +56,7 @@ const Sidenav = ({ userInfo, logout }) => {
               <svg className='sidenav__icon'>
                 <use xlinkHref={`${Icons}#icon-log-out`} />
               </svg>
-              Logout
+              Log out
             </a>
           </li>
         </ul>

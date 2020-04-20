@@ -18,10 +18,10 @@ const Login = () => {
         Track & view your lifting weights in a simple way
       </p>
       <Link to='/signup' className='btn login__btn login__btn--end'>
-        Signup
+        Sign up
       </Link>
       <Link to='/signin' className='btn login__btn login__btn--start'>
-        Signin
+        Sign in
       </Link>
     </div>
   );
