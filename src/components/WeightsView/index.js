@@ -27,7 +27,7 @@ const WeightsView = ({ weights, revertWeight, removeWeight }) => {
           userWeights
         ) : (
           <p style={{ gridColumn: '1 / -1' }}>
-            You didn`t add any weights... Start adding now!
+            You didn't add any weights... Start adding now!
           </p>
         )}
       </div>

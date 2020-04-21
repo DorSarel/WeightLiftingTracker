@@ -107,7 +107,7 @@ const SignIn = () => {
         errorMsg={errors.password}
         attributes={formState.password.validation}
       />
-      <button className='btn'>login</button>
+      <button className='btn'>sign in</button>
     </form>
   );
 };
