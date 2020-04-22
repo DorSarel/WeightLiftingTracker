@@ -73,9 +73,14 @@
 
   &__btn {
     border-radius: 10px;
+    grid-column: span 2;
 
-    &:not(:last-child) {
-      margin-right: 2rem;
+    @media only screen and (min-width: $login-breakpoint) {
+      grid-column: span 1;
+
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
     }
   }
 }
