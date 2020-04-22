@@ -8,15 +8,7 @@ const UserInfo = ({ userInfo }) => {
 
   for (let key in userInfo) {
     if (userInfo[key].value) {
-      userData.push(
-        <UserInfoItem
-          key={key}
-          label={key}
-          value={userInfo[key].value}
-          previous={userInfo[key].previous}
-          unit={userInfo[key].unit}
-        />
-      );
+      userData.push({ key, ...userInfo[key] });
     }
   }
 
@@ -25,7 +17,15 @@ const UserInfo = ({ userInfo }) => {
       <h1 className='heading-1 heading-1--center user-info__title'>
         Personal Information
       </h1>
-      {userData}
+      {userData.map((userItem) => (
+        <UserInfoItem
+          key={userItem.key}
+          label={userItem.key}
+          value={userItem.value}
+          previous={userItem.previous}
+          unit={userItem.unit}
+        />
+      ))}
     </div>
   );
 };
