@@ -27,7 +27,11 @@
   }
 
   &__grid-span {
-    grid-column: span 2;
+    grid-column: 1 / -1;
+
+    @media only screen and (min-width: $login-breakpoint) {
+      grid-column: span 2;
+    }
 
     @media only screen and (min-width: $large-breakpoint) {
       grid-column: span 1;

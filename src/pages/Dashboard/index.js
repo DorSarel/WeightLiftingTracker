@@ -22,7 +22,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (auth.uid && !userInformation) {
-      dispatch(loadUserInfo(auth.uid));
+      dispatch(loadUserInfo(auth.uid)).catch((error) => {
+        toast.error('Failed to get user information. ' + error.message);
+      });
     }
   }, [dispatch, userInformation, auth.uid]);
 
