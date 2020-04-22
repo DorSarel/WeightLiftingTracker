@@ -122,21 +122,21 @@ const UserForm = ({ userInfo, onSave, saving }) => {
           errorMsg={errors.age}
         />
         <NumberInput
-          label='weight'
+          label='weight (KG)'
           value={userState.weight.value}
           onChange={handleOnChange}
           attributes={userState.weight.validation}
           errorMsg={errors.weight}
         />
         <NumberInput
-          label='height'
+          label='height (CM)'
           value={userState.height.value}
           onChange={handleOnChange}
           attributes={userState.height.validation}
           errorMsg={errors.height}
         />
         <NumberInput
-          label='fat'
+          label='fat (%)'
           value={userState.fat.value}
           onChange={handleOnChange}
           attributes={userState.fat.validation}

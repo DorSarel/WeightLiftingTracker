@@ -200,21 +200,21 @@ const SignUp = () => {
         attributes={numberFormState.age.validation}
       />
       <NumberInput
-        label='weight'
+        label='weight (KG)'
         value={numberFormState.weight.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.weight}
         attributes={numberFormState.weight.validation}
       />
       <NumberInput
-        label='height'
+        label='height (CM)'
         value={numberFormState.height.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.height}
         attributes={numberFormState.height.validation}
       />
       <NumberInput
-        label='fat'
+        label='fat (%)'
         value={numberFormState.fat.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.fat}
