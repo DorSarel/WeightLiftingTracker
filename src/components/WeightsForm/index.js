@@ -35,13 +35,13 @@ const WeightsForm = ({ onSave, saving }) => {
       errors.exercise = 'Please select exercise from the list';
 
     const { min: minAllowedValue, max: maxAllowedValue } = weight.validation;
-    const weightValidation = checkNumberInput(
+    const weightErrorMessage = checkNumberInput(
       weight.value,
       'weight',
       minAllowedValue,
       maxAllowedValue
     );
-    if (weightValidation.error) errors.weight = weightValidation.error;
+    if (weightErrorMessage) errors.weight = weightErrorMessage;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;

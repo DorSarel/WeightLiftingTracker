@@ -17,20 +17,18 @@ export const checkPassword = (
   minAllowedLength,
   maxAllowedLength
 ) => {
-  let isPasswordValid = {
-    error: null,
-  };
+  let passwordErrorMessage = '';
 
   if (passwordToCheck === '') {
-    isPasswordValid.error = 'Password cannot be blank';
+    passwordErrorMessage = 'Password cannot be blank';
   } else if (
     passwordToCheck.length < minAllowedLength ||
     passwordToCheck.length > maxAllowedLength
   ) {
-    isPasswordValid.error = `Password must be between ${minAllowedLength} and ${maxAllowedLength}`;
+    passwordErrorMessage = `Password must be between ${minAllowedLength} and ${maxAllowedLength}`;
   }
 
-  return isPasswordValid;
+  return passwordErrorMessage;
 };
 
 export const checkNumberInput = (
@@ -39,20 +37,18 @@ export const checkNumberInput = (
   minAllowedLength,
   maxAllowedLength
 ) => {
-  let isInputValid = {
-    error: null,
-  };
+  let inputErrorMessage = '';
 
   if (inputToCheck === '') {
-    isInputValid.error = `${inputName} cannot be blank`;
+    inputErrorMessage = `${inputName} cannot be blank`;
   } else if (
     inputToCheck < minAllowedLength ||
     inputToCheck > maxAllowedLength
   ) {
-    isInputValid.error = `${inputName} value must be between ${minAllowedLength} and ${maxAllowedLength}`;
+    inputErrorMessage = `${inputName} value must be between ${minAllowedLength} and ${maxAllowedLength}`;
   }
 
-  return isInputValid;
+  return inputErrorMessage;
 };
 
 export const getMaxValue = (trackedExerciseWeights) =>

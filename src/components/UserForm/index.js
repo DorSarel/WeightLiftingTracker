@@ -59,13 +59,13 @@ const UserForm = ({ userInfo, onSave, saving }) => {
         inputName
       ].validation;
 
-      const inputValidation = checkNumberInput(
+      const inputErrorMessage = checkNumberInput(
         value,
         inputName,
         minAllowedValue,
         maxAllowedValue
       );
-      if (inputValidation.error) errors[inputName] = inputValidation.error;
+      if (inputErrorMessage) errors[inputName] = inputErrorMessage;
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;

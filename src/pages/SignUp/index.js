@@ -71,12 +71,12 @@ const SignUp = () => {
       value: password,
       validation: { min: minAllowedLength, max: maxAllowedLength },
     } = textFormState.password;
-    const passwordValidation = checkPassword(
+    const passwordErrorMessage = checkPassword(
       password,
       minAllowedLength,
       maxAllowedLength
     );
-    if (passwordValidation.error) errors.password = passwordValidation.error;
+    if (passwordErrorMessage) errors.password = passwordErrorMessage;
 
     const firstName = textFormState.firstName.value;
     const lastName = textFormState.lastName.value;

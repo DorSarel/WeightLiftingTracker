@@ -41,12 +41,12 @@ const SignIn = () => {
       value: password,
       validation: { min: minAllowedLength, max: maxAllowedLength },
     } = formState.password;
-    const passwordValidation = checkPassword(
+    const passwordErrorMessage = checkPassword(
       password,
       minAllowedLength,
       maxAllowedLength
     );
-    if (passwordValidation.error) errors.password = passwordValidation.error;
+    if (passwordErrorMessage) errors.password = passwordErrorMessage;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
