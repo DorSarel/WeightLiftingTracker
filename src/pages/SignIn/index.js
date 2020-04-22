@@ -33,8 +33,8 @@ const SignIn = () => {
   const isFormValid = () => {
     let errors = {};
     // validate email
-    const emailValidation = checkEmail(formState.email.value);
-    if (emailValidation.error) errors.email = emailValidation.error;
+    const emailErrorMessage = checkEmail(formState.email.value);
+    if (emailErrorMessage) errors.email = emailErrorMessage;
 
     // validate password
     const {

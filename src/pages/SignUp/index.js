@@ -63,8 +63,8 @@ const SignUp = () => {
     // validate email, username, password
     let errors = {};
 
-    const emailValidation = checkEmail(textFormState.email.value);
-    if (emailValidation.error) errors.email = emailValidation.error;
+    const emailErrorMessage = checkEmail(textFormState.email.value);
+    if (emailErrorMessage) errors.email = emailErrorMessage;
 
     // validate password
     const {
