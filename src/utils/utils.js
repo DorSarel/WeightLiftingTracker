@@ -1,16 +1,15 @@
 export const checkEmail = (emailToCheck) => {
-  let isEmailValid = {
-    error: null,
-  };
+  let emailErrorMessage = '';
 
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (emailToCheck === '') {
-    isEmailValid.error = 'Email cannot be blank';
+
+  if (!emailToCheck) {
+    emailErrorMessage = 'Email cannot be blank';
   } else if (!re.test(String(emailToCheck).toLowerCase())) {
-    isEmailValid.error = 'Email format is invalid';
+    emailErrorMessage = 'Email format is invalid';
   }
 
-  return isEmailValid;
+  return emailErrorMessage;
 };
 
 export const checkPassword = (
@@ -18,20 +17,18 @@ export const checkPassword = (
   minAllowedLength,
   maxAllowedLength
 ) => {
-  let isPasswordValid = {
-    error: null,
-  };
+  let passwordErrorMessage = '';
 
   if (passwordToCheck === '') {
-    isPasswordValid.error = 'Password cannot be blank';
+    passwordErrorMessage = 'Password cannot be blank';
   } else if (
     passwordToCheck.length < minAllowedLength ||
     passwordToCheck.length > maxAllowedLength
   ) {
-    isPasswordValid.error = `Password must be between ${minAllowedLength} and ${maxAllowedLength}`;
+    passwordErrorMessage = `Password must be between ${minAllowedLength} and ${maxAllowedLength}`;
   }
 
-  return isPasswordValid;
+  return passwordErrorMessage;
 };
 
 export const checkNumberInput = (
@@ -40,20 +37,18 @@ export const checkNumberInput = (
   minAllowedLength,
   maxAllowedLength
 ) => {
-  let isInputValid = {
-    error: null,
-  };
+  let inputErrorMessage = '';
 
   if (inputToCheck === '') {
-    isInputValid.error = `${inputName} cannot be blank`;
+    inputErrorMessage = `${inputName} cannot be blank`;
   } else if (
     inputToCheck < minAllowedLength ||
     inputToCheck > maxAllowedLength
   ) {
-    isInputValid.error = `${inputName} value must be between ${minAllowedLength} and ${maxAllowedLength}`;
+    inputErrorMessage = `${inputName} value must be between ${minAllowedLength} and ${maxAllowedLength}`;
   }
 
-  return isInputValid;
+  return inputErrorMessage;
 };
 
 export const getMaxValue = (trackedExerciseWeights) =>

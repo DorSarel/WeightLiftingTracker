@@ -33,20 +33,20 @@ const SignIn = () => {
   const isFormValid = () => {
     let errors = {};
     // validate email
-    const emailValidation = checkEmail(formState.email.value);
-    if (emailValidation.error) errors.email = emailValidation.error;
+    const emailErrorMessage = checkEmail(formState.email.value);
+    if (emailErrorMessage) errors.email = emailErrorMessage;
 
     // validate password
     const {
       value: password,
       validation: { min: minAllowedLength, max: maxAllowedLength },
     } = formState.password;
-    const passwordValidation = checkPassword(
+    const passwordErrorMessage = checkPassword(
       password,
       minAllowedLength,
       maxAllowedLength
     );
-    if (passwordValidation.error) errors.password = passwordValidation.error;
+    if (passwordErrorMessage) errors.password = passwordErrorMessage;
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
