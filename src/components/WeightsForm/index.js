@@ -95,6 +95,7 @@ const WeightsForm = ({ onSave, saving }) => {
         />
         <NumberInput
           label='weight (KG)'
+          name='weight'
           value={weight.value}
           onChange={handleWeightOnChage}
           attributes={weight.validation}
