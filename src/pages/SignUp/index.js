@@ -194,6 +194,7 @@ const SignUp = () => {
       />
       <NumberInput
         label='age'
+        name='age'
         value={numberFormState.age.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.age}
@@ -201,6 +202,7 @@ const SignUp = () => {
       />
       <NumberInput
         label='weight (KG)'
+        name='weight'
         value={numberFormState.weight.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.weight}
@@ -208,6 +210,7 @@ const SignUp = () => {
       />
       <NumberInput
         label='height (CM)'
+        name='height'
         value={numberFormState.height.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.height}
@@ -215,6 +218,7 @@ const SignUp = () => {
       />
       <NumberInput
         label='fat (%)'
+        name='fat'
         value={numberFormState.fat.value}
         onChange={handleNumberOnChange}
         errorMsg={errors.fat}

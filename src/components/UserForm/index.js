@@ -116,6 +116,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
       <form ref={elementToScrollTo} className='form' onSubmit={handleSubmit}>
         <NumberInput
           label='age'
+          name='age'
           value={userState.age.value}
           onChange={handleOnChange}
           attributes={userState.age.validation}
@@ -123,6 +124,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
         />
         <NumberInput
           label='weight (KG)'
+          name='weight'
           value={userState.weight.value}
           onChange={handleOnChange}
           attributes={userState.weight.validation}
@@ -130,6 +132,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
         />
         <NumberInput
           label='height (CM)'
+          name='height'
           value={userState.height.value}
           onChange={handleOnChange}
           attributes={userState.height.validation}
@@ -137,6 +140,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
         />
         <NumberInput
           label='fat (%)'
+          name='fat'
           value={userState.fat.value}
           onChange={handleOnChange}
           attributes={userState.fat.validation}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const NumberInput = ({
   label,
+  name,
   value,
   attributes = {},
   errorMsg = '',
@@ -20,7 +21,7 @@ const NumberInput = ({
       <input
         type='number'
         className='form__input'
-        name={label}
+        name={name}
         value={value}
         placeholder={`Your ${label}`}
         onChange={onChange}
