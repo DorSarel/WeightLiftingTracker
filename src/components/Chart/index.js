@@ -10,7 +10,7 @@ const Chart = ({ label, exercisePeriodData }) => {
     datasets: [
       {
         label,
-        data: exercisePeriodData.map((previousData) => previousData.value),
+        data: exercisePeriodData.map((previousData) => previousData.weight),
         borderColor: '#715aff',
         pointBackgroundColor: '#a682ff',
         fill: false,

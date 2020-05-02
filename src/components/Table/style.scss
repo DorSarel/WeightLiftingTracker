@@ -5,6 +5,11 @@
   text-align: center;
   background-color: #fff;
   border-radius: 5px;
+  visibility: hidden;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    visibility: visible;
+  }
 
   &__row-heading {
     font-size: 1.75rem;

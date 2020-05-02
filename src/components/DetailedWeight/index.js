@@ -10,12 +10,10 @@ import './style.scss';
 const DetailedWeight = () => {
   const { exercise } = useParams();
   const exerciseData = useSelector(({ userWeights }) => userWeights[exercise]);
-  const maxWeight = getMaxValue(exerciseData.exercisePeriodData);
-  const avgWeight = getAvgValue(exerciseData.exercisePeriodData);
+  const maxWeight = getMaxValue(exerciseData.data);
+  const avgWeight = getAvgValue(exerciseData.data);
 
-  const dataSetReversedArray = [...exerciseData.exercisePeriodData].sort(
-    sortObjectsByDate
-  );
+  const dataSetReversedArray = [...exerciseData.data].sort(sortObjectsByDate);
 
   return (
     <div className='detailed-weight'>
@@ -44,11 +42,11 @@ const DetailedWeight = () => {
         unit='kg'
         additionlClass='detailed-weight__grid-span'
       />
-      {exerciseData.exercisePeriodData.length > 1 ? (
+      {exerciseData.data.length > 1 ? (
         <div className='detailed-weight__chart'>
           <Chart
             label={exerciseData.exercise}
-            exercisePeriodData={exerciseData.exercisePeriodData}
+            exercisePeriodData={exerciseData.data}
           />
         </div>
       ) : (

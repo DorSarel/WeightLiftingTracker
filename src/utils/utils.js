@@ -53,14 +53,14 @@ export const checkNumberInput = (
 
 export const getMaxValue = (trackedExerciseWeights) =>
   trackedExerciseWeights.reduce(
-    (max, currentValue) => Math.max(max, currentValue.value),
-    trackedExerciseWeights[0].value
+    (max, currentValue) => Math.max(max, currentValue.weight),
+    trackedExerciseWeights[0].weight
   );
 
 export const getAvgValue = (trackedExerciseWeights) => {
   let totalWeightsValue = trackedExerciseWeights.reduce(
     (totalSum, currentValue) => {
-      return totalSum + currentValue.value;
+      return totalSum + currentValue.weight;
     },
     0
   );

@@ -19,8 +19,7 @@ export const createExerciseToSave = (exerciseData, allUserWeights) => {
 
 export const createExerciseToRevert = (exerciseToRevert, allUserWeight) => {
   const indexToRemove = allUserWeight[exerciseToRevert].data.length - 1;
-  const indexToUseForPrevious =
-    allUserWeight[exerciseToRevert].exerciseDataToSave.length - 3;
+  const indexToUseForPrevious = allUserWeight[exerciseToRevert].data.length - 3;
   const previousDataObj =
     allUserWeight[exerciseToRevert].data[indexToUseForPrevious];
 
