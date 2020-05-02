@@ -86,20 +86,19 @@ const UserActions = ({ userInfo, uid }) => {
   };
 
   const handleRevertExercise = (exerciseToRevert) => {
-    const indexToRemove =
-      userWeights[exerciseToRevert].exercisePeriodData.length - 1;
+    const indexToRemove = userWeights[exerciseToRevert].data.length - 1;
     const indexToUseForPrevious =
-      userWeights[exerciseToRevert].exercisePeriodData.length - 3;
+      userWeights[exerciseToRevert].exerciseDataToSave.length - 3;
     const previousDataObj =
-      userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious];
+      userWeights[exerciseToRevert].data[indexToUseForPrevious];
 
     const exerciseDataToUpdate = {
       ...userWeights[exerciseToRevert],
       current: userWeights[exerciseToRevert].previous,
       previous: previousDataObj ? previousDataObj.value : 0,
-      exercisePeriodData: userWeights[
-        exerciseToRevert
-      ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
+      data: userWeights[exerciseToRevert].data.filter(
+        (_, idx) => idx !== indexToRemove
+      ),
     };
 
     const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
