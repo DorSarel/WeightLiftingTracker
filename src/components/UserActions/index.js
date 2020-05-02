@@ -4,17 +4,19 @@ import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import WeightsView from '../WeightsView';
 import WeightsForm from '../WeightsForm';
 import UserForm from '../UserForm';
+import DetailedWeight from '../DetailedWeight';
+import Modal from '../Modal';
+import { useModal } from '../../hooks/useModal';
 import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExerciseWeight,
   removeExerciseWeight,
 } from '../../redux/actions/weightsActions';
-import './style.scss';
-import DetailedWeight from '../DetailedWeight';
-import { useModal } from '../../hooks/useModal';
-import Modal from '../Modal';
 import { toast } from 'react-toastify';
+import { createExerciseToSave } from '../../utils/weightUtils';
+
+import './style.scss';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -48,25 +50,8 @@ const UserActions = ({ userInfo, uid }) => {
   const handleWeightsFormSubmit = (newWeight) => {
     // assuming validation occurred in UserForm component
     setSaving(true);
-    const forGraphUses = {
-      value: newWeight.weight,
-      createdAt: newWeight.createdAt,
-    };
 
-    // handle first time key
-    let exerciseDataToSave = {};
-    exerciseDataToSave.current = newWeight.weight;
-    exerciseDataToSave.exercise = newWeight.exercise;
-    if (!userWeights || !userWeights[newWeight.exercise]) {
-      exerciseDataToSave.previous = 0;
-      exerciseDataToSave.exercisePeriodData = [{ ...forGraphUses }];
-    } else {
-      exerciseDataToSave.previous = userWeights[newWeight.exercise].current;
-      exerciseDataToSave.exercisePeriodData = [
-        ...userWeights[newWeight.exercise].exercisePeriodData,
-        { ...forGraphUses },
-      ];
-    }
+    const exerciseDataToSave = createExerciseToSave(newWeight, userWeights);
     const isFirstUserExercise = userWeights === null;
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
 
