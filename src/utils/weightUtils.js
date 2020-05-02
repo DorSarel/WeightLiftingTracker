@@ -16,3 +16,22 @@ export const createExerciseToSave = (exerciseData, allUserWeights) => {
 
   return exerciseDataToSave;
 };
+
+export const createExerciseToRevert = (exerciseToRevert, allUserWeight) => {
+  const indexToRemove = allUserWeight[exerciseToRevert].data.length - 1;
+  const indexToUseForPrevious =
+    allUserWeight[exerciseToRevert].exerciseDataToSave.length - 3;
+  const previousDataObj =
+    allUserWeight[exerciseToRevert].data[indexToUseForPrevious];
+
+  const exerciseDataToUpdate = {
+    ...allUserWeight[exerciseToRevert],
+  };
+  exerciseDataToUpdate.current = exerciseDataToUpdate.previous;
+  exerciseDataToUpdate.previous = previousDataObj ? previousDataObj.weight : 0;
+  exerciseDataToUpdate.data = exerciseDataToUpdate.data.filter(
+    (_, idx) => idx !== indexToRemove
+  );
+
+  return exerciseDataToUpdate;
+};

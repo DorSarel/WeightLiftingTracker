@@ -14,7 +14,10 @@ import {
   removeExerciseWeight,
 } from '../../redux/actions/weightsActions';
 import { toast } from 'react-toastify';
-import { createExerciseToSave } from '../../utils/weightUtils';
+import {
+  createExerciseToSave,
+  createExerciseToRevert,
+} from '../../utils/weightUtils';
 
 import './style.scss';
 
@@ -86,20 +89,10 @@ const UserActions = ({ userInfo, uid }) => {
   };
 
   const handleRevertExercise = (exerciseToRevert) => {
-    const indexToRemove = userWeights[exerciseToRevert].data.length - 1;
-    const indexToUseForPrevious =
-      userWeights[exerciseToRevert].exerciseDataToSave.length - 3;
-    const previousDataObj =
-      userWeights[exerciseToRevert].data[indexToUseForPrevious];
-
-    const exerciseDataToUpdate = {
-      ...userWeights[exerciseToRevert],
-      current: userWeights[exerciseToRevert].previous,
-      previous: previousDataObj ? previousDataObj.value : 0,
-      data: userWeights[exerciseToRevert].data.filter(
-        (_, idx) => idx !== indexToRemove
-      ),
-    };
+    const exerciseDataToUpdate = createExerciseToRevert(
+      exerciseToRevert,
+      userWeights
+    );
 
     const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
     dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false))
