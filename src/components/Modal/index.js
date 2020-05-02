@@ -7,7 +7,6 @@ const Modal = ({ title, actionText, handleConfirm, handleClose }) => {
 
   useEffect(() => {
     const viewportOffsets = elementToScrollTo.current.getBoundingClientRect();
-    console.log(viewportOffsets);
     window.scrollTo({
       top: window.innerHeight / 2 + elementToScrollTo.current.offsetHeight,
       left: viewportOffsets.left,

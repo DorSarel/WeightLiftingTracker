@@ -54,14 +54,20 @@ const WeightsForm = ({ onSave, saving }) => {
     if (exercise.value === '')
       errors.exercise = 'Please select exercise from the list';
 
-    const { min: minAllowedValue, max: maxAllowedValue } = weight.validation;
-    const weightErrorMessage = checkNumberInput(
-      weight.value,
-      'weight',
-      minAllowedValue,
-      maxAllowedValue
-    );
-    if (weightErrorMessage) errors.weight = weightErrorMessage;
+    for (let field in formData) {
+      if (field === 'exercise') continue;
+
+      const { min: minAllowedValue, max: maxAllowedValue } = formData[
+        field
+      ].validation;
+      const fieldErrorMessage = checkNumberInput(
+        formData[field].value,
+        field,
+        minAllowedValue,
+        maxAllowedValue
+      );
+      if (fieldErrorMessage) errors[field] = fieldErrorMessage;
+    }
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -135,7 +141,7 @@ const WeightsForm = ({ onSave, saving }) => {
           errorMsg={errors.rounds}
         />
         <NumberInput
-          label='reps'
+          label='reps (per round)'
           name='reps'
           value={reps.value}
           onChange={handleOnChage}
