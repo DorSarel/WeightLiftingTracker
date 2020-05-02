@@ -9,7 +9,9 @@ const Table = ({ dataList }) => (
     <thead>
       <tr className='table__row-heading'>
         <th>Date</th>
-        <th>Weight</th>
+        <th>Weight (KG)</th>
+        <th>Rounds</th>
+        <th>Reps</th>
         <th>Change</th>
       </tr>
     </thead>
@@ -17,11 +19,13 @@ const Table = ({ dataList }) => (
       {(dataList || []).map((item, idx, arr) => (
         <tr key={item.createdAt} className='table__row'>
           <td>{moment(new Date(item.createdAt)).calendar()}</td>
-          <td>{item.value}</td>
+          <td>{item.weight}</td>
+          <td>{item.rounds}</td>
+          <td>{item.reps}</td>
           <td>
             <ChangeInPercentage
-              current={item.value}
-              previous={arr[idx + 1] ? arr[idx + 1].value : 0}
+              current={item.weight}
+              previous={arr[idx + 1] ? arr[idx + 1].weight : 0}
             />
           </td>
         </tr>

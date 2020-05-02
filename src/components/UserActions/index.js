@@ -4,17 +4,22 @@ import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import WeightsView from '../WeightsView';
 import WeightsForm from '../WeightsForm';
 import UserForm from '../UserForm';
+import DetailedWeight from '../DetailedWeight';
+import Modal from '../Modal';
+import { useModal } from '../../hooks/useModal';
 import { updateUserInfo } from '../../redux/actions/userInfoActions';
 import {
   loadUserWeights,
   saveNewExerciseWeight,
   removeExerciseWeight,
 } from '../../redux/actions/weightsActions';
-import './style.scss';
-import DetailedWeight from '../DetailedWeight';
-import { useModal } from '../../hooks/useModal';
-import Modal from '../Modal';
 import { toast } from 'react-toastify';
+import {
+  createExerciseToSave,
+  createExerciseToRevert,
+} from '../../utils/weightUtils';
+
+import './style.scss';
 
 const UserActions = ({ userInfo, uid }) => {
   const match = useRouteMatch();
@@ -48,25 +53,8 @@ const UserActions = ({ userInfo, uid }) => {
   const handleWeightsFormSubmit = (newWeight) => {
     // assuming validation occurred in UserForm component
     setSaving(true);
-    const forGraphUses = {
-      value: newWeight.weight,
-      createdAt: newWeight.createdAt,
-    };
 
-    // handle first time key
-    let exerciseDataToSave = {};
-    exerciseDataToSave.current = newWeight.weight;
-    exerciseDataToSave.exercise = newWeight.exercise;
-    if (!userWeights || !userWeights[newWeight.exercise]) {
-      exerciseDataToSave.previous = 0;
-      exerciseDataToSave.exercisePeriodData = [{ ...forGraphUses }];
-    } else {
-      exerciseDataToSave.previous = userWeights[newWeight.exercise].current;
-      exerciseDataToSave.exercisePeriodData = [
-        ...userWeights[newWeight.exercise].exercisePeriodData,
-        { ...forGraphUses },
-      ];
-    }
+    const exerciseDataToSave = createExerciseToSave(newWeight, userWeights);
     const isFirstUserExercise = userWeights === null;
     const exerciseToSave = { [newWeight.exercise]: exerciseDataToSave };
 
@@ -101,21 +89,10 @@ const UserActions = ({ userInfo, uid }) => {
   };
 
   const handleRevertExercise = (exerciseToRevert) => {
-    const indexToRemove =
-      userWeights[exerciseToRevert].exercisePeriodData.length - 1;
-    const indexToUseForPrevious =
-      userWeights[exerciseToRevert].exercisePeriodData.length - 3;
-    const previousDataObj =
-      userWeights[exerciseToRevert].exercisePeriodData[indexToUseForPrevious];
-
-    const exerciseDataToUpdate = {
-      ...userWeights[exerciseToRevert],
-      current: userWeights[exerciseToRevert].previous,
-      previous: previousDataObj ? previousDataObj.value : 0,
-      exercisePeriodData: userWeights[
-        exerciseToRevert
-      ].exercisePeriodData.filter((_, idx) => idx !== indexToRemove),
-    };
+    const exerciseDataToUpdate = createExerciseToRevert(
+      exerciseToRevert,
+      userWeights
+    );
 
     const exerciseToUpdate = { [exerciseToRevert]: exerciseDataToUpdate };
     dispatch(saveNewExerciseWeight(exerciseToUpdate, uid, false))

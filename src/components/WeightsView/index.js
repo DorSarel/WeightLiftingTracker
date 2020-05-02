@@ -21,7 +21,7 @@ const WeightsView = ({ weights, revertWeight, removeWeight }) => {
               lastWeight={weightItem.previous}
               onRevert={revertWeight}
               onRemove={removeWeight}
-              disable={weightItem.exercisePeriodData.length < 2}
+              disable={weightItem.data.length < 2}
             />
           ))
         ) : (

@@ -74,7 +74,7 @@ const UserForm = ({ userInfo, onSave, saving }) => {
   const handleOnChange = (e) => {
     let { name, value } = e.target;
     if (isNaN(value) || value === '') {
-      console.log(value);
+      // console.log(value);
       value = userState[name].validation.min;
     }
     setUserState((prevState) => ({

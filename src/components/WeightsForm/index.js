@@ -5,17 +5,35 @@ import { checkNumberInput } from '../../utils/utils';
 import weightliftingExercises from '../../config/exercises';
 
 const initialState = {
-  value: 0.5,
-  validation: {
-    min: 0.5,
-    max: 500,
-    step: 0.1,
+  exercise: {
+    value: '',
+  },
+  weight: {
+    value: 0.5,
+    validation: {
+      min: 0.5,
+      max: 500,
+      step: 0.1,
+    },
+  },
+  rounds: {
+    value: 1,
+    validation: {
+      min: 1,
+      max: 200,
+    },
+  },
+  reps: {
+    value: 1,
+    validation: {
+      min: 1,
+      max: 200,
+    },
   },
 };
 
 const WeightsForm = ({ onSave, saving }) => {
-  const [exercise, setExercise] = useState('');
-  const [weight, setWeight] = useState(initialState);
+  const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const elementToScrollTo = useRef(null);
 
@@ -28,36 +46,46 @@ const WeightsForm = ({ onSave, saving }) => {
     });
   }, []);
 
+  const { exercise, weight, rounds, reps } = formData;
+
   const isFormValid = () => {
     let errors = {};
 
-    if (exercise === '')
+    if (exercise.value === '')
       errors.exercise = 'Please select exercise from the list';
 
-    const { min: minAllowedValue, max: maxAllowedValue } = weight.validation;
-    const weightErrorMessage = checkNumberInput(
-      weight.value,
-      'weight',
-      minAllowedValue,
-      maxAllowedValue
-    );
-    if (weightErrorMessage) errors.weight = weightErrorMessage;
+    for (let field in formData) {
+      if (field === 'exercise') continue;
+
+      const { min: minAllowedValue, max: maxAllowedValue } = formData[
+        field
+      ].validation;
+      const fieldErrorMessage = checkNumberInput(
+        formData[field].value,
+        field,
+        minAllowedValue,
+        maxAllowedValue
+      );
+      if (fieldErrorMessage) errors[field] = fieldErrorMessage;
+    }
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  const handleSelectOnChange = (e) => {
-    const { value } = e.target;
-    setExercise(value);
-  };
-
-  const handleWeightOnChage = (e) => {
-    const { value } = e.target;
-    setWeight((prevWeight) => ({
-      ...prevWeight,
-      value: parseFloat(value),
-    }));
+  const handleOnChage = (e) => {
+    const { name, value } = e.target;
+    if (isNaN(value)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: { ...prevData[name], value },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: { ...prevData[name], value: parseFloat(value) },
+      }));
+    }
   };
 
   const handleOnSubmit = (e) => {
@@ -65,10 +93,13 @@ const WeightsForm = ({ onSave, saving }) => {
     if (!isFormValid()) return;
 
     const newWeight = {
-      exercise,
+      exercise: exercise.value,
       weight: weight.value,
+      rounds: rounds.value,
+      reps: reps.value,
       createdAt: Date.now(),
     };
+    // console.log(newWeight);
     onSave(newWeight);
   };
 
@@ -87,8 +118,8 @@ const WeightsForm = ({ onSave, saving }) => {
         <SelectInput
           name='exercise'
           label='exercise'
-          value={exercise}
-          onChange={handleSelectOnChange}
+          value={exercise.value}
+          onChange={handleOnChage}
           options={options}
           defaultOption='Select Exercise'
           error={errors.exercise}
@@ -97,9 +128,25 @@ const WeightsForm = ({ onSave, saving }) => {
           label='weight (KG)'
           name='weight'
           value={weight.value}
-          onChange={handleWeightOnChage}
+          onChange={handleOnChage}
           attributes={weight.validation}
           errorMsg={errors.weight}
+        />
+        <NumberInput
+          label='rounds'
+          name='rounds'
+          value={rounds.value}
+          onChange={handleOnChage}
+          attributes={rounds.validation}
+          errorMsg={errors.rounds}
+        />
+        <NumberInput
+          label='reps (per round)'
+          name='reps'
+          value={reps.value}
+          onChange={handleOnChage}
+          attributes={reps.validation}
+          errorMsg={errors.reps}
         />
         <button disabled={saving} className='btn'>
           {saving ? 'adding...' : 'add weight'}
