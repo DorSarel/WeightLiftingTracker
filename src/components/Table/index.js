@@ -25,7 +25,7 @@ const Table = ({ dataList }) => (
           <td>
             <ChangeInPercentage
               current={item.weight}
-              previous={arr[idx + 1] ? arr[idx + 1].value : 0}
+              previous={arr[idx + 1] ? arr[idx + 1].weight : 0}
             />
           </td>
         </tr>
